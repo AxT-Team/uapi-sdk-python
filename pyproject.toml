@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uapi-sdk-python"
+version = "0.1.0"
+description = "Idiomatic UAPI SDK for Python"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{name = "UAPI", email = "dev@uapis.cn"}]
+dependencies = ["httpx>=0.24.1"]
+
+[project.optional-dependencies]
+dev = ["pytest", "mypy", "black", "isort"]
+
+[tool.setuptools.packages.find]
+include = ["uapi*"]
+exclude = ["internal*"]
+
+[tool.black]
+line-length = 100
+
+[tool.mypy]
+python_version = 3.11
+strict = true
+
+[tool.isort]
+profile = "black"

@@ -23,6 +23,9 @@ result = client.social.get_social_qq_userinfo(qq="10001")
 print(result)
 ```
 
+> [!TIP]
+> 请使用与运行脚本一致的解释器安装依赖：执行 `python -m pip install uapi-sdk-python` 后直接 `python myip.py`。如果 VS Code / Pyright 报 “Import uapi could not be resolved”，将解释器切换到你的虚拟环境（例如 `.venv/Scripts/python.exe`）即可恢复补全。
+
 ## 特性
 
 现在你不再需要反反复复的查阅文档了。
@@ -36,6 +39,54 @@ print(result)
 `UapiClient(base_url, token, timeout)` 默认使用 `httpx` 并自动追加 `Authorization` 头；需要切换环境或调整超时时，只要改一次构造参数即可。
 
 如果你需要查看字段细节或内部逻辑，仓库中的 `./internal` 目录同步保留了由 `openapi-generator` 生成的完整结构体，随时可供参考。
+
+## 进阶实践
+
+### 缓存与幂等
+
+```python
+from functools import lru_cache
+from uapi import UapiClient
+
+client = UapiClient("https://uapis.cn/api/v1", token="<TOKEN>")
+
+@lru_cache(maxsize=128)
+def cached_user(qq: str):
+    return client.social.get_social_qq_userinfo(qq=qq)
+
+print(cached_user("10001"))
+```
+
+也可以结合 Redis/Memcached：先读缓存，未命中再调用 SDK，并把结果序列化回写缓存。
+
+### 注入自定义 httpx.Client
+
+```python
+import httpx
+from httpx import Auth
+from uapi import UapiClient
+
+class Bearer(Auth):
+    def __init__(self, token: str):
+        self.token = token
+    def auth_flow(self, request):
+        request.headers["Authorization"] = f"Bearer {self.token}"
+        yield request
+
+http_client = httpx.Client(
+    timeout=5,
+    transport=httpx.HTTPTransport(retries=3),
+    event_hooks={"request": [lambda req: print("->", req.url)]},
+)
+
+client = UapiClient(
+    "https://uapis.cn/api/v1",
+    client=http_client,
+    auth=Bearer("<TOKEN>"),
+)
+```
+
+这样可以把企业代理、日志、APM、重试策略统统放进同一个 `httpx.Client`，SDK 会原样复用。
 
 ## 错误模型概览
 

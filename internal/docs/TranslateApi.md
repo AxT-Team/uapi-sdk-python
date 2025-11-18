@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_ai_translate_languages**](TranslateApi.md#get_ai_translate_languages) | **GET** /ai/translate/languages | 获取AI翻译支持的语言和配置
 [**post_ai_translate**](TranslateApi.md#post_ai_translate) | **POST** /ai/translate | AI智能翻译
+[**post_translate_stream**](TranslateApi.md#post_translate_stream) | **POST** /translate/stream | 流式翻译（中英互译）
 [**post_translate_text**](TranslateApi.md#post_translate_text) | **POST** /translate/text | 多语言文本翻译
 
 
@@ -159,6 +160,91 @@ No authorization required
 **401** | 认证失败。请检查API密钥是否有效。 |  -  |
 **429** | 请求频率过高。请稍后重试。 |  -  |
 **500** | 翻译服务内部错误。请稍后重试或联系技术支持。 |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **post_translate_stream**
+> str post_translate_stream(post_translate_stream_request)
+
+流式翻译（中英互译）
+
+想让翻译结果像打字机一样逐字显示出来？这个流式翻译接口能实现这种效果。
+
+## 功能概述
+不同于传统翻译API一次性返回完整结果，这个接口会实时地、一个字一个字地把翻译内容推给你（就像ChatGPT回复消息那样），非常适合用在聊天应用、直播字幕等需要即时反馈的场景。
+
+## 它能做什么
+- **中英互译**：支持中文和英文之间的双向翻译
+- **自动识别**：不确定源语言？设置为 `auto` 让我们自动检测
+- **逐字返回**：翻译结果会像打字机一样逐字流式返回，用户体验更流畅
+- **音频朗读**：部分翻译结果会附带音频链接，方便朗读
+
+## 支持的语言
+目前专注于中英互译，支持以下选项：
+- `中文`（简体/繁体）
+- `英文`
+- `auto`（自动检测）
+
+### Example
+
+
+```python
+import uapi
+from uapi.models.post_translate_stream_request import PostTranslateStreamRequest
+from uapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = uapi.Configuration(
+    host = "https://uapis.cn/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with uapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = uapi.TranslateApi(api_client)
+    post_translate_stream_request = uapi.PostTranslateStreamRequest() # PostTranslateStreamRequest | 包含翻译参数的JSON对象
+
+    try:
+        # 流式翻译（中英互译）
+        api_response = api_instance.post_translate_stream(post_translate_stream_request)
+        print("The response of TranslateApi->post_translate_stream:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TranslateApi->post_translate_stream: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **post_translate_stream_request** | [**PostTranslateStreamRequest**](PostTranslateStreamRequest.md)| 包含翻译参数的JSON对象 | 
+
+### Return type
+
+**str**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: text/event-stream, application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | SSE流式响应。Content-Type为text/event-stream |  -  |
+**400** | 请求参数错误 |  -  |
+**500** | 翻译服务错误 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

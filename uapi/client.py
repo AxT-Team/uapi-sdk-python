@@ -1739,6 +1739,32 @@ class _TranslateApi:
         
         return self._http.request("POST", path, params=params, json=body)
     
+    def post_translate_stream(self, **kwargs):
+        """流式翻译（中英互译）
+        想让翻译结果像打字机一样逐字显示出来？这个流式翻译接口能实现这种效果。
+
+## 功能概述
+不同于传统翻译API一次性返回完整结果，这个接口会实时地、一个字一个字地把翻译内容推给你（就像ChatGPT回复消息那样），非常适合用在聊天应用、直播字幕等需要即时反馈的场景。
+
+## 它能做什么
+- **中英互译**：支持中文和英文之间的双向翻译
+- **自动识别**：不确定源语言？设置为 `auto` 让我们自动检测
+- **逐字返回**：翻译结果会像打字机一样逐字流式返回，用户体验更流畅
+- **音频朗读**：部分翻译结果会附带音频链接，方便朗读
+
+## 支持的语言
+目前专注于中英互译，支持以下选项：
+- `中文`（简体/繁体）
+- `英文`
+- `auto`（自动检测）
+        """
+        params = {}
+        body = None
+        
+        path = "/translate/stream"
+        
+        return self._http.request("POST", path, params=params, json=body)
+    
     def post_translate_text(self, **kwargs):
         """多语言文本翻译
         需要跨越语言的鸿沟进行交流？这个翻译接口是你可靠的'同声传译'。

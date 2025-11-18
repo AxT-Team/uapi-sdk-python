@@ -264,6 +264,9 @@ docs/PostTextMd5Request.md
 docs/PostTextMd5Verify200Response.md
 docs/PostTextMd5Verify400Response.md
 docs/PostTextMd5VerifyRequest.md
+docs/PostTranslateStream400Response.md
+docs/PostTranslateStream500Response.md
+docs/PostTranslateStreamRequest.md
 docs/PostTranslateText200Response.md
 docs/PostTranslateText400Response.md
 docs/PostTranslateText500Response.md
@@ -284,6 +287,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_post_translate_stream400_response.py
+test/test_post_translate_stream500_response.py
+test/test_post_translate_stream_request.py
 tox.ini
 uapi/__init__.py
 uapi/api/__init__.py
@@ -559,6 +565,9 @@ uapi/models/post_text_md5_request.py
 uapi/models/post_text_md5_verify200_response.py
 uapi/models/post_text_md5_verify400_response.py
 uapi/models/post_text_md5_verify_request.py
+uapi/models/post_translate_stream400_response.py
+uapi/models/post_translate_stream500_response.py
+uapi/models/post_translate_stream_request.py
 uapi/models/post_translate_text200_response.py
 uapi/models/post_translate_text400_response.py
 uapi/models/post_translate_text500_response.py

@@ -24,7 +24,7 @@ print(result)
 ```
 
 > [!TIP]
-> 请使用与运行脚本一致的解释器安装依赖：执行 `python -m pip install uapi-sdk-python` 后直接 `python myip.py`。如果 VS Code / Pyright 报 “Import uapi could not be resolved”，将解释器切换到你的虚拟环境（例如 `.venv/Scripts/python.exe`）即可恢复补全。
+> 请使用与运行脚本相同的 Python 解释器安装依赖，例如执行 `python -m pip install uapi-sdk-python` 后再运行 `python main.py`。在 VS Code / Pyright 中若提示 “Import uapi could not be resolved”，将解释器切换到当前虚拟环境即可恢复补全。
 
 ## 特性
 
@@ -51,13 +51,13 @@ from uapi import UapiClient
 client = UapiClient("https://uapis.cn/api/v1", token="<TOKEN>")
 
 @lru_cache(maxsize=128)
-def cached_user(qq: str):
+def cached_lookup(qq: str):
     return client.social.get_social_qq_userinfo(qq=qq)
 
-print(cached_user("10001"))
+user = cached_lookup("10001")
 ```
 
-也可以结合 Redis/Memcached：先读缓存，未命中再调用 SDK，并把结果序列化回写缓存。
+也可以在 FastAPI / Django 项目里配合 Redis，将 SDK 的响应序列化后写入缓存，命中即直接返回。
 
 ### 注入自定义 httpx.Client
 
@@ -66,7 +66,7 @@ import httpx
 from httpx import Auth
 from uapi import UapiClient
 
-class Bearer(Auth):
+class StaticToken(Auth):
     def __init__(self, token: str):
         self.token = token
     def auth_flow(self, request):
@@ -76,17 +76,17 @@ class Bearer(Auth):
 http_client = httpx.Client(
     timeout=5,
     transport=httpx.HTTPTransport(retries=3),
-    event_hooks={"request": [lambda req: print("->", req.url)]},
+    event_hooks={"request": [lambda request: print("->", request.url)]},
 )
 
 client = UapiClient(
     "https://uapis.cn/api/v1",
     client=http_client,
-    auth=Bearer("<TOKEN>"),
+    auth=StaticToken("<TOKEN>"),
 )
 ```
 
-这样可以把企业代理、日志、APM、重试策略统统放进同一个 `httpx.Client`，SDK 会原样复用。
+通过自定义 `client` / `transport` / `auth`，可以无缝植入代理、重试策略或 APM 埋点。
 
 ## 错误模型概览
 

@@ -294,6 +294,9 @@ __all__ = [
     "PostTextMd5Verify200Response",
     "PostTextMd5Verify400Response",
     "PostTextMd5VerifyRequest",
+    "PostTranslateStream400Response",
+    "PostTranslateStream500Response",
+    "PostTranslateStreamRequest",
     "PostTranslateText200Response",
     "PostTranslateText400Response",
     "PostTranslateText500Response",
@@ -584,6 +587,9 @@ from uapi.models.post_text_md5_request import PostTextMd5Request as PostTextMd5R
 from uapi.models.post_text_md5_verify200_response import PostTextMd5Verify200Response as PostTextMd5Verify200Response
 from uapi.models.post_text_md5_verify400_response import PostTextMd5Verify400Response as PostTextMd5Verify400Response
 from uapi.models.post_text_md5_verify_request import PostTextMd5VerifyRequest as PostTextMd5VerifyRequest
+from uapi.models.post_translate_stream400_response import PostTranslateStream400Response as PostTranslateStream400Response
+from uapi.models.post_translate_stream500_response import PostTranslateStream500Response as PostTranslateStream500Response
+from uapi.models.post_translate_stream_request import PostTranslateStreamRequest as PostTranslateStreamRequest
 from uapi.models.post_translate_text200_response import PostTranslateText200Response as PostTranslateText200Response
 from uapi.models.post_translate_text400_response import PostTranslateText400Response as PostTranslateText400Response
 from uapi.models.post_translate_text500_response import PostTranslateText500Response as PostTranslateText500Response

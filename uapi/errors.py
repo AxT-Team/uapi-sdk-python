@@ -150,4 +150,4 @@ def _class_by_code(code: str, status: int):
         "UNSUPPORTED_FORMAT": UnsupportedFormatError,
         
     }
-    return mapping.get(c) or ( {400: InvalidParameterError, 401: UnauthorizedError, 404: NotFoundError, 429: ServiceBusyError, 500: InternalServerError}.get(status) or UapiError )
+    return mapping.get(c) or ( {400: InvalidParameterError, 401: UnauthorizedError, 404: NotFoundError, 429: ServiceBusyError, 500: InternalServerErrorError}.get(status) or UapiError )

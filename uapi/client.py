@@ -108,7 +108,7 @@ class _ClipzyZaiXianJianTieBanApi:
         if "query" == "query" and "id" in kwargs:
             params["id"] = kwargs["id"]
         
-        path = "/api/get"
+        path = "/api/v1/api/get"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -130,7 +130,7 @@ class _ClipzyZaiXianJianTieBanApi:
         if "query" == "query" and "key" in kwargs:
             params["key"] = kwargs["key"]
         
-        path = "/api/raw/{id}"
+        path = "/api/v1/api/raw/{id}"
         
         if "id" in kwargs:
             path = path.replace("{" + "id" + "}", str(kwargs["id"]))
@@ -147,7 +147,7 @@ class _ClipzyZaiXianJianTieBanApi:
         params = {}
         body = None
         
-        path = "/api/store"
+        path = "/api/v1/api/store"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -182,7 +182,7 @@ class _ConvertApi:
         if "query" == "query" and "time" in kwargs:
             params["time"] = kwargs["time"]
         
-        path = "/convert/unixtime"
+        path = "/api/v1/convert/unixtime"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -204,7 +204,7 @@ class _ConvertApi:
         params = {}
         body = None
         
-        path = "/convert/json"
+        path = "/api/v1/convert/json"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -234,7 +234,7 @@ class _DailyApi:
         params = {}
         body = None
         
-        path = "/daily/news-image"
+        path = "/api/v1/daily/news-image"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -264,7 +264,7 @@ class _GameApi:
         params = {}
         body = None
         
-        path = "/game/epic-free"
+        path = "/api/v1/game/epic-free"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -286,7 +286,7 @@ class _GameApi:
         if "query" == "query" and "uuid" in kwargs:
             params["uuid"] = kwargs["uuid"]
         
-        path = "/game/minecraft/historyid"
+        path = "/api/v1/game/minecraft/historyid"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -303,7 +303,7 @@ class _GameApi:
         if "query" == "query" and "server" in kwargs:
             params["server"] = kwargs["server"]
         
-        path = "/game/minecraft/serverstatus"
+        path = "/api/v1/game/minecraft/serverstatus"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -320,7 +320,7 @@ class _GameApi:
         if "query" == "query" and "username" in kwargs:
             params["username"] = kwargs["username"]
         
-        path = "/game/minecraft/userinfo"
+        path = "/api/v1/game/minecraft/userinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -364,7 +364,7 @@ class _GameApi:
         if "query" == "query" and "key" in kwargs:
             params["key"] = kwargs["key"]
         
-        path = "/game/steam/summary"
+        path = "/api/v1/game/steam/summary"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -396,7 +396,7 @@ class _ImageApi:
         if "query" == "query" and "r" in kwargs:
             params["r"] = kwargs["r"]
         
-        path = "/avatar/gravatar"
+        path = "/api/v1/avatar/gravatar"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -418,7 +418,7 @@ class _ImageApi:
         params = {}
         body = None
         
-        path = "/image/bing-daily"
+        path = "/api/v1/image/bing-daily"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -442,7 +442,7 @@ class _ImageApi:
         if "query" == "query" and "bg_color" in kwargs:
             params["bg_color"] = kwargs["bg_color"]
         
-        path = "/image/motou"
+        path = "/api/v1/image/motou"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -474,7 +474,7 @@ class _ImageApi:
         if "query" == "query" and "format" in kwargs:
             params["format"] = kwargs["format"]
         
-        path = "/image/qrcode"
+        path = "/api/v1/image/qrcode"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -491,7 +491,7 @@ class _ImageApi:
         if "query" == "query" and "url" in kwargs:
             params["url"] = kwargs["url"]
         
-        path = "/image/tobase64"
+        path = "/api/v1/image/tobase64"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -536,7 +536,7 @@ class _ImageApi:
         if "query" == "query" and "format" in kwargs:
             params["format"] = kwargs["format"]
         
-        path = "/image/compress"
+        path = "/api/v1/image/compress"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -556,7 +556,7 @@ class _ImageApi:
         params = {}
         body = None
         
-        path = "/image/frombase64"
+        path = "/api/v1/image/frombase64"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -577,7 +577,7 @@ class _ImageApi:
         params = {}
         body = None
         
-        path = "/image/motou"
+        path = "/api/v1/image/motou"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -596,7 +596,7 @@ class _ImageApi:
         params = {}
         body = None
         
-        path = "/image/speechless"
+        path = "/api/v1/image/speechless"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -622,7 +622,7 @@ class _ImageApi:
         if "query" == "query" and "quality" in kwargs:
             params["quality"] = kwargs["quality"]
         
-        path = "/image/svg"
+        path = "/api/v1/image/svg"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -648,7 +648,7 @@ class _MiscApi:
         if "query" == "query" and "day" in kwargs:
             params["day"] = kwargs["day"]
         
-        path = "/history/programmer"
+        path = "/api/v1/history/programmer"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -662,7 +662,7 @@ class _MiscApi:
         params = {}
         body = None
         
-        path = "/history/programmer/today"
+        path = "/api/v1/history/programmer/today"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -691,7 +691,7 @@ class _MiscApi:
         if "query" == "query" and "type" in kwargs:
             params["type"] = kwargs["type"]
         
-        path = "/misc/hotboard"
+        path = "/api/v1/misc/hotboard"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -708,7 +708,7 @@ class _MiscApi:
         if "query" == "query" and "phone" in kwargs:
             params["phone"] = kwargs["phone"]
         
-        path = "/misc/phoneinfo"
+        path = "/api/v1/misc/phoneinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -760,7 +760,7 @@ graph TD
         if "query" == "query" and "decimal_places" in kwargs:
             params["decimal_places"] = kwargs["decimal_places"]
         
-        path = "/misc/randomnumber"
+        path = "/api/v1/misc/randomnumber"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -782,7 +782,7 @@ graph TD
         if "query" == "query" and "ts" in kwargs:
             params["ts"] = kwargs["ts"]
         
-        path = "/misc/timestamp"
+        path = "/api/v1/misc/timestamp"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -804,7 +804,7 @@ graph TD
         params = {}
         body = None
         
-        path = "/misc/tracking/carriers"
+        path = "/api/v1/misc/tracking/carriers"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -829,7 +829,7 @@ graph TD
         if "query" == "query" and "tracking_number" in kwargs:
             params["tracking_number"] = kwargs["tracking_number"]
         
-        path = "/misc/tracking/detect"
+        path = "/api/v1/misc/tracking/detect"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -857,7 +857,7 @@ graph TD
         if "query" == "query" and "carrier_code" in kwargs:
             params["carrier_code"] = kwargs["carrier_code"]
         
-        path = "/misc/tracking/query"
+        path = "/api/v1/misc/tracking/query"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -884,7 +884,7 @@ graph TD
         if "query" == "query" and "adcode" in kwargs:
             params["adcode"] = kwargs["adcode"]
         
-        path = "/misc/weather"
+        path = "/api/v1/misc/weather"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -901,7 +901,7 @@ graph TD
         if "query" == "query" and "city" in kwargs:
             params["city"] = kwargs["city"]
         
-        path = "/misc/worldtime"
+        path = "/api/v1/misc/worldtime"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -927,7 +927,7 @@ class _NetworkApi:
         if "query" == "query" and "type" in kwargs:
             params["type"] = kwargs["type"]
         
-        path = "/network/dns"
+        path = "/api/v1/network/dns"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -948,7 +948,7 @@ class _NetworkApi:
         if "query" == "query" and "domain" in kwargs:
             params["domain"] = kwargs["domain"]
         
-        path = "/network/icp"
+        path = "/api/v1/network/icp"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -970,7 +970,7 @@ class _NetworkApi:
         if "query" == "query" and "source" in kwargs:
             params["source"] = kwargs["source"]
         
-        path = "/network/ipinfo"
+        path = "/api/v1/network/ipinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -989,7 +989,7 @@ class _NetworkApi:
         if "query" == "query" and "source" in kwargs:
             params["source"] = kwargs["source"]
         
-        path = "/network/myip"
+        path = "/api/v1/network/myip"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1006,7 +1006,7 @@ class _NetworkApi:
         if "query" == "query" and "host" in kwargs:
             params["host"] = kwargs["host"]
         
-        path = "/network/ping"
+        path = "/api/v1/network/ping"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1020,7 +1020,7 @@ class _NetworkApi:
         params = {}
         body = None
         
-        path = "/network/pingmyip"
+        path = "/api/v1/network/pingmyip"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1043,7 +1043,7 @@ class _NetworkApi:
         if "query" == "query" and "protocol" in kwargs:
             params["protocol"] = kwargs["protocol"]
         
-        path = "/network/portscan"
+        path = "/api/v1/network/portscan"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1063,7 +1063,7 @@ class _NetworkApi:
         if "query" == "query" and "url" in kwargs:
             params["url"] = kwargs["url"]
         
-        path = "/network/urlstatus"
+        path = "/api/v1/network/urlstatus"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1090,7 +1090,7 @@ class _NetworkApi:
         if "query" == "query" and "format" in kwargs:
             params["format"] = kwargs["format"]
         
-        path = "/network/whois"
+        path = "/api/v1/network/whois"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1107,7 +1107,7 @@ class _NetworkApi:
         if "query" == "query" and "domain" in kwargs:
             params["domain"] = kwargs["domain"]
         
-        path = "/network/wxdomain"
+        path = "/api/v1/network/wxdomain"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1127,7 +1127,7 @@ class _PoemApi:
         params = {}
         body = None
         
-        path = "/saying"
+        path = "/api/v1/saying"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1159,7 +1159,7 @@ class _RandomApi:
         if "query" == "query" and "question" in kwargs:
             params["question"] = kwargs["question"]
         
-        path = "/answerbook/ask"
+        path = "/api/v1/answerbook/ask"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1216,7 +1216,7 @@ class _RandomApi:
         if "query" == "query" and "type" in kwargs:
             params["type"] = kwargs["type"]
         
-        path = "/random/image"
+        path = "/api/v1/random/image"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1248,7 +1248,7 @@ class _RandomApi:
         if "query" == "query" and "type" in kwargs:
             params["type"] = kwargs["type"]
         
-        path = "/random/string"
+        path = "/api/v1/random/string"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1265,7 +1265,7 @@ class _RandomApi:
         params = {}
         body = None
         
-        path = "/answerbook/ask"
+        path = "/api/v1/answerbook/ask"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1297,7 +1297,7 @@ class _SocialApi:
         if "query" == "query" and "repo" in kwargs:
             params["repo"] = kwargs["repo"]
         
-        path = "/github/repo"
+        path = "/api/v1/github/repo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1352,7 +1352,7 @@ class _SocialApi:
         if "query" == "query" and "pn" in kwargs:
             params["pn"] = kwargs["pn"]
         
-        path = "/social/bilibili/archives"
+        path = "/api/v1/social/bilibili/archives"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1375,7 +1375,7 @@ class _SocialApi:
         if "query" == "query" and "room_id" in kwargs:
             params["room_id"] = kwargs["room_id"]
         
-        path = "/social/bilibili/liveroom"
+        path = "/api/v1/social/bilibili/liveroom"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1410,7 +1410,7 @@ class _SocialApi:
         if "query" == "query" and "pn" in kwargs:
             params["pn"] = kwargs["pn"]
         
-        path = "/social/bilibili/replies"
+        path = "/api/v1/social/bilibili/replies"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1427,7 +1427,7 @@ class _SocialApi:
         if "query" == "query" and "uid" in kwargs:
             params["uid"] = kwargs["uid"]
         
-        path = "/social/bilibili/userinfo"
+        path = "/api/v1/social/bilibili/userinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1453,7 +1453,7 @@ class _SocialApi:
         if "query" == "query" and "bvid" in kwargs:
             params["bvid"] = kwargs["bvid"]
         
-        path = "/social/bilibili/videoinfo"
+        path = "/api/v1/social/bilibili/videoinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1483,7 +1483,7 @@ class _SocialApi:
         if "query" == "query" and "group_id" in kwargs:
             params["group_id"] = kwargs["group_id"]
         
-        path = "/social/qq/groupinfo"
+        path = "/api/v1/social/qq/groupinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1509,7 +1509,7 @@ class _SocialApi:
         if "query" == "query" and "qq" in kwargs:
             params["qq"] = kwargs["qq"]
         
-        path = "/social/qq/userinfo"
+        path = "/api/v1/social/qq/userinfo"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1538,7 +1538,7 @@ class _StatusApi:
         if "header" == "query" and "Authorization" in kwargs:
             params["Authorization"] = kwargs["Authorization"]
         
-        path = "/status/ratelimit"
+        path = "/api/v1/status/ratelimit"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1555,7 +1555,7 @@ class _StatusApi:
         if "query" == "query" and "path" in kwargs:
             params["path"] = kwargs["path"]
         
-        path = "/status/usage"
+        path = "/api/v1/status/usage"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1581,7 +1581,7 @@ class _TextApi:
         if "query" == "query" and "text" in kwargs:
             params["text"] = kwargs["text"]
         
-        path = "/text/md5"
+        path = "/api/v1/text/md5"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1602,7 +1602,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/aes/decrypt"
+        path = "/api/v1/text/aes/decrypt"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1620,7 +1620,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/aes/encrypt"
+        path = "/api/v1/text/aes/encrypt"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1634,7 +1634,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/analyze"
+        path = "/api/v1/text/analyze"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1648,7 +1648,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/base64/decode"
+        path = "/api/v1/text/base64/decode"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1662,7 +1662,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/base64/encode"
+        path = "/api/v1/text/base64/encode"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1676,7 +1676,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/md5"
+        path = "/api/v1/text/md5"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1690,7 +1690,7 @@ class _TextApi:
         params = {}
         body = None
         
-        path = "/text/md5/verify"
+        path = "/api/v1/text/md5/verify"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1707,7 +1707,7 @@ class _TranslateApi:
         params = {}
         body = None
         
-        path = "/ai/translate/languages"
+        path = "/api/v1/ai/translate/languages"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1735,7 +1735,7 @@ class _TranslateApi:
         if "query" == "query" and "target_lang" in kwargs:
             params["target_lang"] = kwargs["target_lang"]
         
-        path = "/ai/translate"
+        path = "/api/v1/ai/translate"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1761,7 +1761,7 @@ class _TranslateApi:
         params = {}
         body = None
         
-        path = "/translate/stream"
+        path = "/api/v1/translate/stream"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1781,7 +1781,7 @@ class _TranslateApi:
         if "query" == "query" and "to_lang" in kwargs:
             params["to_lang"] = kwargs["to_lang"]
         
-        path = "/translate/text"
+        path = "/api/v1/translate/text"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1819,7 +1819,7 @@ class _WebparseApi:
         if "path" == "query" and "task_id" in kwargs:
             params["task_id"] = kwargs["task_id"]
         
-        path = "/web/tomarkdown/async/{task_id}"
+        path = "/api/v1/web/tomarkdown/async/{task_id}"
         
         if "task_id" in kwargs:
             path = path.replace("{" + "task_id" + "}", str(kwargs["task_id"]))
@@ -1839,7 +1839,7 @@ class _WebparseApi:
         if "query" == "query" and "url" in kwargs:
             params["url"] = kwargs["url"]
         
-        path = "/webparse/extractimages"
+        path = "/api/v1/webparse/extractimages"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1856,7 +1856,7 @@ class _WebparseApi:
         if "query" == "query" and "url" in kwargs:
             params["url"] = kwargs["url"]
         
-        path = "/webparse/metadata"
+        path = "/api/v1/webparse/metadata"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1883,7 +1883,7 @@ UAPI Pro平台推出的异步网页转Markdown API能够将任意网页URL转换
         if "query" == "query" and "url" in kwargs:
             params["url"] = kwargs["url"]
         
-        path = "/web/tomarkdown/async"
+        path = "/api/v1/web/tomarkdown/async"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1903,7 +1903,7 @@ class _MinGanCiShiBieApi:
         if "query" == "query" and "keyword" in kwargs:
             params["keyword"] = kwargs["keyword"]
         
-        path = "/sensitive-word/analyze-query"
+        path = "/api/v1/sensitive-word/analyze-query"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -1949,7 +1949,7 @@ class _MinGanCiShiBieApi:
         params = {}
         body = None
         
-        path = "/sensitive-word/analyze"
+        path = "/api/v1/sensitive-word/analyze"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -1973,7 +1973,7 @@ class _MinGanCiShiBieApi:
         params = {}
         body = None
         
-        path = "/text/profanitycheck"
+        path = "/api/v1/text/profanitycheck"
         
         return self._http.request("POST", path, params=params, json=body)
     
@@ -2000,7 +2000,7 @@ class _ZhiNengSouSuoApi:
         params = {}
         body = None
         
-        path = "/search/engines"
+        path = "/api/v1/search/engines"
         
         return self._http.request("GET", path, params=params, json=body)
     
@@ -2024,7 +2024,7 @@ UAPI Pro Search 是自研的智能搜索引擎，采用机器学习算法对搜�
         params = {}
         body = None
         
-        path = "/search/aggregate"
+        path = "/api/v1/search/aggregate"
         
         return self._http.request("POST", path, params=params, json=body)
     

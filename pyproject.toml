@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "uapi-sdk-python"
-version = "0.1.2"
+version = "0.1.5"
 description = "Idiomatic UAPI SDK for Python"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -27,4 +27,5 @@ strict = true
 
 [tool.isort]
 profile = "black"
+
 

@@ -1,6 +1,6 @@
 # uapi-sdk-python
 
-![Banner](https://raw.githubusercontent.com/AxT-Team/uapi-sdk-python/main/banner.png)
+![Banner](https://raw.githubusercontent.com/uapis/uapi-sdk-python/main/banner.png)
 
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Docs](https://img.shields.io/badge/Docs-uapis.cn-2EAE5D?style=flat-square)](https://uapis.cn/)

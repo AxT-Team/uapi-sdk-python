@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
 **question** | **str** |  | [optional] 
 **answer** | **str** |  | [optional] 
 

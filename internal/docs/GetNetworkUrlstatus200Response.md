@@ -5,8 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
-**status** | **int** | HTTP响应状态码 | [optional] 
+**status** | **int** | 目标不可达或请求失败时固定为 0。 | [optional] 
 **url** | **str** |  | [optional] 
 
 ## Example

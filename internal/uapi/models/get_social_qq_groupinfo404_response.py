@@ -26,10 +26,8 @@ class GetSocialQqGroupinfo404Response(BaseModel):
     """
     GetSocialQqGroupinfo404Response
     """ # noqa: E501
-    code: Optional[StrictStr] = None
-    details: Optional[Dict[str, Any]] = None
-    message: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "details", "message"]
+    error: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["error"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,9 +80,7 @@ class GetSocialQqGroupinfo404Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "details": obj.get("details"),
-            "message": obj.get("message")
+            "error": obj.get("error")
         })
         return _obj
 

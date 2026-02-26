@@ -12,6 +12,17 @@ Name | Type | Description | Notes
 **tag** | **str** | 群标签 | [optional] 
 **join_url** | **str** | 加群链接（QR码URL） | [optional] 
 **last_updated** | **str** | 最后更新时间（ISO 8601格式） | [optional] 
+**member_count** | **int** | 当前成员数 | [optional] 
+**max_member_count** | **int** | 最大成员数 | [optional] 
+**active_member_num** | **int** | 活跃成员数（可选，部分群有此数据） | [optional] 
+**owner_uin** | **str** | 群主QQ号（可选） | [optional] 
+**owner_uid** | **str** | 群主UID（可选） | [optional] 
+**create_time** | **int** | 建群时间戳（Unix时间戳，可选） | [optional] 
+**create_time_str** | **str** | 建群时间格式化字符串（可选） | [optional] 
+**group_grade** | **int** | 群等级（可选） | [optional] 
+**group_memo** | **str** | 群公告/简介（可选） | [optional] 
+**cert_type** | **int** | 认证类型（0&#x3D;未认证，可选） | [optional] 
+**cert_text** | **str** | 认证说明文本（可选） | [optional] 
 
 ## Example
 

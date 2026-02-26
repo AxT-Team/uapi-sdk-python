@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,8 @@ class GetImageTobase64200Response(BaseModel):
     GetImageTobase64200Response
     """ # noqa: E501
     var_base64: Optional[StrictStr] = Field(default=None, description="转换后的完整Base64 Data URI，可以直接在CSS或HTML中使用。", alias="base64")
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
     msg: Optional[StrictStr] = Field(default=None, description="操作结果描述。")
-    __properties: ClassVar[List[str]] = ["base64", "code", "msg"]
+    __properties: ClassVar[List[str]] = ["base64", "msg"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +82,6 @@ class GetImageTobase64200Response(BaseModel):
 
         _obj = cls.model_validate({
             "base64": obj.get("base64"),
-            "code": obj.get("code"),
             "msg": obj.get("msg")
         })
         return _obj

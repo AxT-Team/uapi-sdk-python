@@ -27,13 +27,12 @@ class GetNetworkPingmyip200Response(BaseModel):
     GetNetworkPingmyip200Response
     """ # noqa: E501
     avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="平均延迟(ms)")
-    code: Optional[StrictInt] = None
     host: Optional[StrictStr] = None
     ip: Optional[StrictStr] = None
     location: Optional[StrictStr] = None
     max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="最大延迟(ms)")
     min: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="最小延迟(ms)")
-    __properties: ClassVar[List[str]] = ["avg", "code", "host", "ip", "location", "max", "min"]
+    __properties: ClassVar[List[str]] = ["avg", "host", "ip", "location", "max", "min"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +86,6 @@ class GetNetworkPingmyip200Response(BaseModel):
 
         _obj = cls.model_validate({
             "avg": obj.get("avg"),
-            "code": obj.get("code"),
             "host": obj.get("host"),
             "ip": obj.get("ip"),
             "location": obj.get("location"),

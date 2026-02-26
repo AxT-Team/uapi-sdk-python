@@ -28,7 +28,7 @@ class PostTextAesDecryptRequest(BaseModel):
     """ # noqa: E501
     key: StrictStr = Field(description="密钥，长度必须为16、24或32字节，对应AES-128/192/256。")
     text: StrictStr = Field(description="Base64编码的密文。")
-    nonce: StrictStr = Field(description="16�ֽڵ�IV/Nonce����Ϊ16���ַ�")
+    nonce: StrictStr = Field(description="16字节的IV/Nonce，必须为16个字符")
     __properties: ClassVar[List[str]] = ["key", "text", "nonce"]
 
     model_config = ConfigDict(

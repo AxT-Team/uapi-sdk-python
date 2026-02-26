@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **languages** | **Dict[str, int]** |  | [optional] 
 **collaborators** | [**List[GetGithubRepo200ResponseCollaboratorsInner]**](GetGithubRepo200ResponseCollaboratorsInner.md) |  | [optional] 
 **maintainers** | [**List[GetGithubRepo200ResponseCollaboratorsInner]**](GetGithubRepo200ResponseCollaboratorsInner.md) |  | [optional] 
+**latest_release** | [**GetGithubRepo200ResponseLatestRelease**](GetGithubRepo200ResponseLatestRelease.md) |  | [optional] 
 
 ## Example
 

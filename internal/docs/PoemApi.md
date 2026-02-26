@@ -4,13 +4,13 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_saying**](PoemApi.md#get_saying) | **GET** /saying | 随机获取一句诗词或名言
+[**get_saying**](PoemApi.md#get_saying) | **GET** /saying | 一言
 
 
 # **get_saying**
 > GetSaying200Response get_saying()
 
-随机获取一句诗词或名言
+一言
 
 想在你的应用里每天展示一句不一样的话，给用户一点小小的惊喜吗？这个“一言”接口就是为此而生。
 
@@ -39,7 +39,7 @@ with uapi.ApiClient(configuration) as api_client:
     api_instance = uapi.PoemApi(api_client)
 
     try:
-        # 随机获取一句诗词或名言
+        # 一言
         api_response = api_instance.get_saying()
         print("The response of PoemApi->get_saying:\n")
         pprint(api_response)

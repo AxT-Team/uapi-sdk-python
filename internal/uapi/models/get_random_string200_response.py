@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,9 +26,8 @@ class GetRandomString200Response(BaseModel):
     """
     GetRandomString200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     text: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "text"]
+    __properties: ClassVar[List[str]] = ["text"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +80,6 @@ class GetRandomString200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "text": obj.get("text")
         })
         return _obj

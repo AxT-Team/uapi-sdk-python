@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_github_repo200_response_collaborators_inner import GetGithubRepo200ResponseCollaboratorsInner
+from uapi.models.get_github_repo200_response_latest_release import GetGithubRepo200ResponseLatestRelease
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -51,7 +52,8 @@ class GetGithubRepo200Response(BaseModel):
     languages: Optional[Dict[str, StrictInt]] = None
     collaborators: Optional[List[GetGithubRepo200ResponseCollaboratorsInner]] = None
     maintainers: Optional[List[GetGithubRepo200ResponseCollaboratorsInner]] = None
-    __properties: ClassVar[List[str]] = ["full_name", "description", "homepage", "default_branch", "primary_branch", "default_branch_sha", "visibility", "archived", "disabled", "fork", "language", "topics", "license", "stargazers", "forks", "open_issues", "watchers", "pushed_at", "created_at", "updated_at", "languages", "collaborators", "maintainers"]
+    latest_release: Optional[GetGithubRepo200ResponseLatestRelease] = None
+    __properties: ClassVar[List[str]] = ["full_name", "description", "homepage", "default_branch", "primary_branch", "default_branch_sha", "visibility", "archived", "disabled", "fork", "language", "topics", "license", "stargazers", "forks", "open_issues", "watchers", "pushed_at", "created_at", "updated_at", "languages", "collaborators", "maintainers", "latest_release"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,10 +108,18 @@ class GetGithubRepo200Response(BaseModel):
                 if _item_maintainers:
                     _items.append(_item_maintainers.to_dict())
             _dict['maintainers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of latest_release
+        if self.latest_release:
+            _dict['latest_release'] = self.latest_release.to_dict()
         # set to None if collaborators (nullable) is None
         # and model_fields_set contains the field
         if self.collaborators is None and "collaborators" in self.model_fields_set:
             _dict['collaborators'] = None
+
+        # set to None if latest_release (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_release is None and "latest_release" in self.model_fields_set:
+            _dict['latest_release'] = None
 
         return _dict
 
@@ -145,7 +155,8 @@ class GetGithubRepo200Response(BaseModel):
             "updated_at": obj.get("updated_at"),
             "languages": obj.get("languages"),
             "collaborators": [GetGithubRepo200ResponseCollaboratorsInner.from_dict(_item) for _item in obj["collaborators"]] if obj.get("collaborators") is not None else None,
-            "maintainers": [GetGithubRepo200ResponseCollaboratorsInner.from_dict(_item) for _item in obj["maintainers"]] if obj.get("maintainers") is not None else None
+            "maintainers": [GetGithubRepo200ResponseCollaboratorsInner.from_dict(_item) for _item in obj["maintainers"]] if obj.get("maintainers") is not None else None,
+            "latest_release": GetGithubRepo200ResponseLatestRelease.from_dict(obj["latest_release"]) if obj.get("latest_release") is not None else None
         })
         return _obj
 

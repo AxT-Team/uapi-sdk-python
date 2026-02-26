@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,11 +26,10 @@ class GetGameMinecraftUserinfo200Response(BaseModel):
     """
     GetGameMinecraftUserinfo200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
     skin_url: Optional[StrictStr] = Field(default=None, description="玩家当前使用的皮肤图片URL。")
     username: Optional[StrictStr] = Field(default=None, description="玩家当前的准确用户名（注意大小写可能与输入不同）。")
     uuid: Optional[StrictStr] = Field(default=None, description="玩家的32位无破折号UUID。")
-    __properties: ClassVar[List[str]] = ["code", "skin_url", "username", "uuid"]
+    __properties: ClassVar[List[str]] = ["skin_url", "username", "uuid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +82,6 @@ class GetGameMinecraftUserinfo200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "skin_url": obj.get("skin_url"),
             "username": obj.get("username"),
             "uuid": obj.get("uuid")

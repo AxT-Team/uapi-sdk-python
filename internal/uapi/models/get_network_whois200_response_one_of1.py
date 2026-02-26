@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,9 +26,8 @@ class GetNetworkWhois200ResponseOneOf1(BaseModel):
     """
     ### JSON格式响应 当 `format=json` 时，`whois` 字段返回结构化的JSON对象。  > [!NOTE] > **注意**：返回的具体字段可能因域名注册局和隐私保护设置而异。某些敏感信息可能会被部分隐藏或标记为 `REDACTED FOR PRIVACY`。
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     whois: Optional[Dict[str, Any]] = Field(default=None, description="### 结构化WHOIS信息  返回经过解析的JSON对象，包含以下主要部分：  - **域名信息**: 包含域名ID、注册状态、DNS服务器等 - **注册商信息**: 注册服务商的详细信息 - **注册人信息**: 域名所有者的相关信息（可能因隐私保护而部分隐藏） - **重要日期**: 包括注册日期、更新日期和到期日期")
-    __properties: ClassVar[List[str]] = ["code", "whois"]
+    __properties: ClassVar[List[str]] = ["whois"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +80,6 @@ class GetNetworkWhois200ResponseOneOf1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "whois": obj.get("whois")
         })
         return _obj

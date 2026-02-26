@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** | 状态码，200代表成功。 | [optional] 
 **skin_url** | **str** | 玩家当前使用的皮肤图片URL。 | [optional] 
 **username** | **str** | 玩家当前的准确用户名（注意大小写可能与输入不同）。 | [optional] 
 **uuid** | **str** | 玩家的32位无破折号UUID。 | [optional] 

@@ -27,9 +27,8 @@ class GetMiscWeather500Response(BaseModel):
     GetMiscWeather500Response
     """ # noqa: E501
     code: Optional[StrictStr] = None
-    details: Optional[Dict[str, Any]] = None
     message: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "details", "message"]
+    __properties: ClassVar[List[str]] = ["code", "message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +82,6 @@ class GetMiscWeather500Response(BaseModel):
 
         _obj = cls.model_validate({
             "code": obj.get("code"),
-            "details": obj.get("details"),
             "message": obj.get("message")
         })
         return _obj

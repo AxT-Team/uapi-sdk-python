@@ -5,13 +5,14 @@ All URIs are relative to *https://uapis.cn/api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_avatar_gravatar**](ImageApi.md#get_avatar_gravatar) | **GET** /avatar/gravatar | 获取Gravatar头像
-[**get_image_bing_daily**](ImageApi.md#get_image_bing_daily) | **GET** /image/bing-daily | 获取必应每日壁纸
-[**get_image_motou**](ImageApi.md#get_image_motou) | **GET** /image/motou | 生成摸摸头GIF (QQ号方式)
-[**get_image_qrcode**](ImageApi.md#get_image_qrcode) | **GET** /image/qrcode | 动态生成二维码
-[**get_image_tobase64**](ImageApi.md#get_image_tobase64) | **GET** /image/tobase64 | 将在线图片转换为Base64
+[**get_image_bing_daily**](ImageApi.md#get_image_bing_daily) | **GET** /image/bing-daily | 必应壁纸
+[**get_image_motou**](ImageApi.md#get_image_motou) | **GET** /image/motou | 生成摸摸头GIF (QQ号)
+[**get_image_qrcode**](ImageApi.md#get_image_qrcode) | **GET** /image/qrcode | 生成二维码
+[**get_image_tobase64**](ImageApi.md#get_image_tobase64) | **GET** /image/tobase64 | 图片转 Base64
 [**post_image_compress**](ImageApi.md#post_image_compress) | **POST** /image/compress | 无损压缩图片
 [**post_image_frombase64**](ImageApi.md#post_image_frombase64) | **POST** /image/frombase64 | 通过Base64编码上传图片
-[**post_image_motou**](ImageApi.md#post_image_motou) | **POST** /image/motou | 生成摸摸头GIF (图片上传或URL方式)
+[**post_image_motou**](ImageApi.md#post_image_motou) | **POST** /image/motou | 生成摸摸头GIF
+[**post_image_nsfw**](ImageApi.md#post_image_nsfw) | **POST** /image/nsfw | 图片敏感检测
 [**post_image_speechless**](ImageApi.md#post_image_speechless) | **POST** /image/speechless | 生成你们怎么不说话了表情包
 [**post_image_svg**](ImageApi.md#post_image_svg) | **POST** /image/svg | SVG转图片
 
@@ -96,7 +97,7 @@ No authorization required
 # **get_image_bing_daily**
 > bytearray get_image_bing_daily()
 
-获取必应每日壁纸
+必应壁纸
 
 每天都想换张新壁纸？让必应的美图点亮你的一天吧！
 
@@ -132,7 +133,7 @@ with uapi.ApiClient(configuration) as api_client:
     api_instance = uapi.ImageApi(api_client)
 
     try:
-        # 获取必应每日壁纸
+        # 必应壁纸
         api_response = api_instance.get_image_bing_daily()
         print("The response of ImageApi->get_image_bing_daily:\n")
         pprint(api_response)
@@ -171,7 +172,7 @@ No authorization required
 # **get_image_motou**
 > bytearray get_image_motou(qq, bg_color=bg_color)
 
-生成摸摸头GIF (QQ号方式)
+生成摸摸头GIF (QQ号)
 
 想在线rua一下好友的头像吗？这个趣味接口可以满足你。
 
@@ -205,7 +206,7 @@ with uapi.ApiClient(configuration) as api_client:
     bg_color = 'transparent' # str | GIF的背景颜色。留空则由后端服务决定默认值。 (optional)
 
     try:
-        # 生成摸摸头GIF (QQ号方式)
+        # 生成摸摸头GIF (QQ号)
         api_response = api_instance.get_image_motou(qq, bg_color=bg_color)
         print("The response of ImageApi->get_image_motou:\n")
         pprint(api_response)
@@ -247,14 +248,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_image_qrcode**
-> bytearray get_image_qrcode(text, size=size, format=format)
+> bytearray get_image_qrcode(text, size=size, format=format, transparent=transparent, fgcolor=fgcolor, bgcolor=bgcolor)
 
-动态生成二维码
+生成二维码
 
 无论是网址、文本还是联系方式，通通可以变成一个二维码！这是一个非常灵活的二维码生成工具。
 
 ## 功能概述
-你提供一段文本内容，我们为你生成对应的二维码图片。你可以自定义尺寸，并选择不同的返回格式以适应不同场景。
+你提供一段文本内容，我们为你生成对应的二维码图片。你可以自定义尺寸、前景色、背景色，还支持透明背景，并选择不同的返回格式以适应不同场景。
 
 ## 使用须知
 
@@ -264,6 +265,12 @@ No authorization required
 > - **`image`** (默认): 直接返回 `image/png` 格式的图片二进制数据，适合在 `<img>` 标签中直接使用。
 > - **`json`**: 返回一个包含 Base64 Data URI 的 JSON 对象，适合需要在前端直接嵌入CSS或HTML的场景。
 > - **`json_url`**: 返回一个包含图片临时URL的JSON对象，适合需要图片链接的场景。
+
+> [!TIP]
+> **颜色参数说明**
+> - 颜色参数使用十六进制格式（如 `#FF0000`）
+> - URL 中需要对 `#` 进行编码，即 `%23`（例如：`fgcolor=%23FF0000`）
+> - 当 `transparent=true` 时，`bgcolor` 参数会被忽略
 
 ### Example
 
@@ -285,12 +292,15 @@ with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.ImageApi(api_client)
     text = 'https://www.bilibili.com/video/BV1uT4y1P7CX/' # str | 你希望编码到二维码中的任何文本内容，比如一个URL、一段话或者一个JSON字符串。
-    size = 256 # int | 二维码图片的边长（正方形），单位是像素。有效范围是 256 到 1024 之间。 (optional) (default to 256)
+    size = 256 # int | 二维码图片的边长（正方形），单位是像素。有效范围是 256 到 2048 之间。 (optional) (default to 256)
     format = image # str | 指定响应内容的格式。可选值为 `image`, `json`, `json_url`。 (optional) (default to image)
+    transparent = False # bool | 是否使用透明背景。启用后生成的 PNG 图片将具有 alpha 通道，背景透明。 (optional) (default to False)
+    fgcolor = '#000000' # str | 二维码前景色（即二维码本身的颜色），使用十六进制格式。URL 中需要将 `#` 编码为 `%23`。 (optional) (default to '#000000')
+    bgcolor = '#FFFFFF' # str | 二维码背景色，使用十六进制格式。当 `transparent=true` 时此参数会被忽略。URL 中需要将 `#` 编码为 `%23`。 (optional) (default to '#FFFFFF')
 
     try:
-        # 动态生成二维码
-        api_response = api_instance.get_image_qrcode(text, size=size, format=format)
+        # 生成二维码
+        api_response = api_instance.get_image_qrcode(text, size=size, format=format, transparent=transparent, fgcolor=fgcolor, bgcolor=bgcolor)
         print("The response of ImageApi->get_image_qrcode:\n")
         pprint(api_response)
     except Exception as e:
@@ -305,8 +315,11 @@ with uapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **text** | **str**| 你希望编码到二维码中的任何文本内容，比如一个URL、一段话或者一个JSON字符串。 | 
- **size** | **int**| 二维码图片的边长（正方形），单位是像素。有效范围是 256 到 1024 之间。 | [optional] [default to 256]
+ **size** | **int**| 二维码图片的边长（正方形），单位是像素。有效范围是 256 到 2048 之间。 | [optional] [default to 256]
  **format** | **str**| 指定响应内容的格式。可选值为 &#x60;image&#x60;, &#x60;json&#x60;, &#x60;json_url&#x60;。 | [optional] [default to image]
+ **transparent** | **bool**| 是否使用透明背景。启用后生成的 PNG 图片将具有 alpha 通道，背景透明。 | [optional] [default to False]
+ **fgcolor** | **str**| 二维码前景色（即二维码本身的颜色），使用十六进制格式。URL 中需要将 &#x60;#&#x60; 编码为 &#x60;%23&#x60;。 | [optional] [default to &#39;#000000&#39;]
+ **bgcolor** | **str**| 二维码背景色，使用十六进制格式。当 &#x60;transparent&#x3D;true&#x60; 时此参数会被忽略。URL 中需要将 &#x60;#&#x60; 编码为 &#x60;%23&#x60;。 | [optional] [default to &#39;#FFFFFF&#39;]
 
 ### Return type
 
@@ -334,7 +347,7 @@ No authorization required
 # **get_image_tobase64**
 > GetImageTobase64200Response get_image_tobase64(url)
 
-将在线图片转换为Base64
+图片转 Base64
 
 看到一张网上的图片，想把它转换成 Base64 编码以便嵌入到你的 HTML 或 CSS 中？用这个接口就对了。
 
@@ -364,7 +377,7 @@ with uapi.ApiClient(configuration) as api_client:
     url = 'https://ts3.tc.mm.bing.net/th?id=ORMS.44196851bb1757ec3f66572811fe8e07&pid=Wdp&w=612&h=304&qlt=90&c=1&rs=1&dpr=1.25&p=0' # str | 需要转换为Base64的、可公开访问的图片URL地址。
 
     try:
-        # 将在线图片转换为Base64
+        # 图片转 Base64
         api_response = api_instance.get_image_tobase64(url)
         print("The response of ImageApi->get_image_tobase64:\n")
         pprint(api_response)
@@ -424,7 +437,7 @@ No authorization required
 
 ### 请求与响应格式
 - 请求必须使用 `multipart/form-data` 格式上传文件。
-- 成功响应将直接返回压缩后的文件二进制流 (`application/octet-stream`)，并附带 `Content-Disposition` 头，建议客户端根据此头信息保存文件。
+- 成功响应将直接返回压缩后的文件二进制流 (`image/*`)，并附带 `Content-Disposition` 头，建议客户端根据此头信息保存文件。
 
 ## 参数详解
 ### `level` (压缩等级)
@@ -499,7 +512,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | ѹ���ɹ�����Ӧ����ѹ������ͼƬ���������ݡ�Content-Type ��������ѡ��Ŀ��ʽ����Ĭ��Ϊ image/png�� |  * Content-Disposition - ����ͻ��˽��ļ�����Ϊѹ�������ļ������Ƽ�ʹ��׺����������ʽ�� <br>  |
+**200** | 压缩成功响应。响应是压缩后的图片二进制数据。&#x60;Content-Type&#x60; 依据选择的目标格式，默认为 image/png。 |  * Content-Disposition - 提示客户端文件下载为压缩后的文件。建议扩展名与输出格式一致。 <br>  |
 **400** | 请求无效。可能是未上传文件、文件格式不受支持或参数错误。 |  -  |
 **500** | 服务器内部错误。压缩过程中发生错误。 |  -  |
 
@@ -588,7 +601,7 @@ No authorization required
 # **post_image_motou**
 > bytearray post_image_motou(image_url=image_url, file=file, bg_color=bg_color)
 
-生成摸摸头GIF (图片上传或URL方式)
+生成摸摸头GIF
 
 除了使用QQ头像，你还可以通过上传自己的图片或提供图片URL来制作独一无二的摸摸头GIF。
 
@@ -626,7 +639,7 @@ with uapi.ApiClient(configuration) as api_client:
     bg_color = 'bg_color_example' # str | GIF的背景颜色。可选值为 'white', 'black', 'transparent'。 (optional)
 
     try:
-        # 生成摸摸头GIF (图片上传或URL方式)
+        # 生成摸摸头GIF
         api_response = api_instance.post_image_motou(image_url=image_url, file=file, bg_color=bg_color)
         print("The response of ImageApi->post_image_motou:\n")
         pprint(api_response)
@@ -668,6 +681,101 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **post_image_nsfw**
+> PostImageNsfw200Response post_image_nsfw(file=file, url=url)
+
+图片敏感检测
+
+这是一个图片内容审核接口，自动识别图片中的违规内容并返回处理建议。
+
+> [!VIP]
+> 此接口限时免费开放，无需企业认证即可使用。
+
+## 功能概述
+上传图片文件或提供图片URL，接口会自动分析图片内容，返回是否违规、风险等级和处理建议。适合对接到用户上传流程中，实现自动化内容审核。
+
+## 返回字段说明
+- **is_nsfw**: 是否判定为违规内容，`true` 表示违规，`false` 表示正常
+- **nsfw_score**: 违规内容置信度，0-1 之间，越高表示越可能违规
+- **normal_score**: 正常内容置信度，0-1 之间，与 nsfw_score 互补
+- **suggestion**: 处理建议
+  - `pass`: 内容正常，可以直接放行
+  - `review`: 存在风险，建议转人工复核
+  - `block`: 高风险内容，建议直接拦截
+- **risk_level**: 风险等级
+  - `low`: 低风险
+  - `medium`: 中风险
+  - `high`: 高风险
+- **label**: 内容标签，`nsfw` 或 `normal`
+- **confidence**: 模型对当前判断的整体置信度
+- **inference_time_ms**: 模型推理耗时，单位毫秒
+
+### Example
+
+
+```python
+import uapi
+from uapi.models.post_image_nsfw200_response import PostImageNsfw200Response
+from uapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = uapi.Configuration(
+    host = "https://uapis.cn/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with uapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = uapi.ImageApi(api_client)
+    file = None # bytearray | 要检测的图片文件。支持 JPG、JPEG、PNG、GIF、WebP 格式，最大 20MB。 (optional)
+    url = 'url_example' # str | 图片的 URL 地址。如果同时提供 file 和 url，将优先使用 file。 (optional)
+
+    try:
+        # 图片敏感检测
+        api_response = api_instance.post_image_nsfw(file=file, url=url)
+        print("The response of ImageApi->post_image_nsfw:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ImageApi->post_image_nsfw: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file** | **bytearray**| 要检测的图片文件。支持 JPG、JPEG、PNG、GIF、WebP 格式，最大 20MB。 | [optional] 
+ **url** | **str**| 图片的 URL 地址。如果同时提供 file 和 url，将优先使用 file。 | [optional] 
+
+### Return type
+
+[**PostImageNsfw200Response**](PostImageNsfw200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | 检测成功！返回图片的 NSFW 分析结果。 |  -  |
+**400** | 请求参数错误。可能是未提供图片、文件格式不支持或文件过大。 |  -  |
+**413** | 文件过大。上传的图片超过了 20MB 的限制。 |  -  |
+**500** | 服务器内部错误。在处理图片或进行 NSFW 检测时发生错误。 |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **post_image_speechless**
 > bytearray post_image_speechless(post_image_speechless_request)
 
@@ -675,11 +783,8 @@ No authorization required
 
 你们怎么不说话了？是不是都在偷偷玩Uapi，求求你们不要玩Uapi了
 
-## 效果展示
-![示例](https://uapis.cn/static/uploads/33580466897f1e5815296f235b582815.png)
-
 ## 使用须知
-- **响应格式**：接口成功时直接返回 `image/jpeg` 格式的二进制数据。
+- **响应格式**：接口成功时直接返回 `image/png` 格式的二进制数据。
 - **文字内容**：至少需要提供 `top_text`（上方文字）或 `bottom_text`（下方文字）之一。
 - **梗图逻辑**：上方描述某个行为，下方通常以「们」开头表示劝阻，形成戏谑的对比效果。
 
@@ -740,7 +845,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | ���ɳɹ�����Ӧ����PNG��ʽ�ı����ͼƬ���������ݡ� |  -  |
+**200** | 生成成功！响应体是PNG格式的表情包图片二进制数据。 |  -  |
 **400** | 请求参数错误。必须提供 &#39;top_text&#39; 或 &#39;bottom_text&#39; 至少其中之一。 |  -  |
 **500** | 服务器内部错误。在生成表情包图片过程中发生错误。 |  -  |
 

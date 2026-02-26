@@ -5,24 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asn** | **str** | 自治系统编号 (由GeoLite2或商业版提供) | [optional] 
-**beginip** | **str** | IP范围起始 (仅在默认查询中提供) | [optional] 
-**code** | **int** |  | [optional] 
-**endip** | **str** | IP范围结束 (仅在默认查询中提供) | [optional] 
-**ip** | **str** |  | [optional] 
-**isp** | **str** | 运营商 | [optional] 
-**latitude** | **float** |  | [optional] 
-**llc** | **str** | 归属 | [optional] 
-**longitude** | **float** |  | [optional] 
-**region** | **str** | 格式：国家 省份 城市 | [optional] 
-**district** | **str** | 行政区 (仅在商业查询中提供) | [optional] 
-**area_code** | **str** | 行政区划代码 (仅在商业查询中提供) | [optional] 
-**city_code** | **str** | 城市区号 (仅在商业查询中提供) | [optional] 
-**zip_code** | **str** | 邮政编码 (仅在商业查询中提供) | [optional] 
-**time_zone** | **str** | 时区 (仅在商业查询中提供) | [optional] 
-**scenes** | **str** | 应用场景 (仅在商业查询中提供) | [optional] 
-**elevation** | **str** | 海拔（米）(仅在商业查询中提供) | [optional] 
-**weather_station** | **str** | 气象站代码 (仅在商业查询中提供) | [optional] 
+**ip** | **str** | 查询的IP地址 | [optional] 
+**region** | **str** | 地理位置，格式：国家 省份 城市 | [optional] 
+**isp** | **str** | 运营商名称 | [optional] 
+**llc** | **str** | 归属机构 | [optional] 
+**asn** | **str** | 自治系统编号 | [optional] 
+**latitude** | **float** | 纬度 | [optional] 
+**longitude** | **float** | 经度 | [optional] 
+**beginip** | **str** | IP段起始地址（标准查询） | [optional] 
+**endip** | **str** | IP段结束地址（标准查询） | [optional] 
+**district** | **str** | 行政区（商业查询） | [optional] 
 
 ## Example
 

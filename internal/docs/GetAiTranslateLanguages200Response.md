@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
 **message** | **str** |  | [optional] 
 **data** | [**GetAiTranslateLanguages200ResponseData**](GetAiTranslateLanguages200ResponseData.md) |  | [optional] 
 **performance** | [**GetAiTranslateLanguages200ResponsePerformance**](GetAiTranslateLanguages200ResponsePerformance.md) |  | [optional] 

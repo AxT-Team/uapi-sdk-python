@@ -6,7 +6,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
 **whois** | **str** | **WHOIS原始文本**  返回未经处理的原始WHOIS查询结果文本。 | [optional] 
 
 ## Example

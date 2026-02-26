@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +26,9 @@ class PostImageFrombase64200Response(BaseModel):
     """
     PostImageFrombase64200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
     image_url: Optional[StrictStr] = Field(default=None, description="图片保存后在服务器上的绝对访问URL。")
     msg: Optional[StrictStr] = Field(default=None, description="操作结果描述。")
-    __properties: ClassVar[List[str]] = ["code", "image_url", "msg"]
+    __properties: ClassVar[List[str]] = ["image_url", "msg"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +81,6 @@ class PostImageFrombase64200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "image_url": obj.get("image_url"),
             "msg": obj.get("msg")
         })

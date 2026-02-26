@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,9 +26,8 @@ class GetNetworkWhois200ResponseOneOf(BaseModel):
     """
     ### 文本格式响应 当 `format=text` 或未指定时，`whois` 字段包含原始的WHOIS查询文本。这保留了最完整的信息，适合需要自行解析或展示原始数据的场景。
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     whois: Optional[StrictStr] = Field(default=None, description="**WHOIS原始文本**  返回未经处理的原始WHOIS查询结果文本。")
-    __properties: ClassVar[List[str]] = ["code", "whois"]
+    __properties: ClassVar[List[str]] = ["whois"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +80,6 @@ class GetNetworkWhois200ResponseOneOf(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "whois": obj.get("whois")
         })
         return _obj

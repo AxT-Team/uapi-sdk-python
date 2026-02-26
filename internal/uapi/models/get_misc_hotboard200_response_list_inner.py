@@ -31,7 +31,8 @@ class GetMiscHotboard200ResponseListInner(BaseModel):
     index: Optional[StrictInt] = None
     title: Optional[StrictStr] = None
     url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["extra", "hot_value", "index", "title", "url"]
+    cover: Optional[StrictStr] = Field(default=None, description="封面图 URL，音乐类热榜返回专辑封面，其他平台无此字段。")
+    __properties: ClassVar[List[str]] = ["extra", "hot_value", "index", "title", "url", "cover"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,7 +89,8 @@ class GetMiscHotboard200ResponseListInner(BaseModel):
             "hot_value": obj.get("hot_value"),
             "index": obj.get("index"),
             "title": obj.get("title"),
-            "url": obj.get("url")
+            "url": obj.get("url"),
+            "cover": obj.get("cover")
         })
         return _obj
 

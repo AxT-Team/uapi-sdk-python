@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_ai_translate_languages200_response_data import GetAiTranslateLanguages200ResponseData
 from uapi.models.get_ai_translate_languages200_response_performance import GetAiTranslateLanguages200ResponsePerformance
@@ -28,11 +28,10 @@ class GetAiTranslateLanguages200Response(BaseModel):
     """
     GetAiTranslateLanguages200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     message: Optional[StrictStr] = None
     data: Optional[GetAiTranslateLanguages200ResponseData] = None
     performance: Optional[GetAiTranslateLanguages200ResponsePerformance] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "data", "performance"]
+    __properties: ClassVar[List[str]] = ["message", "data", "performance"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +90,6 @@ class GetAiTranslateLanguages200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "message": obj.get("message"),
             "data": GetAiTranslateLanguages200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None,
             "performance": GetAiTranslateLanguages200ResponsePerformance.from_dict(obj["performance"]) if obj.get("performance") is not None else None

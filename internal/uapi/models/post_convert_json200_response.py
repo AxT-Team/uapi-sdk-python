@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,9 +26,8 @@ class PostConvertJson200Response(BaseModel):
     """
     PostConvertJson200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表操作成功。")
     content: Optional[StrictStr] = Field(default=None, description="格式化后的JSON字符串，带有标准缩进和换行。")
-    __properties: ClassVar[List[str]] = ["code", "content"]
+    __properties: ClassVar[List[str]] = ["content"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +80,6 @@ class PostConvertJson200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "content": obj.get("content")
         })
         return _obj

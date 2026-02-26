@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
 **domain** | **str** |  | [optional] 
 **error** | **str** |  | [optional] 
 **records** | [**List[GetNetworkDns200ResponseRecordsInner]**](GetNetworkDns200ResponseRecordsInner.md) |  | [optional] 

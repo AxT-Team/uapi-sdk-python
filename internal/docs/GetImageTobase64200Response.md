@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_base64** | **str** | 转换后的完整Base64 Data URI，可以直接在CSS或HTML中使用。 | [optional] 
-**code** | **int** | 状态码，200代表成功。 | [optional] 
 **msg** | **str** | 操作结果描述。 | [optional] 
 
 ## Example

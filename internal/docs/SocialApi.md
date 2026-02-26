@@ -4,20 +4,20 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_github_repo**](SocialApi.md#get_github_repo) | **GET** /github/repo | 获取GitHub仓库信息
-[**get_social_bilibili_archives**](SocialApi.md#get_social_bilibili_archives) | **GET** /social/bilibili/archives | 获取Bilibili用户投稿列表
-[**get_social_bilibili_liveroom**](SocialApi.md#get_social_bilibili_liveroom) | **GET** /social/bilibili/liveroom | 获取Bilibili直播间信息
-[**get_social_bilibili_replies**](SocialApi.md#get_social_bilibili_replies) | **GET** /social/bilibili/replies | 获取Bilibili视频评论
-[**get_social_bilibili_userinfo**](SocialApi.md#get_social_bilibili_userinfo) | **GET** /social/bilibili/userinfo | 查询Bilibili用户信息
-[**get_social_bilibili_videoinfo**](SocialApi.md#get_social_bilibili_videoinfo) | **GET** /social/bilibili/videoinfo | 获取Bilibili视频详细信息
-[**get_social_qq_groupinfo**](SocialApi.md#get_social_qq_groupinfo) | **GET** /social/qq/groupinfo | 获取QQ群名称、头像、简介
-[**get_social_qq_userinfo**](SocialApi.md#get_social_qq_userinfo) | **GET** /social/qq/userinfo | 独家获取QQ号头像、昵称
+[**get_github_repo**](SocialApi.md#get_github_repo) | **GET** /github/repo | 查询 GitHub 仓库
+[**get_social_bilibili_archives**](SocialApi.md#get_social_bilibili_archives) | **GET** /social/bilibili/archives | 查询 B站投稿
+[**get_social_bilibili_liveroom**](SocialApi.md#get_social_bilibili_liveroom) | **GET** /social/bilibili/liveroom | 查询 B站直播间
+[**get_social_bilibili_replies**](SocialApi.md#get_social_bilibili_replies) | **GET** /social/bilibili/replies | 查询 B站评论
+[**get_social_bilibili_userinfo**](SocialApi.md#get_social_bilibili_userinfo) | **GET** /social/bilibili/userinfo | 查询 B站用户
+[**get_social_bilibili_videoinfo**](SocialApi.md#get_social_bilibili_videoinfo) | **GET** /social/bilibili/videoinfo | 查询 B站视频
+[**get_social_qq_groupinfo**](SocialApi.md#get_social_qq_groupinfo) | **GET** /social/qq/groupinfo | 查询 QQ 群信息
+[**get_social_qq_userinfo**](SocialApi.md#get_social_qq_userinfo) | **GET** /social/qq/userinfo | 查询 QQ 信息
 
 
 # **get_github_repo**
 > GetGithubRepo200Response get_github_repo(repo)
 
-获取GitHub仓库信息
+查询 GitHub 仓库
 
 需要快速获取一个GitHub仓库的核心信息？这个接口为你聚合了最有价值的数据，避免了多次调用GitHub官方API的麻烦，并且内置了缓存优化，速度更快、更稳定。
 
@@ -56,7 +56,7 @@ with uapi.ApiClient(configuration) as api_client:
     repo = 'torvalds/linux' # str | 目标仓库的标识，格式为 `owner/repo`。
 
     try:
-        # 获取GitHub仓库信息
+        # 查询 GitHub 仓库
         api_response = api_instance.get_github_repo(repo)
         print("The response of SocialApi->get_github_repo:\n")
         pprint(api_response)
@@ -99,7 +99,7 @@ No authorization required
 # **get_social_bilibili_archives**
 > GetSocialBilibiliArchives200Response get_social_bilibili_archives(mid, keywords=keywords, orderby=orderby, ps=ps, pn=pn)
 
-获取Bilibili用户投稿列表
+查询 B站投稿
 
 想要获取UP主的所有投稿视频？或者想在你的应用里展示创作者的作品集？这个接口能帮你轻松实现。
 
@@ -159,7 +159,7 @@ with uapi.ApiClient(configuration) as api_client:
     pn = '1' # str | 页码，默认1 (optional)
 
     try:
-        # 获取Bilibili用户投稿列表
+        # 查询 B站投稿
         api_response = api_instance.get_social_bilibili_archives(mid, keywords=keywords, orderby=orderby, ps=ps, pn=pn)
         print("The response of SocialApi->get_social_bilibili_archives:\n")
         pprint(api_response)
@@ -207,7 +207,7 @@ No authorization required
 # **get_social_bilibili_liveroom**
 > GetSocialBilibiliLiveroom200Response get_social_bilibili_liveroom(mid=mid, room_id=room_id)
 
-获取Bilibili直播间信息
+查询 B站直播间
 
 想知道你喜欢的主播开播了吗？或者想在你的应用里集成B站直播间状态？这个接口能满足你。
 
@@ -241,7 +241,7 @@ with uapi.ApiClient(configuration) as api_client:
     room_id = '22637261' # str | 直播间ID，可以是长号（真实ID）或短号（靓号）。与 `mid` 任选其一。 (optional)
 
     try:
-        # 获取Bilibili直播间信息
+        # 查询 B站直播间
         api_response = api_instance.get_social_bilibili_liveroom(mid=mid, room_id=room_id)
         print("The response of SocialApi->get_social_bilibili_liveroom:\n")
         pprint(api_response)
@@ -283,7 +283,7 @@ No authorization required
 # **get_social_bilibili_replies**
 > GetSocialBilibiliReplies200Response get_social_bilibili_replies(oid, sort=sort, ps=ps, pn=pn)
 
-获取Bilibili视频评论
+查询 B站评论
 
 想要分析B站视频的评论区？这个接口可以帮你轻松获取评论数据，包括热门评论和最新评论，还支持分页加载。
 
@@ -291,7 +291,11 @@ No authorization required
 通过视频的 `oid`（通常就是视频的`aid`），你可以分页获取该视频的评论区内容。你可以指定排序方式和分页参数，来精确地获取你需要的数据。
 
 ## 参数说明
-- **`sort` (排序方式)**: `0`=按时间排序, `1`=按点赞数排序, `2`=按回复数排序。默认为按时间排序。
+- **`sort` (排序方式)**
+  - `0` 或 `time`：按时间排序
+  - `1` 或 `like`：按点赞排序
+  - `2` 或 `reply`：按回复数排序
+  - `3` 或 `hot`（也支持 `hottest`、`最热`）：按最热排序
 
 ## 响应体字段说明
 - **`hots` (热门评论)**: 仅在请求第一页时，可能会返回热门评论列表。其结构与 `replies` 中的对象一致。
@@ -320,12 +324,12 @@ with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.SocialApi(api_client)
     oid = '1706416465' # str | 目标评论区的ID。对于视频，这通常就是它的 `aid`。
-    sort = '1' # str | 排序方式。`0`=按时间, `1`=按点赞, `2`=按回复。默认为 `0`。 (optional)
+    sort = 'hot' # str | 排序方式。支持 `0/time`（按时间）、`1/like`（按点赞）、`2/reply`（按回复数）、`3/hot/hottest/最热`（按最热）。默认为 `0/time`。 (optional)
     ps = '5' # str | 每页获取的评论数量，范围是1到20。默认为 `20`。 (optional)
     pn = '1' # str | 要获取的页码，从1开始。默认为 `1`。 (optional)
 
     try:
-        # 获取Bilibili视频评论
+        # 查询 B站评论
         api_response = api_instance.get_social_bilibili_replies(oid, sort=sort, ps=ps, pn=pn)
         print("The response of SocialApi->get_social_bilibili_replies:\n")
         pprint(api_response)
@@ -341,7 +345,7 @@ with uapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **oid** | **str**| 目标评论区的ID。对于视频，这通常就是它的 &#x60;aid&#x60;。 | 
- **sort** | **str**| 排序方式。&#x60;0&#x60;&#x3D;按时间, &#x60;1&#x60;&#x3D;按点赞, &#x60;2&#x60;&#x3D;按回复。默认为 &#x60;0&#x60;。 | [optional] 
+ **sort** | **str**| 排序方式。支持 &#x60;0/time&#x60;（按时间）、&#x60;1/like&#x60;（按点赞）、&#x60;2/reply&#x60;（按回复数）、&#x60;3/hot/hottest/最热&#x60;（按最热）。默认为 &#x60;0/time&#x60;。 | [optional] 
  **ps** | **str**| 每页获取的评论数量，范围是1到20。默认为 &#x60;20&#x60;。 | [optional] 
  **pn** | **str**| 要获取的页码，从1开始。默认为 &#x60;1&#x60;。 | [optional] 
 
@@ -369,7 +373,7 @@ No authorization required
 # **get_social_bilibili_userinfo**
 > GetSocialBilibiliUserinfo200Response get_social_bilibili_userinfo(uid)
 
-查询Bilibili用户信息
+查询 B站用户
 
 想在你的应用里集成B站用户资料展示？这个接口可以轻松获取用户的公开信息。
 
@@ -399,7 +403,7 @@ with uapi.ApiClient(configuration) as api_client:
     uid = '483307278' # str | Bilibili用户的UID
 
     try:
-        # 查询Bilibili用户信息
+        # 查询 B站用户
         api_response = api_instance.get_social_bilibili_userinfo(uid)
         print("The response of SocialApi->get_social_bilibili_userinfo:\n")
         pprint(api_response)
@@ -443,7 +447,7 @@ No authorization required
 # **get_social_bilibili_videoinfo**
 > GetSocialBilibiliVideoinfo200Response get_social_bilibili_videoinfo(aid=aid, bvid=bvid)
 
-获取Bilibili视频详细信息
+查询 B站视频
 
 想在你的应用里展示B站视频的详细信息吗？无论是封面、标题，还是播放量、UP主信息，这个接口都能一网打尽。
 
@@ -480,7 +484,7 @@ with uapi.ApiClient(configuration) as api_client:
     bvid = 'BV17x411w79F' # str | 视频的BV号 (bvid)，例如 `BV117411r7R1`。`aid`和`bvid`任选其一即可。 (optional)
 
     try:
-        # 获取Bilibili视频详细信息
+        # 查询 B站视频
         api_response = api_instance.get_social_bilibili_videoinfo(aid=aid, bvid=bvid)
         print("The response of SocialApi->get_social_bilibili_videoinfo:\n")
         pprint(api_response)
@@ -522,25 +526,36 @@ No authorization required
 # **get_social_qq_groupinfo**
 > GetSocialQqGroupinfo200Response get_social_qq_groupinfo(group_id)
 
-获取QQ群名称、头像、简介
+查询 QQ 群信息
 
-想在你的应用里展示QQ群信息？这个接口让你轻松获取群名称、群头像、群简介等公开信息。它能帮你快速构建社群导航站、群聊推荐系统，或是为你的数据分析工具提供可靠的数据源。无论是展示群聊卡片、生成加群链接，还是进行社群数据统计，这个接口都能满足你的需求。
+想在你的应用里展示QQ群信息？这个接口让你轻松获取群名称、群头像、群简介、成员数量等详细公开信息。它能帮你快速构建社群导航站、群聊推荐系统，或是为你的数据分析工具提供可靠的数据源。
 
 > [!VIP]
 > 本API目前处于**限时免费**阶段，我们鼓励开发者集成和测试。未来，它将转为付费API，为用户提供更稳定和强大的服务。
 
 ## 功能概述
-你只需要提供一个QQ群号（5-12位纯数字），接口就会返回该群的完整公开信息。我们会先验证群号的有效性，确保返回的数据准确可靠。接口的响应速度快，数据结构清晰，非常适合集成到各类应用场景中。
+你只需要提供一个QQ群号（5-12位纯数字），接口就会返回该群的完整公开信息。我们会先验证群号的有效性，确保返回的数据准确可靠。接口响应速度快，数据结构清晰，非常适合集成到各类应用场景中。
 
 ## 返回数据说明
 接口会返回以下QQ群的关键信息：
-- **群基础信息**: 包括群号、群名称，让你能够准确识别和展示群聊。
-- **视觉素材**: 提供群头像URL（标准100x100尺寸），可直接用于在你的界面中展示群聊图标。
-- **群介绍资料**: 包含群描述/简介和群标签，帮助用户了解群聊的主题和特色。
-- **便捷入口**: 返回加群链接（二维码URL），方便用户一键加入感兴趣的群聊。
-- **数据时效**: 提供最后更新时间戳，让你了解数据的新鲜度。
 
-所有返回的数据都遵循标准的JSON格式，字段命名清晰，便于解析和使用。无论你是在做网页端、移动端还是后端服务，都能轻松集成。
+### 基础字段（所有群都有）
+- **群基础信息**: 包括群号、群名称，让你能够准确识别和展示群聊
+- **视觉素材**: 提供群头像URL（支持多种尺寸），可直接用于在你的界面中展示群聊图标
+- **群介绍资料**: 包含群描述/简介和群标签，帮助用户了解群聊的主题和特色
+- **便捷入口**: 返回加群链接（二维码URL），方便用户一键加入感兴趣的群聊
+- **成员统计**: 当前成员数和最大成员数，直观了解群规模
+- **数据时效**: 提供最后更新时间戳，让你了解数据的新鲜度
+
+### 扩展字段（部分群有）
+- **活跃度**: 活跃成员数量（可选）
+- **群主信息**: 群主QQ号和UID（可选）
+- **时间信息**: 建群时间戳和格式化时间（可选）
+- **群等级**: 群等级数值（可选）
+- **群公告**: 群公告/简介内容（可选）
+- **认证信息**: 官方认证类型和说明（可选）
+
+所有返回的数据都遵循标准的JSON格式，字段命名清晰，便于解析和使用。扩展字段仅在数据可用时返回，保持响应体精简。
 
 ### Example
 
@@ -565,7 +580,7 @@ with uapi.ApiClient(configuration) as api_client:
     group_id = '526357265' # str | QQ群号，长度5-12位
 
     try:
-        # 获取QQ群名称、头像、简介
+        # 查询 QQ 群信息
         api_response = api_instance.get_social_qq_groupinfo(group_id)
         print("The response of SocialApi->get_social_qq_groupinfo:\n")
         pprint(api_response)
@@ -601,15 +616,14 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | 成功响应，返回QQ群的详细信息 |  -  |
 **400** | 缺少或无效的group_id参数 |  -  |
-**404** | QQ群不存在或无法访问 |  -  |
-**500** | 获取QQ群聊信息失败 |  -  |
+**404** | QQ群不存在或无法访问（经优化后，此接口遵循RESTful规范，群不存在时返回404而非500） |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_social_qq_userinfo**
 > GetSocialQqUserinfo200Response get_social_qq_userinfo(qq)
 
-独家获取QQ号头像、昵称
+查询 QQ 信息
 
 这是一个功能丰富的QQ用户信息查询接口，能够获取QQ用户的详细公开信息。
 
@@ -648,7 +662,7 @@ with uapi.ApiClient(configuration) as api_client:
     qq = '10001' # str | 需要查询的QQ号
 
     try:
-        # 独家获取QQ号头像、昵称
+        # 查询 QQ 信息
         api_response = api_instance.get_social_qq_userinfo(qq)
         print("The response of SocialApi->get_social_qq_userinfo:\n")
         pprint(api_response)

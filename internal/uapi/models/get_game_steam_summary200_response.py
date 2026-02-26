@@ -29,7 +29,6 @@ class GetGameSteamSummary200Response(BaseModel):
     avatar: Optional[StrictStr] = Field(default=None, description="32x32 像素的小尺寸头像URL。")
     avatarfull: Optional[StrictStr] = Field(default=None, description="184x184 像素的大尺寸头像URL。")
     avatarmedium: Optional[StrictStr] = Field(default=None, description="64x64 像素的中等尺寸头像URL。")
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
     communityvisibilitystate: Optional[StrictInt] = Field(default=None, description="社区资料的可见性状态: 1=私密, 3=公开。")
     loccountrycode: Optional[StrictStr] = Field(default=None, description="用户个人资料中设置的国家代码 (ISO 3166-1)，前提是用户已设置并公开。")
     personaname: Optional[StrictStr] = Field(default=None, description="玩家的当前昵称。")
@@ -41,7 +40,7 @@ class GetGameSteamSummary200Response(BaseModel):
     steamid: Optional[StrictStr] = Field(default=None, description="被查询用户的64位SteamID。")
     timecreated: Optional[StrictInt] = Field(default=None, description="账户创建时的Unix时间戳（秒）。")
     timecreated_str: Optional[StrictStr] = Field(default=None, description="我们为你格式化好的账户创建时间，更直观。")
-    __properties: ClassVar[List[str]] = ["avatar", "avatarfull", "avatarmedium", "code", "communityvisibilitystate", "loccountrycode", "personaname", "personastate", "primaryclanid", "profilestate", "profileurl", "realname", "steamid", "timecreated", "timecreated_str"]
+    __properties: ClassVar[List[str]] = ["avatar", "avatarfull", "avatarmedium", "communityvisibilitystate", "loccountrycode", "personaname", "personastate", "primaryclanid", "profilestate", "profileurl", "realname", "steamid", "timecreated", "timecreated_str"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,7 +96,6 @@ class GetGameSteamSummary200Response(BaseModel):
             "avatar": obj.get("avatar"),
             "avatarfull": obj.get("avatarfull"),
             "avatarmedium": obj.get("avatarmedium"),
-            "code": obj.get("code"),
             "communityvisibilitystate": obj.get("communityvisibilitystate"),
             "loccountrycode": obj.get("loccountrycode"),
             "personaname": obj.get("personaname"),

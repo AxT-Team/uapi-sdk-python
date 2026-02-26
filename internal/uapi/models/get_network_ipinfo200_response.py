@@ -26,25 +26,17 @@ class GetNetworkIpinfo200Response(BaseModel):
     """
     GetNetworkIpinfo200Response
     """ # noqa: E501
-    asn: Optional[StrictStr] = Field(default=None, description="自治系统编号 (由GeoLite2或商业版提供)")
-    beginip: Optional[StrictStr] = Field(default=None, description="IP范围起始 (仅在默认查询中提供)")
-    code: Optional[StrictInt] = None
-    endip: Optional[StrictStr] = Field(default=None, description="IP范围结束 (仅在默认查询中提供)")
-    ip: Optional[StrictStr] = None
-    isp: Optional[StrictStr] = Field(default=None, description="运营商")
-    latitude: Optional[Union[StrictFloat, StrictInt]] = None
-    llc: Optional[StrictStr] = Field(default=None, description="归属")
-    longitude: Optional[Union[StrictFloat, StrictInt]] = None
-    region: Optional[StrictStr] = Field(default=None, description="格式：国家 省份 城市")
-    district: Optional[StrictStr] = Field(default=None, description="行政区 (仅在商业查询中提供)")
-    area_code: Optional[StrictStr] = Field(default=None, description="行政区划代码 (仅在商业查询中提供)")
-    city_code: Optional[StrictStr] = Field(default=None, description="城市区号 (仅在商业查询中提供)")
-    zip_code: Optional[StrictStr] = Field(default=None, description="邮政编码 (仅在商业查询中提供)")
-    time_zone: Optional[StrictStr] = Field(default=None, description="时区 (仅在商业查询中提供)")
-    scenes: Optional[StrictStr] = Field(default=None, description="应用场景 (仅在商业查询中提供)")
-    elevation: Optional[StrictStr] = Field(default=None, description="海拔（米）(仅在商业查询中提供)")
-    weather_station: Optional[StrictStr] = Field(default=None, description="气象站代码 (仅在商业查询中提供)")
-    __properties: ClassVar[List[str]] = ["asn", "beginip", "code", "endip", "ip", "isp", "latitude", "llc", "longitude", "region", "district", "area_code", "city_code", "zip_code", "time_zone", "scenes", "elevation", "weather_station"]
+    ip: Optional[StrictStr] = Field(default=None, description="查询的IP地址")
+    region: Optional[StrictStr] = Field(default=None, description="地理位置，格式：国家 省份 城市")
+    isp: Optional[StrictStr] = Field(default=None, description="运营商名称")
+    llc: Optional[StrictStr] = Field(default=None, description="归属机构")
+    asn: Optional[StrictStr] = Field(default=None, description="自治系统编号")
+    latitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="纬度")
+    longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="经度")
+    beginip: Optional[StrictStr] = Field(default=None, description="IP段起始地址（标准查询）")
+    endip: Optional[StrictStr] = Field(default=None, description="IP段结束地址（标准查询）")
+    district: Optional[StrictStr] = Field(default=None, description="行政区（商业查询）")
+    __properties: ClassVar[List[str]] = ["ip", "region", "isp", "llc", "asn", "latitude", "longitude", "beginip", "endip", "district"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,24 +89,16 @@ class GetNetworkIpinfo200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "asn": obj.get("asn"),
-            "beginip": obj.get("beginip"),
-            "code": obj.get("code"),
-            "endip": obj.get("endip"),
             "ip": obj.get("ip"),
-            "isp": obj.get("isp"),
-            "latitude": obj.get("latitude"),
-            "llc": obj.get("llc"),
-            "longitude": obj.get("longitude"),
             "region": obj.get("region"),
-            "district": obj.get("district"),
-            "area_code": obj.get("area_code"),
-            "city_code": obj.get("city_code"),
-            "zip_code": obj.get("zip_code"),
-            "time_zone": obj.get("time_zone"),
-            "scenes": obj.get("scenes"),
-            "elevation": obj.get("elevation"),
-            "weather_station": obj.get("weather_station")
+            "isp": obj.get("isp"),
+            "llc": obj.get("llc"),
+            "asn": obj.get("asn"),
+            "latitude": obj.get("latitude"),
+            "longitude": obj.get("longitude"),
+            "beginip": obj.get("beginip"),
+            "endip": obj.get("endip"),
+            "district": obj.get("district")
         })
         return _obj
 

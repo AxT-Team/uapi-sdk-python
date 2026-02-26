@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -28,12 +28,30 @@ class PostSensitiveWordAnalyze200ResponseResultsInner(BaseModel):
     PostSensitiveWordAnalyze200ResponseResultsInner
     """ # noqa: E501
     k: Optional[StrictStr] = None
-    r: Optional[StrictStr] = None
-    s: Optional[List[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]]] = None
-    v: Optional[List[StrictStr]] = None
-    t: Optional[List[StrictStr]] = None
-    d: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["k", "r", "s", "v", "t", "d"]
+    label: Optional[StrictStr] = None
+    category: Optional[StrictStr] = None
+    confidence: Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]] = None
+    __properties: ClassVar[List[str]] = ["k", "label", "category", "confidence"]
+
+    @field_validator('label')
+    def label_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['sensitive', 'normal']):
+            raise ValueError("must be one of enum values ('sensitive', 'normal')")
+        return value
+
+    @field_validator('category')
+    def category_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['safe', 'threat', 'porn', 'fraud', 'insult']):
+            raise ValueError("must be one of enum values ('safe', 'threat', 'porn', 'fraud', 'insult')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,11 +105,9 @@ class PostSensitiveWordAnalyze200ResponseResultsInner(BaseModel):
 
         _obj = cls.model_validate({
             "k": obj.get("k"),
-            "r": obj.get("r"),
-            "s": obj.get("s"),
-            "v": obj.get("v"),
-            "t": obj.get("t"),
-            "d": obj.get("d")
+            "label": obj.get("label"),
+            "category": obj.get("category"),
+            "confidence": obj.get("confidence")
         })
         return _obj
 

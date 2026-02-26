@@ -17,9 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_misc_hotboard200_response_list_inner import GetMiscHotboard200ResponseListInner
+from uapi.models.get_misc_hotboard200_response_results_inner import GetMiscHotboard200ResponseResultsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,12 @@ class GetMiscHotboard200Response(BaseModel):
     list: Optional[List[GetMiscHotboard200ResponseListInner]] = Field(default=None, description="热榜条目列表。")
     type: Optional[StrictStr] = None
     update_time: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["list", "type", "update_time"]
+    snapshot_time: Optional[StrictInt] = Field(default=None, description="时光机模式返回的快照实际时间戳（毫秒）。")
+    keyword: Optional[StrictStr] = Field(default=None, description="搜索模式返回的搜索关键词。")
+    count: Optional[StrictInt] = Field(default=None, description="搜索模式返回的结果数量。")
+    results: Optional[List[GetMiscHotboard200ResponseResultsInner]] = Field(default=None, description="搜索模式返回的结果数组。")
+    sources: Optional[List[StrictStr]] = Field(default=None, description="数据源列表模式返回的可用历史数据源数组。")
+    __properties: ClassVar[List[str]] = ["list", "type", "update_time", "snapshot_time", "keyword", "count", "results", "sources"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +84,13 @@ class GetMiscHotboard200Response(BaseModel):
                 if _item_list:
                     _items.append(_item_list.to_dict())
             _dict['list'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
@@ -92,7 +105,12 @@ class GetMiscHotboard200Response(BaseModel):
         _obj = cls.model_validate({
             "list": [GetMiscHotboard200ResponseListInner.from_dict(_item) for _item in obj["list"]] if obj.get("list") is not None else None,
             "type": obj.get("type"),
-            "update_time": obj.get("update_time")
+            "update_time": obj.get("update_time"),
+            "snapshot_time": obj.get("snapshot_time"),
+            "keyword": obj.get("keyword"),
+            "count": obj.get("count"),
+            "results": [GetMiscHotboard200ResponseResultsInner.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
+            "sources": obj.get("sources")
         })
         return _obj
 

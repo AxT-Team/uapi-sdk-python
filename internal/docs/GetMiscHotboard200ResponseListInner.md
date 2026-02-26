@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **index** | **int** |  | [optional] 
 **title** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
+**cover** | **str** | 封面图 URL，音乐类热榜返回专辑封面，其他平台无此字段。 | [optional] 
 
 ## Example
 

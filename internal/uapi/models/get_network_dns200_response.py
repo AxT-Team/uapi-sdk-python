@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_network_dns200_response_records_inner import GetNetworkDns200ResponseRecordsInner
 from typing import Optional, Set
@@ -27,12 +27,11 @@ class GetNetworkDns200Response(BaseModel):
     """
     GetNetworkDns200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     domain: Optional[StrictStr] = None
     error: Optional[StrictStr] = None
     records: Optional[List[GetNetworkDns200ResponseRecordsInner]] = None
     type: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "domain", "error", "records", "type"]
+    __properties: ClassVar[List[str]] = ["domain", "error", "records", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +91,6 @@ class GetNetworkDns200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "domain": obj.get("domain"),
             "error": obj.get("error"),
             "records": [GetNetworkDns200ResponseRecordsInner.from_dict(_item) for _item in obj["records"]] if obj.get("records") is not None else None,

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_game_epic_free200_response_data_inner import GetGameEpicFree200ResponseDataInner
 from typing import Optional, Set
@@ -27,9 +27,8 @@ class GetGameEpicFree200Response(BaseModel):
     """
     GetGameEpicFree200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
     data: Optional[List[GetGameEpicFree200ResponseDataInner]] = Field(default=None, description="免费游戏列表数组。")
-    __properties: ClassVar[List[str]] = ["code", "data"]
+    __properties: ClassVar[List[str]] = ["data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +88,6 @@ class GetGameEpicFree200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "data": [GetGameEpicFree200ResponseDataInner.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
         })
         return _obj

@@ -59,7 +59,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetAnswerbookAsk200Response:
-        """获取答案之书的神秘答案 (GET)
+        """答案之书
 
         想要获得人生问题的神秘答案吗？答案之书API提供了一个神奇8球风格的问答服务，你可以提问并获得随机的神秘答案。  ## 功能概述 通过向答案之书提问，你将获得一个充满智慧（或许）的随机答案。这个API支持通过查询参数或POST请求体两种方式提问。  ## 使用须知  > [!TIP] > **提问技巧** > - 提出明确的问题会获得更好的体验 > - 问题不能为空 > - 支持中文问题 > - 答案具有随机性，仅供娱乐参考
 
@@ -128,7 +128,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetAnswerbookAsk200Response]:
-        """获取答案之书的神秘答案 (GET)
+        """答案之书
 
         想要获得人生问题的神秘答案吗？答案之书API提供了一个神奇8球风格的问答服务，你可以提问并获得随机的神秘答案。  ## 功能概述 通过向答案之书提问，你将获得一个充满智慧（或许）的随机答案。这个API支持通过查询参数或POST请求体两种方式提问。  ## 使用须知  > [!TIP] > **提问技巧** > - 提出明确的问题会获得更好的体验 > - 问题不能为空 > - 支持中文问题 > - 答案具有随机性，仅供娱乐参考
 
@@ -197,7 +197,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """获取答案之书的神秘答案 (GET)
+        """答案之书
 
         想要获得人生问题的神秘答案吗？答案之书API提供了一个神奇8球风格的问答服务，你可以提问并获得随机的神秘答案。  ## 功能概述 通过向答案之书提问，你将获得一个充满智慧（或许）的随机答案。这个API支持通过查询参数或POST请求体两种方式提问。  ## 使用须知  > [!TIP] > **提问技巧** > - 提出明确的问题会获得更好的体验 > - 问题不能为空 > - 支持中文问题 > - 答案具有随机性，仅供娱乐参考
 
@@ -313,8 +313,8 @@ class RandomApi:
     @validate_call
     def get_random_image(
         self,
-        category: Annotated[Optional[StrictStr], Field(description="（可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 ")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="（可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 ")] = None,
+        category: Annotated[Optional[StrictStr], Field(description="（可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 ")] = None,
+        type: Annotated[Optional[StrictStr], Field(description="（可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -328,13 +328,13 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytearray:
-        """随机二次元、风景、动漫图片壁纸
+        """随机图片
 
-        需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。  ## 功能概述 这是一个非常简单的接口，它会从我们庞大的图库和精选外部图床中随机挑选一张图片，然后通过 302 重定向让你直接访问到它。这使得它可以非常方便地直接用在 HTML 的 `<img>` 标签中。  你可以通过 `/api/v1/random/image?category=acg&type=4k` 这样的请求获取由UapiPro服务器提供的图片，也可以通过 `/api/v1/random/image?category=ai_drawing` 获取由外部图床精选的图片。  如果你不提供任何 category 参数，程序会从所有图片（包括本地的和URL的）中随机抽取一张（**全局随机图片不包含ikun和AI绘画**）。  > [!TIP] > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。  ### 支持的主类别与子类别 - **UapiPro服务器图片**   - **furry**（福瑞）     - z4k     - szs8k     - s4k     - 4k   - **bq**（表情包/趣图）     - youshou     - xiongmao     - waiguoren     - maomao     - ikun     - eciyuan   - **acg**（二次元动漫）     - pc     - mb - **外部图床精选图片**   - **ai_drawing**: AI绘画。   - **general_anime**: 动漫图。   - **landscape**: 风景图。   - **mobile_wallpaper**: 手机壁纸。   - **pc_wallpaper**: 电脑壁纸。 - **混合动漫**   - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。  > [!NOTE] > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。 
+        需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。  ## 功能概述 这是一个非常简单的接口，它会从我们庞大的图库和精选外部图床中随机挑选一张图片，然后通过 302 重定向让你直接访问到它。这使得它可以非常方便地直接用在 HTML 的 `<img>` 标签中。  你可以通过 `/api/v1/random/image?category=acg&type=4k` 这样的请求获取由UapiPro服务器提供的图片，也可以通过 `/api/v1/random/image?category=ai_drawing` 获取由外部图床精选的图片。  如果你不提供任何 category 参数，程序会从所有图片（包括本地的和URL的）中随机抽取一张（**全局随机图片不包含ikun和AI绘画**）。  > [!TIP] > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。  ### 支持的主类别与子类别 - **acg**（二次元动漫）     - pc     - mb - **外部图床精选/混合动漫**   - **landscape**: 风景图。   - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。   - **pc_wallpaper**: 电脑壁纸。   - **mobile_wallpaper**: 手机壁纸。   - **general_anime**: 动漫图。   - **ai_drawing**: AI绘画。 - **其他分类**   - **bq**（表情包/趣图）     - eciyuan     - ikun     - xiongmao     - waiguoren     - maomao   - **furry**（福瑞）     - z4k     - szs8k     - s4k     - 4k  > [!NOTE] > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。 
 
-        :param category: （可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 
+        :param category: （可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 
         :type category: str
-        :param type: （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 
+        :param type: （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 
         :type type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -369,7 +369,6 @@ class RandomApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bytearray",
-            '302': None,
             '404': "GetRandomImage404Response",
             '500': "GetRandomImage500Response",
         }
@@ -387,8 +386,8 @@ class RandomApi:
     @validate_call
     def get_random_image_with_http_info(
         self,
-        category: Annotated[Optional[StrictStr], Field(description="（可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 ")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="（可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 ")] = None,
+        category: Annotated[Optional[StrictStr], Field(description="（可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 ")] = None,
+        type: Annotated[Optional[StrictStr], Field(description="（可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -402,13 +401,13 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytearray]:
-        """随机二次元、风景、动漫图片壁纸
+        """随机图片
 
-        需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。  ## 功能概述 这是一个非常简单的接口，它会从我们庞大的图库和精选外部图床中随机挑选一张图片，然后通过 302 重定向让你直接访问到它。这使得它可以非常方便地直接用在 HTML 的 `<img>` 标签中。  你可以通过 `/api/v1/random/image?category=acg&type=4k` 这样的请求获取由UapiPro服务器提供的图片，也可以通过 `/api/v1/random/image?category=ai_drawing` 获取由外部图床精选的图片。  如果你不提供任何 category 参数，程序会从所有图片（包括本地的和URL的）中随机抽取一张（**全局随机图片不包含ikun和AI绘画**）。  > [!TIP] > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。  ### 支持的主类别与子类别 - **UapiPro服务器图片**   - **furry**（福瑞）     - z4k     - szs8k     - s4k     - 4k   - **bq**（表情包/趣图）     - youshou     - xiongmao     - waiguoren     - maomao     - ikun     - eciyuan   - **acg**（二次元动漫）     - pc     - mb - **外部图床精选图片**   - **ai_drawing**: AI绘画。   - **general_anime**: 动漫图。   - **landscape**: 风景图。   - **mobile_wallpaper**: 手机壁纸。   - **pc_wallpaper**: 电脑壁纸。 - **混合动漫**   - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。  > [!NOTE] > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。 
+        需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。  ## 功能概述 这是一个非常简单的接口，它会从我们庞大的图库和精选外部图床中随机挑选一张图片，然后通过 302 重定向让你直接访问到它。这使得它可以非常方便地直接用在 HTML 的 `<img>` 标签中。  你可以通过 `/api/v1/random/image?category=acg&type=4k` 这样的请求获取由UapiPro服务器提供的图片，也可以通过 `/api/v1/random/image?category=ai_drawing` 获取由外部图床精选的图片。  如果你不提供任何 category 参数，程序会从所有图片（包括本地的和URL的）中随机抽取一张（**全局随机图片不包含ikun和AI绘画**）。  > [!TIP] > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。  ### 支持的主类别与子类别 - **acg**（二次元动漫）     - pc     - mb - **外部图床精选/混合动漫**   - **landscape**: 风景图。   - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。   - **pc_wallpaper**: 电脑壁纸。   - **mobile_wallpaper**: 手机壁纸。   - **general_anime**: 动漫图。   - **ai_drawing**: AI绘画。 - **其他分类**   - **bq**（表情包/趣图）     - eciyuan     - ikun     - xiongmao     - waiguoren     - maomao   - **furry**（福瑞）     - z4k     - szs8k     - s4k     - 4k  > [!NOTE] > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。 
 
-        :param category: （可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 
+        :param category: （可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 
         :type category: str
-        :param type: （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 
+        :param type: （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 
         :type type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -443,7 +442,6 @@ class RandomApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bytearray",
-            '302': None,
             '404': "GetRandomImage404Response",
             '500': "GetRandomImage500Response",
         }
@@ -461,8 +459,8 @@ class RandomApi:
     @validate_call
     def get_random_image_without_preload_content(
         self,
-        category: Annotated[Optional[StrictStr], Field(description="（可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 ")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="（可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 ")] = None,
+        category: Annotated[Optional[StrictStr], Field(description="（可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 ")] = None,
+        type: Annotated[Optional[StrictStr], Field(description="（可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 ")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -476,13 +474,13 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """随机二次元、风景、动漫图片壁纸
+        """随机图片
 
-        需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。  ## 功能概述 这是一个非常简单的接口，它会从我们庞大的图库和精选外部图床中随机挑选一张图片，然后通过 302 重定向让你直接访问到它。这使得它可以非常方便地直接用在 HTML 的 `<img>` 标签中。  你可以通过 `/api/v1/random/image?category=acg&type=4k` 这样的请求获取由UapiPro服务器提供的图片，也可以通过 `/api/v1/random/image?category=ai_drawing` 获取由外部图床精选的图片。  如果你不提供任何 category 参数，程序会从所有图片（包括本地的和URL的）中随机抽取一张（**全局随机图片不包含ikun和AI绘画**）。  > [!TIP] > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。  ### 支持的主类别与子类别 - **UapiPro服务器图片**   - **furry**（福瑞）     - z4k     - szs8k     - s4k     - 4k   - **bq**（表情包/趣图）     - youshou     - xiongmao     - waiguoren     - maomao     - ikun     - eciyuan   - **acg**（二次元动漫）     - pc     - mb - **外部图床精选图片**   - **ai_drawing**: AI绘画。   - **general_anime**: 动漫图。   - **landscape**: 风景图。   - **mobile_wallpaper**: 手机壁纸。   - **pc_wallpaper**: 电脑壁纸。 - **混合动漫**   - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。  > [!NOTE] > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。 
+        需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。  ## 功能概述 这是一个非常简单的接口，它会从我们庞大的图库和精选外部图床中随机挑选一张图片，然后通过 302 重定向让你直接访问到它。这使得它可以非常方便地直接用在 HTML 的 `<img>` 标签中。  你可以通过 `/api/v1/random/image?category=acg&type=4k` 这样的请求获取由UapiPro服务器提供的图片，也可以通过 `/api/v1/random/image?category=ai_drawing` 获取由外部图床精选的图片。  如果你不提供任何 category 参数，程序会从所有图片（包括本地的和URL的）中随机抽取一张（**全局随机图片不包含ikun和AI绘画**）。  > [!TIP] > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。  ### 支持的主类别与子类别 - **acg**（二次元动漫）     - pc     - mb - **外部图床精选/混合动漫**   - **landscape**: 风景图。   - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。   - **pc_wallpaper**: 电脑壁纸。   - **mobile_wallpaper**: 手机壁纸。   - **general_anime**: 动漫图。   - **ai_drawing**: AI绘画。 - **其他分类**   - **bq**（表情包/趣图）     - eciyuan     - ikun     - xiongmao     - waiguoren     - maomao   - **furry**（福瑞）     - z4k     - szs8k     - s4k     - 4k  > [!NOTE] > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。 
 
-        :param category: （可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 
+        :param category: （可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。 
         :type category: str
-        :param type: （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 
+        :param type: （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。 
         :type type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -517,7 +515,6 @@ class RandomApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bytearray",
-            '302': None,
             '404': "GetRandomImage404Response",
             '500': "GetRandomImage500Response",
         }
@@ -617,7 +614,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetRandomString200Response:
-        """生成高度可定制的随机字符串
+        """随机字符串
 
         无论是需要生成一个安全的随机密码、一个唯一的Token，还是一个简单的随机ID，这个接口都能满足你。  ## 功能概述 你可以精确地控制生成字符串的长度和字符集类型，非常灵活。  ## 使用须知  > [!TIP] > **字符集类型 `type` 详解** > 你可以通过 `type` 参数精确控制生成的字符集： > - **`numeric`**: 纯数字 (0-9) > - **`lower`**: 纯小写字母 (a-z) > - **`upper`**: 纯大写字母 (A-Z) > - **`alpha`**: 大小写字母 (a-zA-Z) > - **`alphanumeric`** (默认): 数字和大小写字母 (0-9a-zA-Z) > - **`hex`**: 十六进制字符 (0-9a-f)
 
@@ -690,7 +687,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetRandomString200Response]:
-        """生成高度可定制的随机字符串
+        """随机字符串
 
         无论是需要生成一个安全的随机密码、一个唯一的Token，还是一个简单的随机ID，这个接口都能满足你。  ## 功能概述 你可以精确地控制生成字符串的长度和字符集类型，非常灵活。  ## 使用须知  > [!TIP] > **字符集类型 `type` 详解** > 你可以通过 `type` 参数精确控制生成的字符集： > - **`numeric`**: 纯数字 (0-9) > - **`lower`**: 纯小写字母 (a-z) > - **`upper`**: 纯大写字母 (A-Z) > - **`alpha`**: 大小写字母 (a-zA-Z) > - **`alphanumeric`** (默认): 数字和大小写字母 (0-9a-zA-Z) > - **`hex`**: 十六进制字符 (0-9a-f)
 
@@ -763,7 +760,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """生成高度可定制的随机字符串
+        """随机字符串
 
         无论是需要生成一个安全的随机密码、一个唯一的Token，还是一个简单的随机ID，这个接口都能满足你。  ## 功能概述 你可以精确地控制生成字符串的长度和字符集类型，非常灵活。  ## 使用须知  > [!TIP] > **字符集类型 `type` 详解** > 你可以通过 `type` 参数精确控制生成的字符集： > - **`numeric`**: 纯数字 (0-9) > - **`lower`**: 纯小写字母 (a-z) > - **`upper`**: 纯大写字母 (A-Z) > - **`alpha`**: 大小写字母 (a-zA-Z) > - **`alphanumeric`** (默认): 数字和大小写字母 (0-9a-zA-Z) > - **`hex`**: 十六进制字符 (0-9a-f)
 
@@ -901,7 +898,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PostAnswerbookAsk200Response:
-        """获取答案之书的神秘答案 (POST)
+        """答案之书 (POST)
 
         通过POST请求向答案之书提问并获得神秘答案。  ## 功能概述 与GET方式相同，但通过JSON请求体发送问题，适合在需要发送较长问题或希望避免URL编码问题的场景中使用。  ## 请求体格式 请求体必须是有效的JSON格式，包含question字段。
 
@@ -970,7 +967,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PostAnswerbookAsk200Response]:
-        """获取答案之书的神秘答案 (POST)
+        """答案之书 (POST)
 
         通过POST请求向答案之书提问并获得神秘答案。  ## 功能概述 与GET方式相同，但通过JSON请求体发送问题，适合在需要发送较长问题或希望避免URL编码问题的场景中使用。  ## 请求体格式 请求体必须是有效的JSON格式，包含question字段。
 
@@ -1039,7 +1036,7 @@ class RandomApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """获取答案之书的神秘答案 (POST)
+        """答案之书 (POST)
 
         通过POST请求向答案之书提问并获得神秘答案。  ## 功能概述 与GET方式相同，但通过JSON请求体发送问题，适合在需要发送较长问题或希望避免URL编码问题的场景中使用。  ## 请求体格式 请求体必须是有效的JSON格式，包含question字段。
 

@@ -4,14 +4,14 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_convert_unixtime**](ConvertApi.md#get_convert_unixtime) | **GET** /convert/unixtime | Unix时间戳与日期字符串双向转换
-[**post_convert_json**](ConvertApi.md#post_convert_json) | **POST** /convert/json | 美化并格式化JSON字符串
+[**get_convert_unixtime**](ConvertApi.md#get_convert_unixtime) | **GET** /convert/unixtime | 时间戳转换
+[**post_convert_json**](ConvertApi.md#post_convert_json) | **POST** /convert/json | JSON 格式化
 
 
 # **get_convert_unixtime**
 > GetConvertUnixtime200Response get_convert_unixtime(time)
 
-Unix时间戳与日期字符串双向转换
+时间戳转换
 
 时间戳和日期字符串，哪个用着更顺手？别纠结了，这个接口让你轻松拥有两种格式！
 
@@ -53,7 +53,7 @@ with uapi.ApiClient(configuration) as api_client:
     time = '1698380645' # str | 一个智能时间参数，可传入Unix时间戳（10位或13位）或标准日期字符串（如 '2023-10-27 10:30:00'），系统将自动识别并转换。
 
     try:
-        # Unix时间戳与日期字符串双向转换
+        # 时间戳转换
         api_response = api_instance.get_convert_unixtime(time)
         print("The response of ConvertApi->get_convert_unixtime:\n")
         pprint(api_response)
@@ -95,7 +95,7 @@ No authorization required
 # **post_convert_json**
 > PostConvertJson200Response post_convert_json(post_convert_json_request)
 
-美化并格式化JSON字符串
+JSON 格式化
 
 还在为一团乱麻的 JSON 字符串头疼吗？这个接口能瞬间让它变得井井有条，赏心悦目。
 
@@ -134,7 +134,7 @@ with uapi.ApiClient(configuration) as api_client:
     post_convert_json_request = uapi.PostConvertJsonRequest() # PostConvertJsonRequest | 这是一个JSON对象，里面必须包含一个名为 `content` 的字段。这个字段的值，就是你希望格式化的、原始的JSON字符串。
 
     try:
-        # 美化并格式化JSON字符串
+        # JSON 格式化
         api_response = api_instance.post_convert_json(post_convert_json_request)
         print("The response of ConvertApi->post_convert_json:\n")
         pprint(api_response)

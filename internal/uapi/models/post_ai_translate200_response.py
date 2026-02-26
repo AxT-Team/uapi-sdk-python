@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.post_ai_translate200_response_batch_data_inner import PostAiTranslate200ResponseBatchDataInner
 from uapi.models.post_ai_translate200_response_batch_summary import PostAiTranslate200ResponseBatchSummary
@@ -31,7 +31,6 @@ class PostAiTranslate200Response(BaseModel):
     """
     PostAiTranslate200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     message: Optional[StrictStr] = None
     is_batch: Optional[StrictBool] = Field(default=None, description="标识是否为批量翻译请求。")
     data: Optional[PostAiTranslate200ResponseData] = None
@@ -39,7 +38,7 @@ class PostAiTranslate200Response(BaseModel):
     batch_summary: Optional[PostAiTranslate200ResponseBatchSummary] = None
     performance: Optional[PostAiTranslate200ResponsePerformance] = None
     quality_metrics: Optional[PostAiTranslate200ResponseQualityMetrics] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "is_batch", "data", "batch_data", "batch_summary", "performance", "quality_metrics"]
+    __properties: ClassVar[List[str]] = ["message", "is_batch", "data", "batch_data", "batch_summary", "performance", "quality_metrics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,7 +110,6 @@ class PostAiTranslate200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "message": obj.get("message"),
             "is_batch": obj.get("is_batch"),
             "data": PostAiTranslate200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None,

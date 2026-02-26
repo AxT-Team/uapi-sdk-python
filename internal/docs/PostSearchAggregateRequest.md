@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **site** | **str** | 限制搜索特定网站，不需要 &#x60;site:&#x60; 前缀 | [optional] 
 **filetype** | **str** | 限制文件类型，不需要 &#x60;filetype:&#x60; 前缀。支持 pdf、doc、docx、ppt、pptx、xls、xlsx、txt 等 | [optional] 
 **fetch_full** | **bool** | 是否获取页面完整正文（会影响响应时间） | [optional] [default to False]
-**timeout_ms** | **int** | 请求超时时间（毫秒），范围 1000-30000 | [optional] [default to 3000]
+**timeout_ms** | **int** | 请求超时时间（毫秒），范围 1000-30000 | [optional] [default to 8000]
+**sort** | **str** | 排序方式 | [optional] [default to 'relevance']
+**time_range** | **str** | 时间范围过滤 | [optional] 
 
 ## Example
 

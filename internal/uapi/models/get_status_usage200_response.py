@@ -19,28 +19,28 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
-from uapi.models.endpoints_aggregate import EndpointsAggregate
-from uapi.models.single_endpoint import SingleEndpoint
+from uapi.models.get_status_usage200_response_any_of import GetStatusUsage200ResponseAnyOf
+from uapi.models.get_status_usage200_response_any_of1 import GetStatusUsage200ResponseAnyOf1
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-GETSTATUSUSAGE200RESPONSE_ANY_OF_SCHEMAS = ["EndpointsAggregate", "SingleEndpoint"]
+GETSTATUSUSAGE200RESPONSE_ANY_OF_SCHEMAS = ["GetStatusUsage200ResponseAnyOf", "GetStatusUsage200ResponseAnyOf1"]
 
 class GetStatusUsage200Response(BaseModel):
     """
     GetStatusUsage200Response
     """
 
-    # data type: EndpointsAggregate
-    anyof_schema_1_validator: Optional[EndpointsAggregate] = None
-    # data type: SingleEndpoint
-    anyof_schema_2_validator: Optional[SingleEndpoint] = None
+    # data type: GetStatusUsage200ResponseAnyOf
+    anyof_schema_1_validator: Optional[GetStatusUsage200ResponseAnyOf] = None
+    # data type: GetStatusUsage200ResponseAnyOf1
+    anyof_schema_2_validator: Optional[GetStatusUsage200ResponseAnyOf1] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[EndpointsAggregate, SingleEndpoint]] = None
+        actual_instance: Optional[Union[GetStatusUsage200ResponseAnyOf, GetStatusUsage200ResponseAnyOf1]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "EndpointsAggregate", "SingleEndpoint" }
+    any_of_schemas: Set[str] = { "GetStatusUsage200ResponseAnyOf", "GetStatusUsage200ResponseAnyOf1" }
 
     model_config = {
         "validate_assignment": True,
@@ -61,21 +61,21 @@ class GetStatusUsage200Response(BaseModel):
     def actual_instance_must_validate_anyof(cls, v):
         instance = GetStatusUsage200Response.model_construct()
         error_messages = []
-        # validate data type: EndpointsAggregate
-        if not isinstance(v, EndpointsAggregate):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `EndpointsAggregate`")
+        # validate data type: GetStatusUsage200ResponseAnyOf
+        if not isinstance(v, GetStatusUsage200ResponseAnyOf):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetStatusUsage200ResponseAnyOf`")
         else:
             return v
 
-        # validate data type: SingleEndpoint
-        if not isinstance(v, SingleEndpoint):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `SingleEndpoint`")
+        # validate data type: GetStatusUsage200ResponseAnyOf1
+        if not isinstance(v, GetStatusUsage200ResponseAnyOf1):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetStatusUsage200ResponseAnyOf1`")
         else:
             return v
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in GetStatusUsage200Response with anyOf schemas: EndpointsAggregate, SingleEndpoint. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in GetStatusUsage200Response with anyOf schemas: GetStatusUsage200ResponseAnyOf, GetStatusUsage200ResponseAnyOf1. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -88,22 +88,22 @@ class GetStatusUsage200Response(BaseModel):
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[EndpointsAggregate] = None
+        # anyof_schema_1_validator: Optional[GetStatusUsage200ResponseAnyOf] = None
         try:
-            instance.actual_instance = EndpointsAggregate.from_json(json_str)
+            instance.actual_instance = GetStatusUsage200ResponseAnyOf.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[SingleEndpoint] = None
+        # anyof_schema_2_validator: Optional[GetStatusUsage200ResponseAnyOf1] = None
         try:
-            instance.actual_instance = SingleEndpoint.from_json(json_str)
+            instance.actual_instance = GetStatusUsage200ResponseAnyOf1.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into GetStatusUsage200Response with anyOf schemas: EndpointsAggregate, SingleEndpoint. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into GetStatusUsage200Response with anyOf schemas: GetStatusUsage200ResponseAnyOf, GetStatusUsage200ResponseAnyOf1. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -117,7 +117,7 @@ class GetStatusUsage200Response(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], EndpointsAggregate, SingleEndpoint]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], GetStatusUsage200ResponseAnyOf, GetStatusUsage200ResponseAnyOf1]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

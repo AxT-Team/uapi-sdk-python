@@ -17,8 +17,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from uapi.models.get_misc_weather200_response_air_pollutants import GetMiscWeather200ResponseAirPollutants
+from uapi.models.get_misc_weather200_response_forecast_inner import GetMiscWeather200ResponseForecastInner
+from uapi.models.get_misc_weather200_response_hourly_forecast_inner import GetMiscWeather200ResponseHourlyForecastInner
+from uapi.models.get_misc_weather200_response_life_indices import GetMiscWeather200ResponseLifeIndices
+from uapi.models.get_misc_weather200_response_minutely_precip import GetMiscWeather200ResponseMinutelyPrecip
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,16 +31,33 @@ class GetMiscWeather200Response(BaseModel):
     """
     GetMiscWeather200Response
     """ # noqa: E501
-    adcode: Optional[StrictStr] = None
-    city: Optional[StrictStr] = None
-    humidity: Optional[StrictInt] = None
-    province: Optional[StrictStr] = None
-    report_time: Optional[StrictStr] = None
-    temperature: Optional[StrictInt] = None
-    weather: Optional[StrictStr] = None
-    wind_direction: Optional[StrictStr] = None
-    wind_power: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["adcode", "city", "humidity", "province", "report_time", "temperature", "weather", "wind_direction", "wind_power"]
+    province: Optional[StrictStr] = Field(default=None, description="省份")
+    city: Optional[StrictStr] = Field(default=None, description="城市名")
+    adcode: Optional[StrictStr] = Field(default=None, description="行政区划代码（部分数据源可能为空）")
+    weather: Optional[StrictStr] = Field(default=None, description="天气状况描述。默认返回中文，传 `lang=en` 时返回英文。非固定枚举。")
+    temperature: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="当前温度 °C")
+    wind_direction: Optional[StrictStr] = Field(default=None, description="风向")
+    wind_power: Optional[StrictStr] = Field(default=None, description="风力等级")
+    humidity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="相对湿度 %")
+    report_time: Optional[StrictStr] = Field(default=None, description="数据更新时间")
+    feels_like: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="体感温度 °C（extended=true 时返回）")
+    visibility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="能见度 km（extended=true 时返回）")
+    pressure: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="气压 hPa（extended=true 时返回）")
+    uv: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="紫外线指数（extended=true 时返回）")
+    precipitation: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="当前降水量 mm（extended=true 时返回）")
+    cloud: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="云量 %（extended=true 时返回）")
+    aqi: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="空气质量指数 0-500（extended=true 时返回）")
+    aqi_level: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="AQI 等级 1-6（extended=true 时返回）")
+    aqi_category: Optional[StrictStr] = Field(default=None, description="AQI 等级描述（优/良/轻度污染/中度污染/重度污染/严重污染）（extended=true 时返回）")
+    aqi_primary: Optional[StrictStr] = Field(default=None, description="主要污染物（如 PM2.5、PM10、O3 等）（extended=true 时返回）")
+    air_pollutants: Optional[GetMiscWeather200ResponseAirPollutants] = None
+    temp_max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="当天最高温 °C（forecast=true 时返回）")
+    temp_min: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="当天最低温 °C（forecast=true 时返回）")
+    forecast: Optional[List[GetMiscWeather200ResponseForecastInner]] = Field(default=None, description="多天天气预报，最多7天（forecast=true 时返回）")
+    hourly_forecast: Optional[List[GetMiscWeather200ResponseHourlyForecastInner]] = Field(default=None, description="逐小时预报，最多24小时（hourly=true 时返回）")
+    minutely_precip: Optional[GetMiscWeather200ResponseMinutelyPrecip] = None
+    life_indices: Optional[GetMiscWeather200ResponseLifeIndices] = None
+    __properties: ClassVar[List[str]] = ["province", "city", "adcode", "weather", "temperature", "wind_direction", "wind_power", "humidity", "report_time", "feels_like", "visibility", "pressure", "uv", "precipitation", "cloud", "aqi", "aqi_level", "aqi_category", "aqi_primary", "air_pollutants", "temp_max", "temp_min", "forecast", "hourly_forecast", "minutely_precip", "life_indices"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +98,29 @@ class GetMiscWeather200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of air_pollutants
+        if self.air_pollutants:
+            _dict['air_pollutants'] = self.air_pollutants.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in forecast (list)
+        _items = []
+        if self.forecast:
+            for _item_forecast in self.forecast:
+                if _item_forecast:
+                    _items.append(_item_forecast.to_dict())
+            _dict['forecast'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in hourly_forecast (list)
+        _items = []
+        if self.hourly_forecast:
+            for _item_hourly_forecast in self.hourly_forecast:
+                if _item_hourly_forecast:
+                    _items.append(_item_hourly_forecast.to_dict())
+            _dict['hourly_forecast'] = _items
+        # override the default output from pydantic by calling `to_dict()` of minutely_precip
+        if self.minutely_precip:
+            _dict['minutely_precip'] = self.minutely_precip.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of life_indices
+        if self.life_indices:
+            _dict['life_indices'] = self.life_indices.to_dict()
         return _dict
 
     @classmethod
@@ -88,15 +133,32 @@ class GetMiscWeather200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "adcode": obj.get("adcode"),
-            "city": obj.get("city"),
-            "humidity": obj.get("humidity"),
             "province": obj.get("province"),
-            "report_time": obj.get("report_time"),
-            "temperature": obj.get("temperature"),
+            "city": obj.get("city"),
+            "adcode": obj.get("adcode"),
             "weather": obj.get("weather"),
+            "temperature": obj.get("temperature"),
             "wind_direction": obj.get("wind_direction"),
-            "wind_power": obj.get("wind_power")
+            "wind_power": obj.get("wind_power"),
+            "humidity": obj.get("humidity"),
+            "report_time": obj.get("report_time"),
+            "feels_like": obj.get("feels_like"),
+            "visibility": obj.get("visibility"),
+            "pressure": obj.get("pressure"),
+            "uv": obj.get("uv"),
+            "precipitation": obj.get("precipitation"),
+            "cloud": obj.get("cloud"),
+            "aqi": obj.get("aqi"),
+            "aqi_level": obj.get("aqi_level"),
+            "aqi_category": obj.get("aqi_category"),
+            "aqi_primary": obj.get("aqi_primary"),
+            "air_pollutants": GetMiscWeather200ResponseAirPollutants.from_dict(obj["air_pollutants"]) if obj.get("air_pollutants") is not None else None,
+            "temp_max": obj.get("temp_max"),
+            "temp_min": obj.get("temp_min"),
+            "forecast": [GetMiscWeather200ResponseForecastInner.from_dict(_item) for _item in obj["forecast"]] if obj.get("forecast") is not None else None,
+            "hourly_forecast": [GetMiscWeather200ResponseHourlyForecastInner.from_dict(_item) for _item in obj["hourly_forecast"]] if obj.get("hourly_forecast") is not None else None,
+            "minutely_precip": GetMiscWeather200ResponseMinutelyPrecip.from_dict(obj["minutely_precip"]) if obj.get("minutely_precip") is not None else None,
+            "life_indices": GetMiscWeather200ResponseLifeIndices.from_dict(obj["life_indices"]) if obj.get("life_indices") is not None else None
         })
         return _obj
 

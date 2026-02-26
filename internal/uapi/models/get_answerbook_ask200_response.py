@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +26,9 @@ class GetAnswerbookAsk200Response(BaseModel):
     """
     GetAnswerbookAsk200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     question: Optional[StrictStr] = None
     answer: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "question", "answer"]
+    __properties: ClassVar[List[str]] = ["question", "answer"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +81,6 @@ class GetAnswerbookAsk200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "question": obj.get("question"),
             "answer": obj.get("answer")
         })

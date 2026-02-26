@@ -6,11 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **k** | **str** |  | [optional] 
-**r** | **str** |  | [optional] 
-**s** | **List[float]** |  | [optional] 
-**v** | **List[str]** |  | [optional] 
-**t** | **List[str]** |  | [optional] 
-**d** | **str** |  | [optional] 
+**label** | **str** |  | [optional] 
+**category** | **str** |  | [optional] 
+**confidence** | **float** |  | [optional] 
 
 ## Example
 

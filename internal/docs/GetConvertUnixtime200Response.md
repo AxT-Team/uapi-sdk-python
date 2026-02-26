@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** | 状态码，200代表操作成功。 | [optional] 
 **datetime** | **str** | 标准格式（YYYY-MM-DD HH:mm:ss）的日期时间字符串。 | [optional] 
 **timestamp** | **int** | 转换后的10位秒级Unix时间戳。 | [optional] 
 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_history_programmer200_response_events_inner import GetHistoryProgrammer200ResponseEventsInner
 from typing import Optional, Set
@@ -27,11 +27,10 @@ class GetHistoryProgrammer200Response(BaseModel):
     """
     GetHistoryProgrammer200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     message: Optional[StrictStr] = None
     var_date: Optional[StrictStr] = Field(default=None, alias="date")
     events: Optional[List[GetHistoryProgrammer200ResponseEventsInner]] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "date", "events"]
+    __properties: ClassVar[List[str]] = ["message", "date", "events"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +90,6 @@ class GetHistoryProgrammer200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "message": obj.get("message"),
             "date": obj.get("date"),
             "events": [GetHistoryProgrammer200ResponseEventsInner.from_dict(_item) for _item in obj["events"]] if obj.get("events") is not None else None

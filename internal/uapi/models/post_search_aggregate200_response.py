@@ -31,7 +31,7 @@ class PostSearchAggregate200Response(BaseModel):
     query: Optional[StrictStr] = Field(default=None, description="实际执行的搜索查询")
     total_results: Optional[StrictInt] = Field(default=None, description="搜索结果总数")
     results: Optional[List[PostSearchAggregate200ResponseResultsInner]] = Field(default=None, description="搜索结果列表")
-    sources: Optional[List[PostSearchAggregate200ResponseSourcesInner]] = Field(default=None, description="各搜索引擎的结果数量统计")
+    sources: Optional[List[PostSearchAggregate200ResponseSourcesInner]] = Field(default=None, description="各搜索源的结果统计")
     process_time_ms: Optional[StrictInt] = Field(default=None, description="处理耗时（毫秒）")
     cached: Optional[StrictBool] = Field(default=None, description="结果是否来自缓存")
     __properties: ClassVar[List[str]] = ["query", "total_results", "results", "sources", "process_time_ms", "cached"]

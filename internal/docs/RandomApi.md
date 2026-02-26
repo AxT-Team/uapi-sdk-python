@@ -4,16 +4,16 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_answerbook_ask**](RandomApi.md#get_answerbook_ask) | **GET** /answerbook/ask | 获取答案之书的神秘答案 (GET)
-[**get_random_image**](RandomApi.md#get_random_image) | **GET** /random/image | 随机二次元、风景、动漫图片壁纸
-[**get_random_string**](RandomApi.md#get_random_string) | **GET** /random/string | 生成高度可定制的随机字符串
-[**post_answerbook_ask**](RandomApi.md#post_answerbook_ask) | **POST** /answerbook/ask | 获取答案之书的神秘答案 (POST)
+[**get_answerbook_ask**](RandomApi.md#get_answerbook_ask) | **GET** /answerbook/ask | 答案之书
+[**get_random_image**](RandomApi.md#get_random_image) | **GET** /random/image | 随机图片
+[**get_random_string**](RandomApi.md#get_random_string) | **GET** /random/string | 随机字符串
+[**post_answerbook_ask**](RandomApi.md#post_answerbook_ask) | **POST** /answerbook/ask | 答案之书 (POST)
 
 
 # **get_answerbook_ask**
 > GetAnswerbookAsk200Response get_answerbook_ask(question)
 
-获取答案之书的神秘答案 (GET)
+答案之书
 
 想要获得人生问题的神秘答案吗？答案之书API提供了一个神奇8球风格的问答服务，你可以提问并获得随机的神秘答案。
 
@@ -52,7 +52,7 @@ with uapi.ApiClient(configuration) as api_client:
     question = '我今天会有好运吗？' # str | 你想要提问的问题。问题不能为空。
 
     try:
-        # 获取答案之书的神秘答案 (GET)
+        # 答案之书
         api_response = api_instance.get_answerbook_ask(question)
         print("The response of RandomApi->get_answerbook_ask:\n")
         pprint(api_response)
@@ -95,7 +95,7 @@ No authorization required
 # **get_random_image**
 > bytearray get_random_image(category=category, type=type)
 
-随机二次元、风景、动漫图片壁纸
+随机图片
 
 需要一张随机图片作为占位符或者背景吗？这个接口是你的不二之选。
 
@@ -110,30 +110,28 @@ No authorization required
 > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。
 
 ### 支持的主类别与子类别
-- **UapiPro服务器图片**
+- **acg**（二次元动漫）
+    - pc
+    - mb
+- **外部图床精选/混合动漫**
+  - **landscape**: 风景图。
+  - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。
+  - **pc_wallpaper**: 电脑壁纸。
+  - **mobile_wallpaper**: 手机壁纸。
+  - **general_anime**: 动漫图。
+  - **ai_drawing**: AI绘画。
+- **其他分类**
+  - **bq**（表情包/趣图）
+    - eciyuan
+    - ikun
+    - xiongmao
+    - waiguoren
+    - maomao
   - **furry**（福瑞）
     - z4k
     - szs8k
     - s4k
     - 4k
-  - **bq**（表情包/趣图）
-    - youshou
-    - xiongmao
-    - waiguoren
-    - maomao
-    - ikun
-    - eciyuan
-  - **acg**（二次元动漫）
-    - pc
-    - mb
-- **外部图床精选图片**
-  - **ai_drawing**: AI绘画。
-  - **general_anime**: 动漫图。
-  - **landscape**: 风景图。
-  - **mobile_wallpaper**: 手机壁纸。
-  - **pc_wallpaper**: 电脑壁纸。
-- **混合动漫**
-  - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。
 
 > [!NOTE]
 > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。
@@ -158,11 +156,11 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.RandomApi(api_client)
-    category = 'acg' # str | （可选）指定图片主类别。  **支持的主类别：** - `furry`（福瑞，UapiPro服务器） - `bq`（表情包/趣图，UapiPro服务器） - `acg`（二次元动漫，UapiPro服务器） - `ai_drawing`（AI绘画，外部图床） - `general_anime`（动漫图，外部图床） - `landscape`（风景图，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `pc_wallpaper`（电脑壁纸，外部图床） - `anime`（混合动漫，UapiPro服务器acg + 外部图床general_anime）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。  (optional)
-    type = 'pc' # str | （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: `z4k`, `szs8k`, `s4k`, `4k` - **bq**: `youshou`, `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。  (optional)
+    category = 'acg' # str | （可选）指定图片主类别。  **支持的主类别：** - `acg`（二次元动漫，UapiPro服务器） - `landscape`（风景图，外部图床） - `anime`（混合动漫） - `pc_wallpaper`（电脑壁纸，外部图床） - `mobile_wallpaper`（手机壁纸，外部图床） - `general_anime`（动漫图，外部图床） - `ai_drawing`（AI绘画，外部图床） - `bq`（表情包/趣图，UapiPro服务器） - `furry`（福瑞，UapiPro服务器）  > [!TIP] > 如果不指定，将从所有图片中随机抽取（不包含 `ikun` 和 `ai_drawing`）。  (optional)
+    type = 'pc' # str | （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: `xiongmao`, `waiguoren`, `maomao`, `ikun`, `eciyuan` - **acg**: `pc`, `mb` - **furry**: `z4k`, `szs8k`, `s4k`, `4k`  > [!TIP] > 外部图床类别和 `anime` 混合类别不支持 `type` 参数。  (optional)
 
     try:
-        # 随机二次元、风景、动漫图片壁纸
+        # 随机图片
         api_response = api_instance.get_random_image(category=category, type=type)
         print("The response of RandomApi->get_random_image:\n")
         pprint(api_response)
@@ -177,8 +175,8 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **category** | **str**| （可选）指定图片主类别。  **支持的主类别：** - &#x60;furry&#x60;（福瑞，UapiPro服务器） - &#x60;bq&#x60;（表情包/趣图，UapiPro服务器） - &#x60;acg&#x60;（二次元动漫，UapiPro服务器） - &#x60;ai_drawing&#x60;（AI绘画，外部图床） - &#x60;general_anime&#x60;（动漫图，外部图床） - &#x60;landscape&#x60;（风景图，外部图床） - &#x60;mobile_wallpaper&#x60;（手机壁纸，外部图床） - &#x60;pc_wallpaper&#x60;（电脑壁纸，外部图床） - &#x60;anime&#x60;（混合动漫，UapiPro服务器acg + 外部图床general_anime）  &gt; [!TIP] &gt; 如果不指定，将从所有图片中随机抽取（不包含 &#x60;ikun&#x60; 和 &#x60;ai_drawing&#x60;）。  | [optional] 
- **type** | **str**| （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **furry**: &#x60;z4k&#x60;, &#x60;szs8k&#x60;, &#x60;s4k&#x60;, &#x60;4k&#x60; - **bq**: &#x60;youshou&#x60;, &#x60;xiongmao&#x60;, &#x60;waiguoren&#x60;, &#x60;maomao&#x60;, &#x60;ikun&#x60;, &#x60;eciyuan&#x60; - **acg**: &#x60;pc&#x60;, &#x60;mb&#x60;  &gt; [!TIP] &gt; 外部图床类别和 &#x60;anime&#x60; 混合类别不支持 &#x60;type&#x60; 参数。  | [optional] 
+ **category** | **str**| （可选）指定图片主类别。  **支持的主类别：** - &#x60;acg&#x60;（二次元动漫，UapiPro服务器） - &#x60;landscape&#x60;（风景图，外部图床） - &#x60;anime&#x60;（混合动漫） - &#x60;pc_wallpaper&#x60;（电脑壁纸，外部图床） - &#x60;mobile_wallpaper&#x60;（手机壁纸，外部图床） - &#x60;general_anime&#x60;（动漫图，外部图床） - &#x60;ai_drawing&#x60;（AI绘画，外部图床） - &#x60;bq&#x60;（表情包/趣图，UapiPro服务器） - &#x60;furry&#x60;（福瑞，UapiPro服务器）  &gt; [!TIP] &gt; 如果不指定，将从所有图片中随机抽取（不包含 &#x60;ikun&#x60; 和 &#x60;ai_drawing&#x60;）。  | [optional] 
+ **type** | **str**| （可选，仅UapiPro服务器图片支持）指定图片子类别。  - **bq**: &#x60;xiongmao&#x60;, &#x60;waiguoren&#x60;, &#x60;maomao&#x60;, &#x60;ikun&#x60;, &#x60;eciyuan&#x60; - **acg**: &#x60;pc&#x60;, &#x60;mb&#x60; - **furry**: &#x60;z4k&#x60;, &#x60;szs8k&#x60;, &#x60;s4k&#x60;, &#x60;4k&#x60;  &gt; [!TIP] &gt; 外部图床类别和 &#x60;anime&#x60; 混合类别不支持 &#x60;type&#x60; 参数。  | [optional] 
 
 ### Return type
 
@@ -197,8 +195,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | �ɹ����ʣ�ֱ�ӷ��� JPEG ��ʽ��ͼƬ���������ݣ�Ĭ�� Content-Type Ϊ image/jpeg�� |  -  |
-**302** | 成功！你的客户端将会被重定向到一张随机图片的URL。 |  -  |
+**200** | 成功！将随机图片以图片二进制 (image/jpeg) 直接返回给客户端，可直接在 &lt;img&gt; 标签中使用。 |  -  |
 **404** | 未找到指定类别的图片。 |  -  |
 **500** | 服务器内部错误。 |  -  |
 
@@ -207,7 +204,7 @@ No authorization required
 # **get_random_string**
 > GetRandomString200Response get_random_string(length=length, type=type)
 
-生成高度可定制的随机字符串
+随机字符串
 
 无论是需要生成一个安全的随机密码、一个唯一的Token，还是一个简单的随机ID，这个接口都能满足你。
 
@@ -250,7 +247,7 @@ with uapi.ApiClient(configuration) as api_client:
     type = alphanumeric # str | 指定构成字符串的字符类型。 (optional) (default to alphanumeric)
 
     try:
-        # 生成高度可定制的随机字符串
+        # 随机字符串
         api_response = api_instance.get_random_string(length=length, type=type)
         print("The response of RandomApi->get_random_string:\n")
         pprint(api_response)
@@ -294,7 +291,7 @@ No authorization required
 # **post_answerbook_ask**
 > PostAnswerbookAsk200Response post_answerbook_ask(post_answerbook_ask_request)
 
-获取答案之书的神秘答案 (POST)
+答案之书 (POST)
 
 通过POST请求向答案之书提问并获得神秘答案。
 
@@ -328,7 +325,7 @@ with uapi.ApiClient(configuration) as api_client:
     post_answerbook_ask_request = uapi.PostAnswerbookAskRequest() # PostAnswerbookAskRequest | 包含问题的JSON对象
 
     try:
-        # 获取答案之书的神秘答案 (POST)
+        # 答案之书 (POST)
         api_response = api_instance.post_answerbook_ask(post_answerbook_ask_request)
         print("The response of RandomApi->post_answerbook_ask:\n")
         pprint(api_response)

@@ -443,7 +443,7 @@ class _ImageApi:
         return self._http.request("GET", path, params=params, json=body if body else None)
     
     def get_image_motou(self, **kwargs):
-        r"""摸头 GIF
+        r"""生成摸摸头GIF (QQ号)
         想在线rua一下好友的头像吗？这个趣味接口可以满足你。
 
 ## 功能概述
@@ -471,7 +471,7 @@ class _ImageApi:
         无论是网址、文本还是联系方式，通通可以变成一个二维码！这是一个非常灵活的二维码生成工具。
 
 ## 功能概述
-你提供一段文本内容，我们为你生成对应的二维码图片。你可以自定义尺寸，并选择不同的返回格式以适应不同场景。
+你提供一段文本内容，我们为你生成对应的二维码图片。你可以自定义尺寸、前景色、背景色，还支持透明背景，并选择不同的返回格式以适应不同场景。
 
 ## 使用须知
 
@@ -481,6 +481,12 @@ class _ImageApi:
 > - **`image`** (默认): 直接返回 `image/png` 格式的图片二进制数据，适合在 `<img>` 标签中直接使用。
 > - **`json`**: 返回一个包含 Base64 Data URI 的 JSON 对象，适合需要在前端直接嵌入CSS或HTML的场景。
 > - **`json_url`**: 返回一个包含图片临时URL的JSON对象，适合需要图片链接的场景。
+
+> [!TIP]
+> **颜色参数说明**
+> - 颜色参数使用十六进制格式（如 `#FF0000`）
+> - URL 中需要对 `#` 进行编码，即 `%23`（例如：`fgcolor=%23FF0000`）
+> - 当 `transparent=true` 时，`bgcolor` 参数会被忽略
         """
         params = {}
         body = {}
@@ -493,6 +499,15 @@ class _ImageApi:
         
         if "query" == "query" and "format" in kwargs:
             params["format"] = kwargs["format"]
+        
+        if "query" == "query" and "transparent" in kwargs:
+            params["transparent"] = kwargs["transparent"]
+        
+        if "query" == "query" and "fgcolor" in kwargs:
+            params["fgcolor"] = kwargs["fgcolor"]
+        
+        if "query" == "query" and "bgcolor" in kwargs:
+            params["bgcolor"] = kwargs["bgcolor"]
         
         path = "/api/v1/image/qrcode"
         
@@ -589,7 +604,7 @@ class _ImageApi:
         return self._http.request("POST", path, params=params, json=body if body else None)
     
     def post_image_motou(self, **kwargs):
-        r"""摸头 GIF (上传)
+        r"""生成摸摸头GIF
         除了使用QQ头像，你还可以通过上传自己的图片或提供图片URL来制作独一无二的摸摸头GIF。
 
 ## 功能概述
@@ -619,12 +634,49 @@ class _ImageApi:
         
         return self._http.request("POST", path, params=params, json=body if body else None)
     
+    def post_image_nsfw(self, **kwargs):
+        r"""图片敏感检测
+        这是一个图片内容审核接口，自动识别图片中的违规内容并返回处理建议。
+
+> [!VIP]
+> 此接口限时免费开放，无需企业认证即可使用。
+
+## 功能概述
+上传图片文件或提供图片URL，接口会自动分析图片内容，返回是否违规、风险等级和处理建议。适合对接到用户上传流程中，实现自动化内容审核。
+
+## 返回字段说明
+- **is_nsfw**: 是否判定为违规内容，`true` 表示违规，`false` 表示正常
+- **nsfw_score**: 违规内容置信度，0-1 之间，越高表示越可能违规
+- **normal_score**: 正常内容置信度，0-1 之间，与 nsfw_score 互补
+- **suggestion**: 处理建议
+  - `pass`: 内容正常，可以直接放行
+  - `review`: 存在风险，建议转人工复核
+  - `block`: 高风险内容，建议直接拦截
+- **risk_level**: 风险等级
+  - `low`: 低风险
+  - `medium`: 中风险
+  - `high`: 高风险
+- **label**: 内容标签，`nsfw` 或 `normal`
+- **confidence**: 模型对当前判断的整体置信度
+- **inference_time_ms**: 模型推理耗时，单位毫秒
+        """
+        params = {}
+        body = {}
+        
+        
+        if "file" in kwargs:
+            body["file"] = kwargs["file"]
+        
+        if "url" in kwargs:
+            body["url"] = kwargs["url"]
+        
+        path = "/api/v1/image/nsfw"
+        
+        return self._http.request("POST", path, params=params, json=body if body else None)
+    
     def post_image_speechless(self, **kwargs):
         r"""生成你们怎么不说话了表情包
         你们怎么不说话了？是不是都在偷偷玩Uapi，求求你们不要玩Uapi了
-
-## 效果展示
-![示例](https://uapis.cn/static/uploads/33580466897f1e5815296f235b582815.png)
 
 ## 使用须知
 - **响应格式**：接口成功时直接返回 `image/png` 格式的二进制数据。
@@ -715,6 +767,91 @@ class _MiscApi:
         
         return self._http.request("GET", path, params=params, json=body if body else None)
     
+    def get_misc_district(self, **kwargs):
+        r"""Adcode 国内外行政区域查询
+        一个接口，覆盖全球 243 个国家、中国省/市/区/街道四级行政区划，支持关键词搜索、行政编码查询、坐标反查三种查询模式（必须至少传入一种查询参数）。
+
+## 功能概述
+根据用户输入的搜索条件快速查找行政区域信息。例如：中国 > 山东省 > 济南市 > 历下区 > 舜华路街道。
+
+无需注册、无需密钥，直接调用即可获取结构化的行政区域数据。支持三种查询方式：
+- 传 `adcode`，按行政编码精确查询，同时返回下级区划列表
+- 传 `lat` + `lng`，坐标反查附近地点
+- 传 `keywords`，按关键词搜索，支持中英文
+
+## 中国与国际数据差异
+中国数据包含 `adcode`、`citycode` 等字段，支持省/市/区/街道四级逐级查询；国际城市数据不含这些字段，但额外提供 `population`（人口）和 `timezone`（时区）。
+
+> [!NOTE]
+> 部分城市（如东莞、文昌）没有区县层级，市级下方直接显示街道。街道级别的 `adcode` 返回的是所属区县的 `adcode`。
+        """
+        params = {}
+        body = {}
+        
+        if "query" == "query" and "keywords" in kwargs:
+            params["keywords"] = kwargs["keywords"]
+        
+        if "query" == "query" and "adcode" in kwargs:
+            params["adcode"] = kwargs["adcode"]
+        
+        if "query" == "query" and "lat" in kwargs:
+            params["lat"] = kwargs["lat"]
+        
+        if "query" == "query" and "lng" in kwargs:
+            params["lng"] = kwargs["lng"]
+        
+        if "query" == "query" and "level" in kwargs:
+            params["level"] = kwargs["level"]
+        
+        if "query" == "query" and "country" in kwargs:
+            params["country"] = kwargs["country"]
+        
+        if "query" == "query" and "limit" in kwargs:
+            params["limit"] = kwargs["limit"]
+        
+        path = "/api/v1/misc/district"
+        
+        return self._http.request("GET", path, params=params, json=body if body else None)
+    
+    def get_misc_holiday_calendar(self, **kwargs):
+        r"""查询节假日与万年历
+        查询指定日期、月份或年份的万年历与节假日信息。
+
+## 功能概述
+这个接口支持三种查询方式：按天（`date`）、按月（`month`）和按年（`year`）。调用时三者选一个传入即可。
+
+如果你只关心某一类事件，可以通过 `holiday_type` 进行筛选，例如只看法定休假/调休、公历节日、农历节日或节气。
+
+在 `date` 模式下，传 `include_nearby=true` 可以额外返回该日期前后最近的节日；返回数量由 `nearby_limit` 控制，默认 7，最大 30。
+        """
+        params = {}
+        body = {}
+        
+        if "query" == "query" and "date" in kwargs:
+            params["date"] = kwargs["date"]
+        
+        if "query" == "query" and "month" in kwargs:
+            params["month"] = kwargs["month"]
+        
+        if "query" == "query" and "year" in kwargs:
+            params["year"] = kwargs["year"]
+        
+        if "query" == "query" and "timezone" in kwargs:
+            params["timezone"] = kwargs["timezone"]
+        
+        if "query" == "query" and "holiday_type" in kwargs:
+            params["holiday_type"] = kwargs["holiday_type"]
+        
+        if "query" == "query" and "include_nearby" in kwargs:
+            params["include_nearby"] = kwargs["include_nearby"]
+        
+        if "query" == "query" and "nearby_limit" in kwargs:
+            params["nearby_limit"] = kwargs["nearby_limit"]
+        
+        path = "/api/v1/misc/holiday-calendar"
+        
+        return self._http.request("GET", path, params=params, json=body if body else None)
+    
     def get_misc_hotboard(self, **kwargs):
         r"""查询热榜
         想快速跟上网络热点？这个接口让你一网打尽各大主流平台的实时热榜/热搜！
@@ -722,15 +859,30 @@ class _MiscApi:
 ## 功能概述
 你只需要指定一个平台类型，就能获取到该平台当前的热榜数据列表。每个热榜条目都包含标题、热度值和原始链接。非常适合用于制作信息聚合类应用或看板。
 
+## 三种使用模式
+
+### 默认模式
+只传 `type` 参数，返回该平台当前的实时热榜。
+
+### 时光机模式
+传 `type` + `time` 参数，返回最接近指定时间的热榜快照。如果不可用或无数据，会返回空。
+
+### 搜索模式
+传 `type` + `keyword` + `time_start` + `time_end` 参数，在指定时间范围内搜索包含关键词的热榜条目。可选传 `limit` 限制返回数量。
+
+### 数据源列表
+传 `sources=true`，返回所有支持历史数据的平台列表。
+
 ## 可选值
 `type` 参数接受多种不同的值，每种值对应一个不同的热榜来源。以下是目前支持的所有值：
 
 | 分类       | 支持的 type 值 |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| 视频/社区  | bilibili（哔哩哔哩弹幕网）, acfun（A站弹幕视频网站）, weibo（新浪微博热搜）, zhihu（知乎热榜）, zhihu-daily（知乎日报热榜）, douyin（抖音热榜）, kuaishou（快手热榜）, douban-movie（豆瓣电影榜单）, douban-group（豆瓣小组话题）, tieba（百度贴吧热帖）, hupu（虎扑热帖）, miyoushe（米游社话题榜）, ngabbs（NGA游戏论坛热帖）, v2ex（V2EX技术社区热帖）, 52pojie（吾爱破解热帖）, hostloc（全球主机交流论坛）, coolapk（酷安热榜） |
+| 视频/社区  | bilibili（哔哩哔哩弹幕网）, acfun（A站弹幕视频网站）, weibo（新浪微博热搜）, zhihu（知乎热榜）, zhihu-daily（知乎日报热榜）, douyin（抖音热榜）, kuaishou（快手热榜）, douban-movie（豆瓣电影榜单）, douban-group（豆瓣小组话题）, tieba（百度贴吧热帖）, hupu（虎扑热帖）, ngabbs（NGA游戏论坛热帖）, v2ex（V2EX技术社区热帖）, 52pojie（吾爱破解热帖）, hostloc（全球主机交流论坛）, coolapk（酷安热榜） |
 | 新闻/资讯  | baidu（百度热搜）, thepaper（澎湃新闻热榜）, toutiao（今日头条热榜）, qq-news（腾讯新闻热榜）, sina（新浪热搜）, sina-news（新浪新闻热榜）, netease-news（网易新闻热榜）, huxiu（虎嗅网热榜）, ifanr（爱范儿热榜） |
 | 技术/IT    | sspai（少数派热榜）, ithome（IT之家热榜）, ithome-xijiayi（IT之家·喜加一栏目）, juejin（掘金社区热榜）, jianshu（简书热榜）, guokr（果壳热榜）, 36kr（36氪热榜）, 51cto（51CTO热榜）, csdn（CSDN博客热榜）, nodeseek（NodeSeek 技术社区）, hellogithub（HelloGitHub 项目推荐） |
 | 游戏       | lol（英雄联盟热帖）, genshin（原神热榜）, honkai（崩坏3热榜）, starrail（星穹铁道热榜） |
+| 音乐       | netease-music（网易云音乐热歌榜）, qq-music（QQ音乐热歌榜） |
 | 其他       | weread（微信读书热门书籍）, weatheralarm（天气预警信息）, earthquake（地震速报）, history（历史上的今天） |
 
         """
@@ -740,7 +892,50 @@ class _MiscApi:
         if "query" == "query" and "type" in kwargs:
             params["type"] = kwargs["type"]
         
+        if "query" == "query" and "time" in kwargs:
+            params["time"] = kwargs["time"]
+        
+        if "query" == "query" and "keyword" in kwargs:
+            params["keyword"] = kwargs["keyword"]
+        
+        if "query" == "query" and "time_start" in kwargs:
+            params["time_start"] = kwargs["time_start"]
+        
+        if "query" == "query" and "time_end" in kwargs:
+            params["time_end"] = kwargs["time_end"]
+        
+        if "query" == "query" and "limit" in kwargs:
+            params["limit"] = kwargs["limit"]
+        
+        if "query" == "query" and "sources" in kwargs:
+            params["sources"] = kwargs["sources"]
+        
         path = "/api/v1/misc/hotboard"
+        
+        return self._http.request("GET", path, params=params, json=body if body else None)
+    
+    def get_misc_lunartime(self, **kwargs):
+        r"""查询农历时间
+        需要在指定时区下查看某个时间点的农历信息？这个接口可以直接返回完整结果。
+
+## 功能概述
+支持传入 Unix 时间戳（秒或毫秒）和 IANA 时区名，返回公历时间、星期、农历年月日、干支、生肖、节气与节日信息。不传 `ts` 时默认使用当前时间，不传 `timezone` 时默认 `Asia/Shanghai`。
+
+## 时区说明
+- 支持标准 IANA 时区，例如 `Asia/Shanghai`、`Asia/Tokyo`
+- 也支持别名：`Shanghai`、`Beijing`
+- 时区非法时返回 400 并提示 `invalid timezone: xxx`
+        """
+        params = {}
+        body = {}
+        
+        if "query" == "query" and "ts" in kwargs:
+            params["ts"] = kwargs["ts"]
+        
+        if "query" == "query" and "timezone" in kwargs:
+            params["timezone"] = kwargs["timezone"]
+        
+        path = "/api/v1/misc/lunartime"
         
         return self._http.request("GET", path, params=params, json=body if body else None)
     
@@ -823,7 +1018,7 @@ graph TD
 > [!WARNING]
 > **接口已过时**：这个接口已被新的 `/convert/unixtime` 取代。新接口功能更强大，支持双向转换。我们建议你迁移到新接口。
 
-[👉 前往新版接口文档](/docs/api-reference/get-convert-unixtime)
+[➡️ 前往新版接口文档](/docs/api-reference/get-convert-unixtime)
         """
         params = {}
         body = {}
@@ -895,6 +1090,7 @@ graph TD
 ## 使用须知
 - **自动识别**：不知道是哪家快递？系统会根据单号规则自动识别快递公司（推荐使用）
 - **手动指定**：如果已知快递公司，可以传递 `carrier_code` 参数，查询速度会更快
+- **手机尾号验证**：部分快递公司需要验证收件人手机尾号才能查询详细物流，如果返回「暂无物流信息」，建议尝试传入 `phone` 参数
 - **查询时效**：物流信息实时查询，响应时间通常在1-2秒内
         """
         params = {}
@@ -906,23 +1102,38 @@ graph TD
         if "query" == "query" and "carrier_code" in kwargs:
             params["carrier_code"] = kwargs["carrier_code"]
         
+        if "query" == "query" and "phone" in kwargs:
+            params["phone"] = kwargs["phone"]
+        
         path = "/api/v1/misc/tracking/query"
         
         return self._http.request("GET", path, params=params, json=body if body else None)
     
     def get_misc_weather(self, **kwargs):
         r"""查询天气
-        出门前，查一下天气总是个好习惯。这个接口为你提供精准、实时的天气数据。
+        出门前，查一下天气总是个好习惯。这个接口为你提供精准、实时的天气数据，支持国内和国际城市。
 
 ## 功能概述
-你可以通过城市名称或6位数字的Adcode来查询指定地区的实时天气状况，包括天气现象、温度、湿度、风向和风力等。
+这个接口支持三种查询方式：
+- 可以传 `adcode`，按行政区编码查询（优先级最高）
+- 可以传 `city`，按城市名称查询，支持中文（`北京`）和英文（`Tokyo`）
+- 两个都不传时，按客户端 IP 自动定位查询
 
-## 使用须知
-- **参数优先级**：当你同时提供了 `city` (城市名) 和 `adcode` (城市编码) 两个参数时，系统会 **优先使用 `adcode`** 进行查询，因为它更精确。
-- **查询范围**：为了保证查询的准确性，我们的服务仅支持标准的“省”、“市”、“区/县”级别的行政区划名称查询，不保证能查询到乡镇或具体地点。
+支持 `lang` 参数，可选 `zh`（默认）和 `en`，城市名翻译覆盖 7000+ 城市。
 
-## 错误处理指南
-- **410 Gone**: 这个特殊的错误码意味着你查询的地区无效或不受我们支持。比如你输入了“火星”，或者某个我们无法识别的村庄名称。这个状态码告诉你，这个“资源”是永久性地不可用了。
+## 可选功能模块
+- `extended=true`：扩展气象字段（体感温度、能见度、气压、紫外线、空气质量及污染物分项数据）
+- `forecast=true`：多天预报（最多7天，含日出日落、风速等详细数据）
+- `hourly=true`：逐小时预报（24小时）
+- `minutely=true`：分钟级降水预报（仅国内城市）
+- `indices=true`：18项生活指数（穿衣、紫外线、洗车、运动、花粉等）
+
+## 天气字段说明
+`weather` 是天气现象文本，不是固定枚举。
+
+常见值包括：晴、多云、阴、小雨、中雨、大雨、雷阵雨、小雪、中雪、大雪、雨夹雪、雾、霾、沙尘。
+
+如果你的业务需要稳定分类，建议结合 `weather_code` 做自己的映射归类。
         """
         params = {}
         body = {}
@@ -936,11 +1147,20 @@ graph TD
         if "query" == "query" and "extended" in kwargs:
             params["extended"] = kwargs["extended"]
         
+        if "query" == "query" and "forecast" in kwargs:
+            params["forecast"] = kwargs["forecast"]
+        
+        if "query" == "query" and "hourly" in kwargs:
+            params["hourly"] = kwargs["hourly"]
+        
+        if "query" == "query" and "minutely" in kwargs:
+            params["minutely"] = kwargs["minutely"]
+        
         if "query" == "query" and "indices" in kwargs:
             params["indices"] = kwargs["indices"]
         
-        if "query" == "query" and "forecast" in kwargs:
-            params["forecast"] = kwargs["forecast"]
+        if "query" == "query" and "lang" in kwargs:
+            params["lang"] = kwargs["lang"]
         
         path = "/api/v1/misc/weather"
         
@@ -1042,10 +1262,10 @@ class _NetworkApi:
     
     def get_network_ipinfo(self, **kwargs):
         r"""查询 IP
-        想知道一个IP地址或域名来自地球的哪个角落？这个接口可以帮你定位它。你可以选择使用默认的GeoIP数据库，也可以指定 `source=commercial` 参数来查询更详细的商业级IP归属信息。
+        想知道一个IP地址或域名来自地球的哪个角落？这个接口可以帮你定位它。你可以使用默认数据源，也可以指定 `source=commercial` 参数来查询更详细的商业级IP归属信息。
 
 ## 功能概述
-提供一个公网IPv4、IPv6地址或域名，我们会利用GeoIP数据库查询并返回它的地理位置（国家、省份、城市）、经纬度、以及所属的运营商（ISP）和自治系统（ASN）信息。这在网络安全分析、访问来源统计等领域非常有用。
+提供一个公网IPv4、IPv6地址或域名，我们会查询并返回它的地理位置（国家、省份、城市）、经纬度、以及所属的运营商（ISP）和自治系统（ASN）信息。这在网络安全分析、访问来源统计等领域非常有用。
 
 当使用 `source=commercial` 参数时，接口将调用高性能商业API，提供更精确的市、区、运营商、时区、海拔等信息。请注意，商业查询的响应时间可能会稍长。
         """
@@ -1064,7 +1284,7 @@ class _NetworkApi:
     
     def get_network_myip(self, **kwargs):
         r"""查询我的 IP
-        想知道你自己的出口公网IP是多少吗？这个接口就是你的“网络身份证”。你可以选择使用默认的GeoIP数据库，也可以指定 `source=commercial` 参数来查询更详细的商业级IP归属信息。
+        想知道你自己的出口公网IP是多少吗？这个接口就是你的“网络身份证”。你可以使用默认数据源，也可以指定 `source=commercial` 参数来查询更详细的商业级IP归属信息。
 
 ## 功能概述
 调用此接口，它会返回你（即发起请求的客户端）的公网IP地址，并附带与 `/network/ipinfo` 接口相同的地理位置和网络归属信息。非常适合用于在网页上向用户展示他们自己的IP和地理位置。
@@ -1141,9 +1361,6 @@ class _NetworkApi:
 
 ## 功能概述
 提供一个URL，我们会向它发起一个请求，并返回其HTTP响应状态码。这是一种简单而有效的服务可用性监控方法。
-
-> [!TIP]
-> **性能优化**：为了提高效率并减少对目标服务器的负载，我们实际发送的是 `HEAD` 请求，而不是 `GET` 请求。`HEAD` 请求只会获取响应头，而不会下载整个页面内容，因此速度更快。
         """
         params = {}
         body = {}
@@ -1266,30 +1483,28 @@ class _RandomApi:
 > 如果你需要更精确地控制图片类型，请使用 `/image/random/{category}/{type}` 接口。
 
 ### 支持的主类别与子类别
-- **UapiPro服务器图片**
+- **acg**（二次元动漫）
+    - pc
+    - mb
+- **外部图床精选/混合动漫**
+  - **landscape**: 风景图。
+  - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。
+  - **pc_wallpaper**: 电脑壁纸。
+  - **mobile_wallpaper**: 手机壁纸。
+  - **general_anime**: 动漫图。
+  - **ai_drawing**: AI绘画。
+- **其他分类**
+  - **bq**（表情包/趣图）
+    - eciyuan
+    - ikun
+    - xiongmao
+    - waiguoren
+    - maomao
   - **furry**（福瑞）
     - z4k
     - szs8k
     - s4k
     - 4k
-  - **bq**（表情包/趣图）
-    - youshou
-    - xiongmao
-    - waiguoren
-    - maomao
-    - ikun
-    - eciyuan
-  - **acg**（二次元动漫）
-    - pc
-    - mb
-- **外部图床精选图片**
-  - **ai_drawing**: AI绘画。
-  - **general_anime**: 动漫图。
-  - **landscape**: 风景图。
-  - **mobile_wallpaper**: 手机壁纸。
-  - **pc_wallpaper**: 电脑壁纸。
-- **混合动漫**
-  - **anime**: 混合了UapiPro服务器的acg和外部图床的general_anime分类下的图片。
 
 > [!NOTE]
 > 默认全局随机（未指定category参数）时，不会包含ikun和AI绘画（ai_drawing）类别的图片。
@@ -1479,7 +1694,11 @@ class _SocialApi:
 通过视频的 `oid`（通常就是视频的`aid`），你可以分页获取该视频的评论区内容。你可以指定排序方式和分页参数，来精确地获取你需要的数据。
 
 ## 参数说明
-- **`sort` (排序方式)**: `0`=按时间排序, `1`=按点赞数排序, `2`=按回复数排序。默认为按时间排序。
+- **`sort` (排序方式)**
+  - `0` 或 `time`：按时间排序
+  - `1` 或 `like`：按点赞排序
+  - `2` 或 `reply`：按回复数排序
+  - `3` 或 `hot`（也支持 `hottest`、`最热`）：按最热排序
 
 ## 响应体字段说明
 - **`hots` (热门评论)**: 仅在请求第一页时，可能会返回热门评论列表。其结构与 `replies` 中的对象一致。
@@ -2067,7 +2286,7 @@ class _TranslateApi:
     
     def get_ai_translate_languages(self, **kwargs):
         r"""AI翻译配置
-        获取AI智能翻译服务支持的完整语言列表、翻译风格选项、上下文场景选项以及性能指标信息。这个接口对于需要在前端动态展示翻译配置选项的应用非常有用，它会返回当前AI翻译服务所支持的所有语言代码、原生名称、翻译风格说明、上下文场景描述，以及服务的性能特征和限制信息。通过此接口，开发者可以构建用户友好的翻译界面，让用户选择合适的翻译参数。
+        获取AI智能翻译服务支持的完整语言列表、翻译风格选项、上下文场景选项以及性能指标信息。
         """
         params = {}
         body = {}
@@ -2078,7 +2297,7 @@ class _TranslateApi:
     
     def post_ai_translate(self, **kwargs):
         r"""AI智能翻译
-        这是一个商业级的AI智能翻译服务，采用最新的神经网络翻译技术和大语言模型，提供远超传统机器翻译的质量。它不仅能够智能处理单个文本翻译，还支持高效的批量文本翻译，并且具备上下文感知、风格适配、格式保留等高级功能。
+        这是一个商业级的AI智能翻译服务，采用最新的神经网络翻译技术和大语言模型，提供远超传统机器翻译的质量。
 
 > [!VIP]
 > 本API目前处于**限时免费**阶段，我们鼓励开发者深度集成和测试。未来，它将转为付费API，为用户提供更稳定、更智能的翻译服务。
@@ -2200,25 +2419,23 @@ class _WebparseApi:
     
     def get_web_tomarkdown_async_status(self, **kwargs):
         r"""转换任务状态
-        提交了URL转Markdown任务后，想知道处理进度和结果？这个接口可以帮你实时追踪。
+        提交了网页转 Markdown 任务后，想知道处理进度和结果？用这个接口来查询。
 
 ## 功能概述
+通过任务 ID 查询转换任务的当前状态、处理进度和最终结果。任务结果缓存 30 分钟，期间可重复查询。
 
-通过之前提交任务时获得的任务ID，你可以查询该任务的当前状态、处理进度以及最终结果。任务结果会在缓存中保存30分钟，期间可以重复查询，非常方便。
+## 任务状态
 
-任务有五种状态：等待处理（pending）时进度为0%；处理中（processing）时进度在10-90%之间；已完成（completed）时进度为100%并返回Markdown内容；失败（failed）时会返回错误信息；超时（timeout）表示任务处理时间超过60秒已被取消。建议采用指数退避策略进行轮询，初始延迟1秒，每次延迟增加20%，最大延迟5秒。当状态为已完成、失败或超时时停止轮询。
+| 状态 | 说明 |
+|------|------|
+| `pending` | 等待处理 |
+| `processing` | 处理中 |
+| `completed` | 已完成，可获取结果 |
+| `failed` | 失败 |
+| `timeout` | 超时（超过 60 秒） |
 
-系统会自动管理任务生命周期，单个任务最长处理时间为60秒，任务结果保存30分钟后自动清理，每5分钟清理一次过期任务。
-
-## 任务状态说明
-
-| 状态 | 说明 | 进度 | 轮询建议 |
-|------|------|------|----------|
-| `pending` | 等待处理 | 0% | 立即开始轮询 |
-| `processing` | 处理中 | 10-90% | 每2-5秒轮询一次 |
-| `completed` | 已完成 | 100% | 停止轮询，获取结果 |
-| `failed` | 失败 | 100% | 停止轮询，查看错误信息 |
-| `timeout` | 超时 | 100% | 停止轮询，任务已取消 |
+> [!NOTE]
+> 建议每 2-5 秒轮询一次，当状态为 `completed`、`failed` 或 `timeout` 时停止轮询。
         """
         params = {}
         body = {}
@@ -2235,10 +2452,10 @@ class _WebparseApi:
     
     def get_webparse_extractimages(self, **kwargs):
         r"""提取网页图片
-        想一次性“打包”一个网页上的所有图片吗？这个接口可以帮你实现。
+        想批量获取一个网页上的所有图片链接？这个接口帮你搞定。
 
 ## 功能概述
-你提供一个网页的URL，我们会访问该页面，解析其HTML内容，并提取出所有 `<img>` 标签中的图片链接，然后将这些链接列表返回给你。非常适合用于制作图片采集器或素材下载工具。
+提供一个网页 URL，返回该页面中所有图片的链接列表。适合用于图片采集、素材下载等场景。
         """
         params = {}
         body = {}
@@ -2251,11 +2468,11 @@ class _WebparseApi:
         return self._http.request("GET", path, params=params, json=body if body else None)
     
     def get_webparse_metadata(self, **kwargs):
-        r"""网页元数据
-        当你在应用中需要展示一个链接的预览时（就像微信或Telegram里那样），这个接口能帮你轻松获取所需信息。
+        r"""提取网页元数据
+        想在应用里做链接预览卡片？这个接口帮你一键获取网页的标题、描述、图标等信息。
 
 ## 功能概述
-你提供一个网页的URL，我们会抓取并解析它的 `<head>` 部分，提取出关键的元数据（Metadata），如页面标题（Title）、描述（Description）、关键词（Keywords）以及网站图标（Favicon）等。
+提供一个网页 URL，返回该页面的元数据，包括标题、描述、关键词、Favicon、Open Graph 信息等。非常适合用于生成链接预览卡片或做 SEO 分析。
         """
         params = {}
         body = {}
@@ -2269,20 +2486,16 @@ class _WebparseApi:
     
     def post_web_tomarkdown_async(self, **kwargs):
         r"""网页转 Markdown
-        想要将复杂的网页转换为结构清晰的Markdown？这个接口采用异步处理模式，特别适合处理大型网页、复杂网站或需要长时间处理的转换任务。
+        想把一个网页的内容转成干净的 Markdown 文本？这个异步接口可以帮你搞定，特别适合处理大型或复杂的网页。
 
 ## 功能概述
 
 > [!VIP]
->本API目前处于**限时免费**阶段，我们鼓励开发者集成和测试。未来，它将转为付费API，为用户提供更稳定和强大的服务。
+> 本 API 目前处于**限时免费**阶段，未来将转为付费服务。
 
-UAPI Pro平台推出的异步网页转Markdown API能够将任意网页URL转换为结构清晰、格式优美的Markdown文本。提交任务后立即返回任务ID，不会阻塞客户端等待。您可以通过任务ID实时查询转换进度和处理状态，支持长达60秒的处理时间，轻松应对大型网站、需要JS渲染的单页应用等复杂页面。任务结果会缓存30分钟，期间可重复查询，过期任务自动清理无需手动管理。
+提交一个网页 URL，我们会自动抓取主体内容，剔除广告、导航栏等干扰元素，并转换为 Markdown 格式。同时会提取标题、作者、发布日期等元数据，生成 YAML Front Matter。
 
-此API采用先进算法，自动识别并抓取网页主体内容，精准剔除广告、导航栏、页眉页脚等无关元素。完美保留原文的格式，包括标题、列表、代码块、表格、引用、图片等，并输出为兼容性强的GitHub Flavored Markdown (GFM) 格式。同时会自动解析并提取文章标题、作者、发布日期、站点名称等关键元数据，并将其格式化为标准的YAML Front Matter，方便后续处理和CMS集成。
-
-## 使用流程
-
-调用本接口提交URL转换任务后，会立即获得一个唯一的任务ID。随后使用任务ID调用查询接口，获取任务状态和进度。任务完成后，从查询接口的响应中获取Markdown内容。
+任务提交后会立即返回任务 ID，你可以用它来查询处理进度和结果。单个任务最长处理 60 秒，结果缓存 30 分钟。
         """
         params = {}
         body = {}
@@ -2316,7 +2529,7 @@ class _MinGanCiShiBieApi:
     
     def post_sensitive_word_analyze(self, **kwargs):
         r"""分析敏感词
-        分析单个或多个关键词的敏感程度，返回详细的风险评分和分析结果。
+        分析单个或多个关键词的敏感程度，返回标准化风险标签与置信度结果。
 
 > [!VIP]
 > 本API基于先进的分析模型，提供三级缓存策略和并发处理能力。
@@ -2326,18 +2539,9 @@ class _MinGanCiShiBieApi:
 - **模型驱动**: 使用先进的分析模型进行语义分析。
 - **高性能**: 采用三级缓存策略（持久化存储 → 统一缓存 → 模型分析），确保高频请求的响应速度。
 - **并发支持**: 支持批量并发处理，单次最多可分析100个关键词。
-- **详细评分**: 提供色情、辱骂、暴力三个维度的详细风险评分。
-- **变体识别**: 能够自动识别关键词的常见变体形式，如拼音、缩写等。
-
-## 风险评分说明
-
-返回的 `s` 字段包含三个维度的风险评分，范围均为0.0至1.0：
-
-- **s[0] - 色情风险**: 评估内容涉及色情信息的程度。
-- **s[1] - 辱骂/仇恨言论风险**: 评估内容是否包含侮辱性或仇恨性言论。
-- **s[2] - 暴力/威胁风险**: 评估内容是否涉及暴力或威胁信息。
-
-风险等级可参考：0.0-0.3为低风险，0.3-0.7为中等风险，0.7-1.0为高风险。
+- **标准标签**: 返回 `label` 字段，明确区分 `sensitive` 与 `normal`。
+- **分类清晰**: 返回 `category` 字段，用于标识具体风险类别。
+- **置信度输出**: 返回 `confidence` 字段，范围为0.0到1.0。
 
 ## 响应字段说明
 
@@ -2345,11 +2549,9 @@ class _MinGanCiShiBieApi:
 |------|------|------|
 | `results` | array | 分析结果对象的数组。 |
 | `results[].k` | string | 您在请求中提供的原始关键词。 |
-| `results[].r` | string | 模型对该关键词的分析过程和判断理由的简要说明。 |
-| `results[].s` | array[float] | 一个包含三个浮点数的数组，分别代表[色情, 辱骂, 暴力]三个维度的风险评分。分值范围从0.0到1.0，越高代表风险越大。 |
-| `results[].v` | array[string] | 模型识别出的该关键词的常见变体形式，例如拼音、谐音、缩写等。 |
-| `results[].t` | array[string] | 根据分析结果为关键词附加的分类标签，便于进行程序化处理和过滤。 |
-| `results[].d` | string | 对整体分析结果的一句简短总结，适合直接展示给用户或记录在日志中。 |
+| `results[].label` | string | 核心判断字段：`sensitive`(敏感)、`normal`(正常)。 |
+| `results[].category` | string | 风险分类：`safe`(安全)、`threat`(威胁)、`porn`(色情)、`fraud`(欺诈)、`insult`(辱骂)。 |
+| `results[].confidence` | number | 当前分类的置信度，范围0.0到1.0。 |
 | `total` | integer | 本次请求成功分析的关键词总数。 |
       
         """

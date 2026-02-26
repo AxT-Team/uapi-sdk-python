@@ -4,14 +4,14 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_status_ratelimit**](StatusApi.md#get_status_ratelimit) | **GET** /status/ratelimit | 获取API限流器实时状态
+[**get_status_ratelimit**](StatusApi.md#get_status_ratelimit) | **GET** /status/ratelimit | 限流状态
 [**get_status_usage**](StatusApi.md#get_status_usage) | **GET** /status/usage | 获取API端点使用统计
 
 
 # **get_status_ratelimit**
 > GetStatusRatelimit200Response get_status_ratelimit(authorization)
 
-获取API限流器实时状态
+限流状态
 
 想了解我们API的当前负载情况吗？这个接口为你提供了服务的“心电图”。
 
@@ -47,7 +47,7 @@ with uapi.ApiClient(configuration) as api_client:
     authorization = 'Bearer sk-xxx' # str | Bearer类型的API密钥认证头。例如：`Bearer sk-xxx`
 
     try:
-        # 获取API限流器实时状态
+        # 限流状态
         api_response = api_instance.get_status_ratelimit(authorization)
         print("The response of StatusApi->get_status_ratelimit:\n")
         pprint(api_response)
@@ -153,10 +153,8 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | 当查询所有路径时 |  -  |
-**401** | 未授权 |  -  |
-**404** | 未找到指定路径的统计数据 |  -  |
-**500** | 服务器内部错误 |  -  |
+**200** | 查询某条路径时 |  -  |
+**404** | 未找到 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

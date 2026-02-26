@@ -20,19 +20,22 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_game_minecraft_historyid200_response_history_inner import GetGameMinecraftHistoryid200ResponseHistoryInner
+from uapi.models.get_game_minecraft_historyid200_response_results_inner import GetGameMinecraftHistoryid200ResponseResultsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
 class GetGameMinecraftHistoryid200Response(BaseModel):
     """
-    GetGameMinecraftHistoryid200Response
+    响应结构根据查询参数不同而变化
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
-    history: Optional[List[GetGameMinecraftHistoryid200ResponseHistoryInner]] = Field(default=None, description="一个包含所有历史用户名的数组，按时间倒序排列。")
-    id: Optional[StrictStr] = Field(default=None, description="玩家当前的用户名。")
-    name_num: Optional[StrictInt] = Field(default=None, description="历史名称的总数（包含当前名称）。")
-    uuid: Optional[StrictStr] = Field(default=None, description="被查询玩家的32位无破折号UUID。")
-    __properties: ClassVar[List[str]] = ["code", "history", "id", "name_num", "uuid"]
+    query: Optional[StrictStr] = Field(default=None, description="【name 查询时返回】查询的用户名。")
+    count: Optional[StrictInt] = Field(default=None, description="【name 查询时返回】匹配到的用户数量，为 0 时表示未找到。")
+    results: Optional[List[GetGameMinecraftHistoryid200ResponseResultsInner]] = Field(default=None, description="【name 查询时返回】匹配用户列表，包含当前用户名或曾用名匹配的所有玩家。")
+    id: Optional[StrictStr] = Field(default=None, description="【uuid 查询时返回】玩家当前的用户名。")
+    uuid: Optional[StrictStr] = Field(default=None, description="【uuid 查询时返回】被查询玩家的UUID（带连字符格式）。")
+    name_num: Optional[StrictInt] = Field(default=None, description="【uuid 查询时返回】历史名称的总数（包含当前名称）。")
+    history: Optional[List[GetGameMinecraftHistoryid200ResponseHistoryInner]] = Field(default=None, description="【uuid 查询时返回】包含所有历史用户名的数组，按时间倒序排列。")
+    __properties: ClassVar[List[str]] = ["query", "count", "results", "id", "uuid", "name_num", "history"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +76,13 @@ class GetGameMinecraftHistoryid200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in history (list)
         _items = []
         if self.history:
@@ -92,11 +102,13 @@ class GetGameMinecraftHistoryid200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "history": [GetGameMinecraftHistoryid200ResponseHistoryInner.from_dict(_item) for _item in obj["history"]] if obj.get("history") is not None else None,
+            "query": obj.get("query"),
+            "count": obj.get("count"),
+            "results": [GetGameMinecraftHistoryid200ResponseResultsInner.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "id": obj.get("id"),
+            "uuid": obj.get("uuid"),
             "name_num": obj.get("name_num"),
-            "uuid": obj.get("uuid")
+            "history": [GetGameMinecraftHistoryid200ResponseHistoryInner.from_dict(_item) for _item in obj["history"]] if obj.get("history") is not None else None
         })
         return _obj
 

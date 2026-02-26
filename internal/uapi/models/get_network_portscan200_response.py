@@ -26,12 +26,11 @@ class GetNetworkPortscan200Response(BaseModel):
     """
     GetNetworkPortscan200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
     ip: Optional[StrictStr] = None
     port: Optional[StrictInt] = None
     port_status: Optional[StrictStr] = Field(default=None, description="\"open\", \"closed\", 或 \"timeout\"")
     protocol: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "ip", "port", "port_status", "protocol"]
+    __properties: ClassVar[List[str]] = ["ip", "port", "port_status", "protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,7 +83,6 @@ class GetNetworkPortscan200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "ip": obj.get("ip"),
             "port": obj.get("port"),
             "port_status": obj.get("port_status"),

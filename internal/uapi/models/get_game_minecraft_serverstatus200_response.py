@@ -26,7 +26,6 @@ class GetGameMinecraftServerstatus200Response(BaseModel):
     """
     GetGameMinecraftServerstatus200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表成功。")
     favicon_url: Optional[StrictStr] = Field(default=None, description="服务器图标的 Base64 Data URI。你可以直接在 `<img>` 标签的 `src` 属性中使用它。")
     ip: Optional[StrictStr] = Field(default=None, description="服务器解析后的IP地址。")
     max_players: Optional[StrictInt] = Field(default=None, description="服务器配置的最大玩家容量。")
@@ -36,7 +35,7 @@ class GetGameMinecraftServerstatus200Response(BaseModel):
     players: Optional[StrictInt] = Field(default=None, description="当前在线的玩家数量。")
     port: Optional[StrictInt] = Field(default=None, description="服务器使用的端口。")
     version: Optional[StrictStr] = Field(default=None, description="服务器报告的版本信息。")
-    __properties: ClassVar[List[str]] = ["code", "favicon_url", "ip", "max_players", "motd_clean", "motd_html", "online", "players", "port", "version"]
+    __properties: ClassVar[List[str]] = ["favicon_url", "ip", "max_players", "motd_clean", "motd_html", "online", "players", "port", "version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +88,6 @@ class GetGameMinecraftServerstatus200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "favicon_url": obj.get("favicon_url"),
             "ip": obj.get("ip"),
             "max_players": obj.get("max_players"),

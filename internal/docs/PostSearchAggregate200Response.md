@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **query** | **str** | 实际执行的搜索查询 | [optional] 
 **total_results** | **int** | 搜索结果总数 | [optional] 
 **results** | [**List[PostSearchAggregate200ResponseResultsInner]**](PostSearchAggregate200ResponseResultsInner.md) | 搜索结果列表 | [optional] 
-**sources** | [**List[PostSearchAggregate200ResponseSourcesInner]**](PostSearchAggregate200ResponseSourcesInner.md) | 各搜索引擎的结果数量统计 | [optional] 
+**sources** | [**List[PostSearchAggregate200ResponseSourcesInner]**](PostSearchAggregate200ResponseSourcesInner.md) | 各搜索源的结果统计 | [optional] 
 **process_time_ms** | **int** | 处理耗时（毫秒） | [optional] 
 **cached** | **bool** | 结果是否来自缓存 | [optional] 
 

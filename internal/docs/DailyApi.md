@@ -4,13 +4,13 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_daily_news_image**](DailyApi.md#get_daily_news_image) | **GET** /daily/news-image | 生成每日新闻摘要图片
+[**get_daily_news_image**](DailyApi.md#get_daily_news_image) | **GET** /daily/news-image | 每日新闻图
 
 
 # **get_daily_news_image**
 > bytearray get_daily_news_image()
 
-生成每日新闻摘要图片
+每日新闻图
 
 想用一张图快速了解天下大事？这个接口为你一键生成今日新闻摘要，非常适合用在早报、数字看板或应用首页等场景。
 
@@ -48,7 +48,7 @@ with uapi.ApiClient(configuration) as api_client:
     api_instance = uapi.DailyApi(api_client)
 
     try:
-        # 生成每日新闻摘要图片
+        # 每日新闻图
         api_response = api_instance.get_daily_news_image()
         print("The response of DailyApi->get_daily_news_image:\n")
         pprint(api_response)

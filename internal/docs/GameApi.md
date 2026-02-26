@@ -4,17 +4,17 @@ All URIs are relative to *https://uapis.cn/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_game_epic_free**](GameApi.md#get_game_epic_free) | **GET** /game/epic-free | 获取Epic Games免费游戏
-[**get_game_minecraft_historyid**](GameApi.md#get_game_minecraft_historyid) | **GET** /game/minecraft/historyid | 查询Minecraft玩家历史用户名
-[**get_game_minecraft_serverstatus**](GameApi.md#get_game_minecraft_serverstatus) | **GET** /game/minecraft/serverstatus | 查询Minecraft服务器状态
-[**get_game_minecraft_userinfo**](GameApi.md#get_game_minecraft_userinfo) | **GET** /game/minecraft/userinfo | 查询Minecraft玩家信息
-[**get_game_steam_summary**](GameApi.md#get_game_steam_summary) | **GET** /game/steam/summary | 获取Steam用户公开摘要
+[**get_game_epic_free**](GameApi.md#get_game_epic_free) | **GET** /game/epic-free | Epic 免费游戏
+[**get_game_minecraft_historyid**](GameApi.md#get_game_minecraft_historyid) | **GET** /game/minecraft/historyid | 查询 MC 曾用名
+[**get_game_minecraft_serverstatus**](GameApi.md#get_game_minecraft_serverstatus) | **GET** /game/minecraft/serverstatus | 查询 MC 服务器
+[**get_game_minecraft_userinfo**](GameApi.md#get_game_minecraft_userinfo) | **GET** /game/minecraft/userinfo | 查询 MC 玩家
+[**get_game_steam_summary**](GameApi.md#get_game_steam_summary) | **GET** /game/steam/summary | 查询 Steam 用户
 
 
 # **get_game_epic_free**
 > GetGameEpicFree200Response get_game_epic_free()
 
-获取Epic Games免费游戏
+Epic 免费游戏
 
 白嫖党的福音来了！想第一时间知道Epic商店本周送了哪些游戏大作吗？
 
@@ -53,7 +53,7 @@ with uapi.ApiClient(configuration) as api_client:
     api_instance = uapi.GameApi(api_client)
 
     try:
-        # 获取Epic Games免费游戏
+        # Epic 免费游戏
         api_response = api_instance.get_game_epic_free()
         print("The response of GameApi->get_game_epic_free:\n")
         pprint(api_response)
@@ -90,19 +90,25 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_game_minecraft_historyid**
-> GetGameMinecraftHistoryid200Response get_game_minecraft_historyid(uuid)
+> GetGameMinecraftHistoryid200Response get_game_minecraft_historyid(name=name, uuid=uuid)
 
-查询Minecraft玩家历史用户名
+查询 MC 曾用名
 
 想知道某个大佬以前叫什么名字吗？这个接口可以帮你追溯一个 Minecraft 玩家的“黑历史”！
 
 ## 功能概述
-通过提供一个玩家的 UUID，你可以获取到该玩家所有曾用名及其变更时间的列表。这对于识别回归的老玩家或者社区管理非常有用。
+通过提供玩家的用户名或 UUID，你可以获取到该玩家所有曾用名及其变更时间的列表。这对于识别回归的老玩家或者社区管理非常有用。
 
 ## 使用须知
 > [!NOTE]
-> **UUID 格式**
-> 查询时，请务必提供玩家的 **32位无破折号** Minecraft UUID，例如 `ee9b4ed1aac1491eb7611471be374b80`。
+> **参数说明**
+> - `name` 和 `uuid` 二选一
+> - UUID 支持带连字符（如 `ee9b4ed1-aac1-491e-b761-1471be374b80`）或不带连字符格式
+
+> [!IMPORTANT]
+> **响应结构差异**
+> - 使用 `uuid` 查询：返回单个用户的历史记录
+> - 使用 `name` 查询：返回所有匹配用户的列表（包括当前用户名或曾用名匹配的玩家），需判断响应中是否有 `results` 字段来区分两种模式
 
 ### Example
 
@@ -124,11 +130,12 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.GameApi(api_client)
-    uuid = 'ee9b4ed1aac1491eb7611471be374b80' # str | 玩家的 Minecraft UUID，请务必使用32位无破折号的格式。
+    name = 'ExamplePlayer' # str | 玩家的 Minecraft 用户名。使用此参数查询时，会返回所有匹配用户的列表（包括当前用户名或曾用名匹配的玩家）。 (optional)
+    uuid = 'ee9b4ed1-aac1-491e-b761-1471be374b80' # str | 玩家的 Minecraft UUID，支持带连字符或不带连字符格式。 (optional)
 
     try:
-        # 查询Minecraft玩家历史用户名
-        api_response = api_instance.get_game_minecraft_historyid(uuid)
+        # 查询 MC 曾用名
+        api_response = api_instance.get_game_minecraft_historyid(name=name, uuid=uuid)
         print("The response of GameApi->get_game_minecraft_historyid:\n")
         pprint(api_response)
     except Exception as e:
@@ -142,7 +149,8 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uuid** | **str**| 玩家的 Minecraft UUID，请务必使用32位无破折号的格式。 | 
+ **name** | **str**| 玩家的 Minecraft 用户名。使用此参数查询时，会返回所有匹配用户的列表（包括当前用户名或曾用名匹配的玩家）。 | [optional] 
+ **uuid** | **str**| 玩家的 Minecraft UUID，支持带连字符或不带连字符格式。 | [optional] 
 
 ### Return type
 
@@ -161,17 +169,17 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | 查询成功！返回该玩家的完整用户名历史记录。 |  -  |
-**400** | 请求失败。请检查你是否提供了 &#x60;uuid&#x60; 参数，以及它的格式是否为32位无破折号字符串。 |  -  |
+**200** | 查询成功！根据查询方式返回不同结构： - **uuid 查询**：返回单个用户的历史记录 - **name 查询**：返回匹配用户列表（判断响应中是否有 &#x60;results&#x60; 字段来区分） |  -  |
+**400** | 请求失败。请检查你是否提供了 &#x60;name&#x60; 或 &#x60;uuid&#x60; 参数中的至少一个。 |  -  |
 **404** | 用户未找到。我们根据你提供的 UUID 未能找到对应的 Minecraft 玩家。请确认 UUID 是否正确。 |  -  |
-**502** | 上游服务错误。在向 Mojang 的官方 API 请求数据时遇到了问题。这可能是他们的服务暂时中断，请稍后重试。 |  -  |
+**502** | 服务暂时不可用，请稍后重试。 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_game_minecraft_serverstatus**
 > GetGameMinecraftServerstatus200Response get_game_minecraft_serverstatus(server)
 
-查询Minecraft服务器状态
+查询 MC 服务器
 
 想在加入服务器前看看有多少人在线？或者检查一下服务器开没开？用这个接口就对了！
 
@@ -201,7 +209,7 @@ with uapi.ApiClient(configuration) as api_client:
     server = 'hypixel.net' # str | Minecraft服务器的地址，可以是域名（如 `hypixel.net`）或 `IP:端口` 的形式（如 `mc.example.com:25565`）。如果省略端口，将默认使用 `25565`。
 
     try:
-        # 查询Minecraft服务器状态
+        # 查询 MC 服务器
         api_response = api_instance.get_game_minecraft_serverstatus(server)
         print("The response of GameApi->get_game_minecraft_serverstatus:\n")
         pprint(api_response)
@@ -245,7 +253,7 @@ No authorization required
 # **get_game_minecraft_userinfo**
 > GetGameMinecraftUserinfo200Response get_game_minecraft_userinfo(username)
 
-查询Minecraft玩家信息
+查询 MC 玩家
 
 只需要一个玩家的用户名，就能快速获取到他的正版皮肤和独一无二的UUID！
 
@@ -275,7 +283,7 @@ with uapi.ApiClient(configuration) as api_client:
     username = 'Notch' # str | 玩家的 Minecraft 游戏内名称（正版ID）。
 
     try:
-        # 查询Minecraft玩家信息
+        # 查询 MC 玩家
         api_response = api_instance.get_game_minecraft_userinfo(username)
         print("The response of GameApi->get_game_minecraft_userinfo:\n")
         pprint(api_response)
@@ -319,7 +327,7 @@ No authorization required
 # **get_game_steam_summary**
 > GetGameSteamSummary200Response get_game_steam_summary(steamid=steamid, id=id, id3=id3, key=key)
 
-获取Steam用户公开摘要
+查询 Steam 用户
 
 想在你的网站或应用中展示用户的 Steam 个人资料？这个接口就是为你准备的。
 
@@ -370,7 +378,7 @@ with uapi.ApiClient(configuration) as api_client:
     key = 'key_example' # str | 你的 Steam Web API Key。这是一个可选参数，如果提供，它将覆盖我们在后端配置的全局Key。这为你提供了更大的灵活性，但请务必注意Key的保密，不要在前端暴露。 (optional)
 
     try:
-        # 获取Steam用户公开摘要
+        # 查询 Steam 用户
         api_response = api_instance.get_game_steam_summary(steamid=steamid, id=id, id3=id3, key=key)
         print("The response of GameApi->get_game_steam_summary:\n")
         pprint(api_response)

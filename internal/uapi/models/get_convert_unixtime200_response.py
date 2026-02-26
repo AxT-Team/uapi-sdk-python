@@ -26,10 +26,9 @@ class GetConvertUnixtime200Response(BaseModel):
     """
     GetConvertUnixtime200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="状态码，200代表操作成功。")
     datetime: Optional[StrictStr] = Field(default=None, description="标准格式（YYYY-MM-DD HH:mm:ss）的日期时间字符串。")
     timestamp: Optional[StrictInt] = Field(default=None, description="转换后的10位秒级Unix时间戳。")
-    __properties: ClassVar[List[str]] = ["code", "datetime", "timestamp"]
+    __properties: ClassVar[List[str]] = ["datetime", "timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +81,6 @@ class GetConvertUnixtime200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
             "datetime": obj.get("datetime"),
             "timestamp": obj.get("timestamp")
         })

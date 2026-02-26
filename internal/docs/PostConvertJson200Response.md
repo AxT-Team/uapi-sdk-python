@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** | 状态码，200代表操作成功。 | [optional] 
 **content** | **str** | 格式化后的JSON字符串，带有标准缩进和换行。 | [optional] 
 
 ## Example

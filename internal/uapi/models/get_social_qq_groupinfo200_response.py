@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,18 @@ class GetSocialQqGroupinfo200Response(BaseModel):
     tag: Optional[StrictStr] = Field(default=None, description="群标签")
     join_url: Optional[StrictStr] = Field(default=None, description="加群链接（QR码URL）")
     last_updated: Optional[StrictStr] = Field(default=None, description="最后更新时间（ISO 8601格式）")
-    __properties: ClassVar[List[str]] = ["group_id", "group_name", "avatar_url", "description", "tag", "join_url", "last_updated"]
+    member_count: Optional[StrictInt] = Field(default=None, description="当前成员数")
+    max_member_count: Optional[StrictInt] = Field(default=None, description="最大成员数")
+    active_member_num: Optional[StrictInt] = Field(default=None, description="活跃成员数（可选，部分群有此数据）")
+    owner_uin: Optional[StrictStr] = Field(default=None, description="群主QQ号（可选）")
+    owner_uid: Optional[StrictStr] = Field(default=None, description="群主UID（可选）")
+    create_time: Optional[StrictInt] = Field(default=None, description="建群时间戳（Unix时间戳，可选）")
+    create_time_str: Optional[StrictStr] = Field(default=None, description="建群时间格式化字符串（可选）")
+    group_grade: Optional[StrictInt] = Field(default=None, description="群等级（可选）")
+    group_memo: Optional[StrictStr] = Field(default=None, description="群公告/简介（可选）")
+    cert_type: Optional[StrictInt] = Field(default=None, description="认证类型（0=未认证，可选）")
+    cert_text: Optional[StrictStr] = Field(default=None, description="认证说明文本（可选）")
+    __properties: ClassVar[List[str]] = ["group_id", "group_name", "avatar_url", "description", "tag", "join_url", "last_updated", "member_count", "max_member_count", "active_member_num", "owner_uin", "owner_uid", "create_time", "create_time_str", "group_grade", "group_memo", "cert_type", "cert_text"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +103,18 @@ class GetSocialQqGroupinfo200Response(BaseModel):
             "description": obj.get("description"),
             "tag": obj.get("tag"),
             "join_url": obj.get("join_url"),
-            "last_updated": obj.get("last_updated")
+            "last_updated": obj.get("last_updated"),
+            "member_count": obj.get("member_count"),
+            "max_member_count": obj.get("max_member_count"),
+            "active_member_num": obj.get("active_member_num"),
+            "owner_uin": obj.get("owner_uin"),
+            "owner_uid": obj.get("owner_uid"),
+            "create_time": obj.get("create_time"),
+            "create_time_str": obj.get("create_time_str"),
+            "group_grade": obj.get("group_grade"),
+            "group_memo": obj.get("group_memo"),
+            "cert_type": obj.get("cert_type"),
+            "cert_text": obj.get("cert_text")
         })
         return _obj
 

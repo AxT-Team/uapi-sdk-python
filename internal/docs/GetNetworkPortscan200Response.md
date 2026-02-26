@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
 **ip** | **str** |  | [optional] 
 **port** | **int** |  | [optional] 
 **port_status** | **str** | \&quot;open\&quot;, \&quot;closed\&quot;, 或 \&quot;timeout\&quot; | [optional] 

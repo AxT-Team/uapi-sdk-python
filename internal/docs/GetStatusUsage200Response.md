@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**endpoints** | [**List[EndpointsAggregateEndpointsInner]**](EndpointsAggregateEndpointsInner.md) |  | [optional] 
-**unaggregated** | [**EndpointsAggregateUnaggregated**](EndpointsAggregateUnaggregated.md) |  | [optional] 
+**endpoints** | [**List[GetStatusUsage200ResponseAnyOfEndpointsInner]**](GetStatusUsage200ResponseAnyOfEndpointsInner.md) |  | [optional] 
+**unaggregated** | [**GetStatusUsage200ResponseAnyOfUnaggregated**](GetStatusUsage200ResponseAnyOfUnaggregated.md) |  | [optional] 
 **path** | **str** |  | [optional] 
 **count** | **int** |  | [optional] 
 

@@ -17,23 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from uapi.models.post_ai_translate200_response_data_explanation import PostAiTranslate200ResponseDataExplanation
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class PostAiTranslate200ResponseData(BaseModel):
     """
-    单个翻译的详细结果，仅在单个翻译时返回。
+    翻译结果的详细信息。
     """ # noqa: E501
-    original_text: Optional[StrictStr] = None
     translated_text: Optional[StrictStr] = None
-    detected_lang: Optional[StrictStr] = None
-    confidence_score: Optional[Union[StrictFloat, StrictInt]] = None
-    alternatives: Optional[List[StrictStr]] = None
-    explanation: Optional[PostAiTranslate200ResponseDataExplanation] = None
-    __properties: ClassVar[List[str]] = ["original_text", "translated_text", "detected_lang", "confidence_score", "alternatives", "explanation"]
+    __properties: ClassVar[List[str]] = ["translated_text"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,9 +68,6 @@ class PostAiTranslate200ResponseData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of explanation
-        if self.explanation:
-            _dict['explanation'] = self.explanation.to_dict()
         return _dict
 
     @classmethod
@@ -89,12 +80,7 @@ class PostAiTranslate200ResponseData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "original_text": obj.get("original_text"),
-            "translated_text": obj.get("translated_text"),
-            "detected_lang": obj.get("detected_lang"),
-            "confidence_score": obj.get("confidence_score"),
-            "alternatives": obj.get("alternatives"),
-            "explanation": PostAiTranslate200ResponseDataExplanation.from_dict(obj["explanation"]) if obj.get("explanation") is not None else None
+            "translated_text": obj.get("translated_text")
         })
         return _obj
 

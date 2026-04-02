@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_ai_translate_languages200_response_performance_typical_response_time_ms import GetAiTranslateLanguages200ResponsePerformanceTypicalResponseTimeMs
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,12 +26,10 @@ class GetAiTranslateLanguages200ResponsePerformance(BaseModel):
     """
     GetAiTranslateLanguages200ResponsePerformance
     """ # noqa: E501
-    fast_mode_available: Optional[StrictBool] = None
     batch_translation_available: Optional[StrictBool] = None
-    max_text_length: Optional[StrictInt] = None
     max_batch_size: Optional[StrictInt] = None
-    typical_response_time_ms: Optional[GetAiTranslateLanguages200ResponsePerformanceTypicalResponseTimeMs] = None
-    __properties: ClassVar[List[str]] = ["fast_mode_available", "batch_translation_available", "max_text_length", "max_batch_size", "typical_response_time_ms"]
+    max_text_length: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["batch_translation_available", "max_batch_size", "max_text_length"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,9 +70,6 @@ class GetAiTranslateLanguages200ResponsePerformance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of typical_response_time_ms
-        if self.typical_response_time_ms:
-            _dict['typical_response_time_ms'] = self.typical_response_time_ms.to_dict()
         return _dict
 
     @classmethod
@@ -88,11 +82,9 @@ class GetAiTranslateLanguages200ResponsePerformance(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "fast_mode_available": obj.get("fast_mode_available"),
             "batch_translation_available": obj.get("batch_translation_available"),
-            "max_text_length": obj.get("max_text_length"),
             "max_batch_size": obj.get("max_batch_size"),
-            "typical_response_time_ms": GetAiTranslateLanguages200ResponsePerformanceTypicalResponseTimeMs.from_dict(obj["typical_response_time_ms"]) if obj.get("typical_response_time_ms") is not None else None
+            "max_text_length": obj.get("max_text_length")
         })
         return _obj
 

@@ -17,9 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_misc_tracking_detect200_response_data import GetMiscTrackingDetect200ResponseData
+from uapi.models.get_misc_tracking_detect200_response_alternatives_inner import GetMiscTrackingDetect200ResponseAlternativesInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +27,11 @@ class GetMiscTrackingDetect200Response(BaseModel):
     """
     GetMiscTrackingDetect200Response
     """ # noqa: E501
-    code: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    data: Optional[GetMiscTrackingDetect200ResponseData] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "data"]
+    tracking_number: Optional[StrictStr] = Field(default=None, description="查询的快递单号")
+    carrier_code: Optional[StrictStr] = Field(default=None, description="识别出的快递公司编码")
+    carrier_name: Optional[StrictStr] = Field(default=None, description="识别出的快递公司名称")
+    alternatives: Optional[List[GetMiscTrackingDetect200ResponseAlternativesInner]] = Field(default=None, description="其他可能的快递公司列表。如果没有备选项，会返回空数组。")
+    __properties: ClassVar[List[str]] = ["tracking_number", "carrier_code", "carrier_name", "alternatives"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,9 +72,13 @@ class GetMiscTrackingDetect200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in alternatives (list)
+        _items = []
+        if self.alternatives:
+            for _item_alternatives in self.alternatives:
+                if _item_alternatives:
+                    _items.append(_item_alternatives.to_dict())
+            _dict['alternatives'] = _items
         return _dict
 
     @classmethod
@@ -86,9 +91,10 @@ class GetMiscTrackingDetect200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "data": GetMiscTrackingDetect200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "tracking_number": obj.get("tracking_number"),
+            "carrier_code": obj.get("carrier_code"),
+            "carrier_name": obj.get("carrier_name"),
+            "alternatives": [GetMiscTrackingDetect200ResponseAlternativesInner.from_dict(_item) for _item in obj["alternatives"]] if obj.get("alternatives") is not None else None
         })
         return _obj
 

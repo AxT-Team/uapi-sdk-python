@@ -13,105 +13,139 @@
 
 
 from __future__ import annotations
-import pprint
-import re  # noqa: F401
 import json
+import pprint
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
+from typing import Any, List, Optional
+from uapi.models.get_misc_hotboard200_response_one_of import GetMiscHotboard200ResponseOneOf
+from uapi.models.get_misc_hotboard200_response_one_of1 import GetMiscHotboard200ResponseOneOf1
+from uapi.models.get_misc_hotboard200_response_one_of2 import GetMiscHotboard200ResponseOneOf2
+from pydantic import StrictStr, Field
+from typing import Union, List, Set, Optional, Dict
+from typing_extensions import Literal, Self
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_misc_hotboard200_response_list_inner import GetMiscHotboard200ResponseListInner
-from uapi.models.get_misc_hotboard200_response_results_inner import GetMiscHotboard200ResponseResultsInner
-from typing import Optional, Set
-from typing_extensions import Self
+GETMISCHOTBOARD200RESPONSE_ONE_OF_SCHEMAS = ["GetMiscHotboard200ResponseOneOf", "GetMiscHotboard200ResponseOneOf1", "GetMiscHotboard200ResponseOneOf2"]
 
 class GetMiscHotboard200Response(BaseModel):
     """
     GetMiscHotboard200Response
-    """ # noqa: E501
-    list: Optional[List[GetMiscHotboard200ResponseListInner]] = Field(default=None, description="热榜条目列表。")
-    type: Optional[StrictStr] = None
-    update_time: Optional[StrictStr] = None
-    snapshot_time: Optional[StrictInt] = Field(default=None, description="时光机模式返回的快照实际时间戳（毫秒）。")
-    keyword: Optional[StrictStr] = Field(default=None, description="搜索模式返回的搜索关键词。")
-    count: Optional[StrictInt] = Field(default=None, description="搜索模式返回的结果数量。")
-    results: Optional[List[GetMiscHotboard200ResponseResultsInner]] = Field(default=None, description="搜索模式返回的结果数组。")
-    sources: Optional[List[StrictStr]] = Field(default=None, description="数据源列表模式返回的可用历史数据源数组。")
-    __properties: ClassVar[List[str]] = ["list", "type", "update_time", "snapshot_time", "keyword", "count", "results", "sources"]
+    """
+    # data type: GetMiscHotboard200ResponseOneOf
+    oneof_schema_1_validator: Optional[GetMiscHotboard200ResponseOneOf] = None
+    # data type: GetMiscHotboard200ResponseOneOf1
+    oneof_schema_2_validator: Optional[GetMiscHotboard200ResponseOneOf1] = None
+    # data type: GetMiscHotboard200ResponseOneOf2
+    oneof_schema_3_validator: Optional[GetMiscHotboard200ResponseOneOf2] = None
+    actual_instance: Optional[Union[GetMiscHotboard200ResponseOneOf, GetMiscHotboard200ResponseOneOf1, GetMiscHotboard200ResponseOneOf2]] = None
+    one_of_schemas: Set[str] = { "GetMiscHotboard200ResponseOneOf", "GetMiscHotboard200ResponseOneOf1", "GetMiscHotboard200ResponseOneOf2" }
 
     model_config = ConfigDict(
-        populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
 
 
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.model_dump(by_alias=True))
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+            if kwargs:
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
+
+    @field_validator('actual_instance')
+    def actual_instance_must_validate_oneof(cls, v):
+        instance = GetMiscHotboard200Response.model_construct()
+        error_messages = []
+        match = 0
+        # validate data type: GetMiscHotboard200ResponseOneOf
+        if not isinstance(v, GetMiscHotboard200ResponseOneOf):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetMiscHotboard200ResponseOneOf`")
+        else:
+            match += 1
+        # validate data type: GetMiscHotboard200ResponseOneOf1
+        if not isinstance(v, GetMiscHotboard200ResponseOneOf1):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetMiscHotboard200ResponseOneOf1`")
+        else:
+            match += 1
+        # validate data type: GetMiscHotboard200ResponseOneOf2
+        if not isinstance(v, GetMiscHotboard200ResponseOneOf2):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetMiscHotboard200ResponseOneOf2`")
+        else:
+            match += 1
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in GetMiscHotboard200Response with oneOf schemas: GetMiscHotboard200ResponseOneOf, GetMiscHotboard200ResponseOneOf1, GetMiscHotboard200ResponseOneOf2. Details: " + ", ".join(error_messages))
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when setting `actual_instance` in GetMiscHotboard200Response with oneOf schemas: GetMiscHotboard200ResponseOneOf, GetMiscHotboard200ResponseOneOf1, GetMiscHotboard200ResponseOneOf2. Details: " + ", ".join(error_messages))
+        else:
+            return v
+
+    @classmethod
+    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Self:
+        """Returns the object represented by the json string"""
+        instance = cls.model_construct()
+        error_messages = []
+        match = 0
+
+        # deserialize data into GetMiscHotboard200ResponseOneOf
+        try:
+            instance.actual_instance = GetMiscHotboard200ResponseOneOf.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into GetMiscHotboard200ResponseOneOf1
+        try:
+            instance.actual_instance = GetMiscHotboard200ResponseOneOf1.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into GetMiscHotboard200ResponseOneOf2
+        try:
+            instance.actual_instance = GetMiscHotboard200ResponseOneOf2.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into GetMiscHotboard200Response with oneOf schemas: GetMiscHotboard200ResponseOneOf, GetMiscHotboard200ResponseOneOf1, GetMiscHotboard200ResponseOneOf2. Details: " + ", ".join(error_messages))
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when deserializing the JSON string into GetMiscHotboard200Response with oneOf schemas: GetMiscHotboard200ResponseOneOf, GetMiscHotboard200ResponseOneOf1, GetMiscHotboard200ResponseOneOf2. Details: " + ", ".join(error_messages))
+        else:
+            return instance
 
     def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
 
-    @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetMiscHotboard200Response from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
+        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Return the dictionary representation of the model using alias.
-
-        This has the following differences from calling pydantic's
-        `self.model_dump(by_alias=True)`:
-
-        * `None` is only added to the output dict for nullable fields that
-          were set at model initialization. Other fields with value `None`
-          are ignored.
-        """
-        excluded_fields: Set[str] = set([
-        ])
-
-        _dict = self.model_dump(
-            by_alias=True,
-            exclude=excluded_fields,
-            exclude_none=True,
-        )
-        # override the default output from pydantic by calling `to_dict()` of each item in list (list)
-        _items = []
-        if self.list:
-            for _item_list in self.list:
-                if _item_list:
-                    _items.append(_item_list.to_dict())
-            _dict['list'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
-            _dict['results'] = _items
-        return _dict
-
-    @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetMiscHotboard200Response from a dict"""
-        if obj is None:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], GetMiscHotboard200ResponseOneOf, GetMiscHotboard200ResponseOneOf1, GetMiscHotboard200ResponseOneOf2]]:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
+        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
+            return self.actual_instance.to_dict()
+        else:
+            # primitive type
+            return self.actual_instance
 
-        _obj = cls.model_validate({
-            "list": [GetMiscHotboard200ResponseListInner.from_dict(_item) for _item in obj["list"]] if obj.get("list") is not None else None,
-            "type": obj.get("type"),
-            "update_time": obj.get("update_time"),
-            "snapshot_time": obj.get("snapshot_time"),
-            "keyword": obj.get("keyword"),
-            "count": obj.get("count"),
-            "results": [GetMiscHotboard200ResponseResultsInner.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
-            "sources": obj.get("sources")
-        })
-        return _obj
+    def to_str(self) -> str:
+        """Returns the string representation of the actual instance"""
+        return pprint.pformat(self.model_dump())
 
 

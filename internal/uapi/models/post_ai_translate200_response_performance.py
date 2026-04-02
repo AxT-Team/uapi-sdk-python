@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,7 @@ class PostAiTranslate200ResponsePerformance(BaseModel):
     PostAiTranslate200ResponsePerformance
     """ # noqa: E501
     processing_time_ms: Optional[StrictInt] = None
-    cache_hit: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["processing_time_ms", "cache_hit"]
+    __properties: ClassVar[List[str]] = ["processing_time_ms"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,8 +80,7 @@ class PostAiTranslate200ResponsePerformance(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "processing_time_ms": obj.get("processing_time_ms"),
-            "cache_hit": obj.get("cache_hit")
+            "processing_time_ms": obj.get("processing_time_ms")
         })
         return _obj
 

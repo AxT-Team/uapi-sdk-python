@@ -5,9 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **int** |  | [optional] 
-**data** | [**GetSocialBilibiliUserinfo200ResponseData**](GetSocialBilibiliUserinfo200ResponseData.md) |  | [optional] 
-**message** | **str** |  | [optional] 
+**mid** | **int** |  | [optional] 
+**name** | **str** |  | [optional] 
+**sex** | **str** |  | [optional] 
+**face** | **str** |  | [optional] 
+**sign** | **str** |  | [optional] 
+**level** | **int** |  | [optional] 
+**birthday** | **str** |  | [optional] 
+**vip_type** | **int** |  | [optional] 
+**vip_status** | **int** |  | [optional] 
+**following** | **int** |  | [optional] 
+**follower** | **int** |  | [optional] 
+**archive_count** | **int** |  | [optional] 
+**article_count** | **int** |  | [optional] 
 
 ## Example
 

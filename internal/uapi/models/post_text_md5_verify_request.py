@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +26,8 @@ class PostTextMd5VerifyRequest(BaseModel):
     """
     PostTextMd5VerifyRequest
     """ # noqa: E501
-    hash: StrictStr
-    text: StrictStr
+    hash: StrictStr = Field(description="用于比对的 MD5 哈希值（32 位小写十六进制字符串）。")
+    text: StrictStr = Field(description="待校验的原始文本，会先计算其 MD5 再与 hash 进行比对。")
     __properties: ClassVar[List[str]] = ["hash", "text"]
 
     model_config = ConfigDict(

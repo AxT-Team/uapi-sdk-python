@@ -35,8 +35,7 @@ class GetNetworkIpinfo200Response(BaseModel):
     longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="经度")
     beginip: Optional[StrictStr] = Field(default=None, description="IP段起始地址（标准查询）")
     endip: Optional[StrictStr] = Field(default=None, description="IP段结束地址（标准查询）")
-    district: Optional[StrictStr] = Field(default=None, description="行政区（商业查询）")
-    __properties: ClassVar[List[str]] = ["ip", "region", "isp", "llc", "asn", "latitude", "longitude", "beginip", "endip", "district"]
+    __properties: ClassVar[List[str]] = ["ip", "region", "isp", "llc", "asn", "latitude", "longitude", "beginip", "endip"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,8 +96,7 @@ class GetNetworkIpinfo200Response(BaseModel):
             "latitude": obj.get("latitude"),
             "longitude": obj.get("longitude"),
             "beginip": obj.get("beginip"),
-            "endip": obj.get("endip"),
-            "district": obj.get("district")
+            "endip": obj.get("endip")
         })
         return _obj
 

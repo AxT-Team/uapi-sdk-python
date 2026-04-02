@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uapi.models.get_github_repo200_response_collaborators_inner import GetGithubRepo200ResponseCollaboratorsInner
 from uapi.models.get_github_repo200_response_latest_release import GetGithubRepo200ResponseLatestRelease
@@ -29,29 +29,29 @@ class GetGithubRepo200Response(BaseModel):
     """
     GetGithubRepo200Response
     """ # noqa: E501
-    full_name: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    homepage: Optional[StrictStr] = None
-    default_branch: Optional[StrictStr] = None
-    primary_branch: Optional[StrictStr] = None
-    default_branch_sha: Optional[StrictStr] = None
-    visibility: Optional[StrictStr] = None
-    archived: Optional[StrictBool] = None
-    disabled: Optional[StrictBool] = None
-    fork: Optional[StrictBool] = None
-    language: Optional[StrictStr] = None
-    topics: Optional[List[StrictStr]] = None
-    license: Optional[StrictStr] = None
-    stargazers: Optional[StrictInt] = None
-    forks: Optional[StrictInt] = None
-    open_issues: Optional[StrictInt] = None
-    watchers: Optional[StrictInt] = None
-    pushed_at: Optional[datetime] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    languages: Optional[Dict[str, StrictInt]] = None
-    collaborators: Optional[List[GetGithubRepo200ResponseCollaboratorsInner]] = None
-    maintainers: Optional[List[GetGithubRepo200ResponseCollaboratorsInner]] = None
+    full_name: Optional[StrictStr] = Field(default=None, description="仓库完整名称。")
+    description: Optional[StrictStr] = Field(default=None, description="仓库简介。")
+    homepage: Optional[StrictStr] = Field(default=None, description="仓库主页链接。")
+    default_branch: Optional[StrictStr] = Field(default=None, description="默认分支名称。")
+    primary_branch: Optional[StrictStr] = Field(default=None, description="主要分支名称（通常与默认分支一致）。")
+    default_branch_sha: Optional[StrictStr] = Field(default=None, description="默认分支最新提交的 SHA 哈希。")
+    visibility: Optional[StrictStr] = Field(default=None, description="仓库可见性，常见值为 `public` 或 `private`。")
+    archived: Optional[StrictBool] = Field(default=None, description="仓库是否已归档。")
+    disabled: Optional[StrictBool] = Field(default=None, description="仓库是否被禁用。")
+    fork: Optional[StrictBool] = Field(default=None, description="是否为 Fork 仓库。")
+    language: Optional[StrictStr] = Field(default=None, description="主要语言。")
+    topics: Optional[List[StrictStr]] = Field(default=None, description="话题标签列表。")
+    license: Optional[StrictStr] = Field(default=None, description="开源许可证名称。")
+    stargazers: Optional[StrictInt] = Field(default=None, description="Star 数。")
+    forks: Optional[StrictInt] = Field(default=None, description="Fork 数。")
+    open_issues: Optional[StrictInt] = Field(default=None, description="开放 Issue 数。")
+    watchers: Optional[StrictInt] = Field(default=None, description="关注者数量（watchers/subscribers）。")
+    pushed_at: Optional[datetime] = Field(default=None, description="最后推送时间（ISO 8601）。")
+    created_at: Optional[datetime] = Field(default=None, description="创建时间（ISO 8601）。")
+    updated_at: Optional[datetime] = Field(default=None, description="更新时间（ISO 8601）。")
+    languages: Optional[Dict[str, StrictInt]] = Field(default=None, description="语言统计（键为语言名，值为代码字节数）。")
+    collaborators: Optional[List[GetGithubRepo200ResponseCollaboratorsInner]] = Field(default=None, description="协作者列表。受权限限制时可能为 null 或空数组。")
+    maintainers: Optional[List[GetGithubRepo200ResponseCollaboratorsInner]] = Field(default=None, description="维护者列表（根据默认分支近期提交推断）。")
     latest_release: Optional[GetGithubRepo200ResponseLatestRelease] = None
     __properties: ClassVar[List[str]] = ["full_name", "description", "homepage", "default_branch", "primary_branch", "default_branch_sha", "visibility", "archived", "disabled", "fork", "language", "topics", "license", "stargazers", "forks", "open_issues", "watchers", "pushed_at", "created_at", "updated_at", "languages", "collaborators", "maintainers", "latest_release"]
 

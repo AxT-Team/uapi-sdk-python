@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +29,7 @@ class PostAiTranslate500Response(BaseModel):
     code: Optional[StrictInt] = None
     message: Optional[StrictStr] = None
     error: Optional[StrictStr] = None
-    is_batch: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "error", "is_batch"]
+    __properties: ClassVar[List[str]] = ["code", "message", "error"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,8 +84,7 @@ class PostAiTranslate500Response(BaseModel):
         _obj = cls.model_validate({
             "code": obj.get("code"),
             "message": obj.get("message"),
-            "error": obj.get("error"),
-            "is_batch": obj.get("is_batch")
+            "error": obj.get("error")
         })
         return _obj
 

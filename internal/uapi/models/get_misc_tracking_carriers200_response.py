@@ -17,9 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_misc_tracking_carriers200_response_data import GetMiscTrackingCarriers200ResponseData
+from uapi.models.get_misc_tracking_carriers200_response_carriers_inner import GetMiscTrackingCarriers200ResponseCarriersInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +27,9 @@ class GetMiscTrackingCarriers200Response(BaseModel):
     """
     GetMiscTrackingCarriers200Response
     """ # noqa: E501
-    code: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    data: Optional[GetMiscTrackingCarriers200ResponseData] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "data"]
+    carriers: Optional[List[GetMiscTrackingCarriers200ResponseCarriersInner]] = Field(default=None, description="快递公司列表")
+    total: Optional[StrictInt] = Field(default=None, description="支持的快递公司总数")
+    __properties: ClassVar[List[str]] = ["carriers", "total"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,9 +70,13 @@ class GetMiscTrackingCarriers200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in carriers (list)
+        _items = []
+        if self.carriers:
+            for _item_carriers in self.carriers:
+                if _item_carriers:
+                    _items.append(_item_carriers.to_dict())
+            _dict['carriers'] = _items
         return _dict
 
     @classmethod
@@ -86,9 +89,8 @@ class GetMiscTrackingCarriers200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "data": GetMiscTrackingCarriers200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "carriers": [GetMiscTrackingCarriers200ResponseCarriersInner.from_dict(_item) for _item in obj["carriers"]] if obj.get("carriers") is not None else None,
+            "total": obj.get("total")
         })
         return _obj
 

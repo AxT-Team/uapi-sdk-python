@@ -322,7 +322,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.RandomApi(api_client)
-    post_answerbook_ask_request = uapi.PostAnswerbookAskRequest() # PostAnswerbookAskRequest | 包含问题的JSON对象
+    post_answerbook_ask_request = uapi.PostAnswerbookAskRequest() # PostAnswerbookAskRequest | 
 
     try:
         # 答案之书 (POST)
@@ -340,7 +340,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_answerbook_ask_request** | [**PostAnswerbookAskRequest**](PostAnswerbookAskRequest.md)| 包含问题的JSON对象 | 
+ **post_answerbook_ask_request** | [**PostAnswerbookAskRequest**](PostAnswerbookAskRequest.md)|  | 
 
 ### Return type
 

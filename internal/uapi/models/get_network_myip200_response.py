@@ -35,8 +35,9 @@ class GetNetworkMyip200Response(BaseModel):
     longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="经度")
     beginip: Optional[StrictStr] = Field(default=None, description="IP段起始地址（标准查询）")
     endip: Optional[StrictStr] = Field(default=None, description="IP段结束地址（标准查询）")
-    district: Optional[StrictStr] = Field(default=None, description="行政区（商业查询）")
-    __properties: ClassVar[List[str]] = ["ip", "region", "isp", "llc", "asn", "latitude", "longitude", "beginip", "endip", "district"]
+    district: Optional[StrictStr] = Field(default=None, description="行政区。仅 `source=commercial` 时可能返回。")
+    time_zone: Optional[StrictStr] = Field(default=None, description="时区名称。仅 `source=commercial` 时可能返回。")
+    __properties: ClassVar[List[str]] = ["ip", "region", "isp", "llc", "asn", "latitude", "longitude", "beginip", "endip", "district", "time_zone"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,7 +99,8 @@ class GetNetworkMyip200Response(BaseModel):
             "longitude": obj.get("longitude"),
             "beginip": obj.get("beginip"),
             "endip": obj.get("endip"),
-            "district": obj.get("district")
+            "district": obj.get("district"),
+            "time_zone": obj.get("time_zone")
         })
         return _obj
 

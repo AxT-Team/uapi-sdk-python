@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +26,10 @@ class GetGithubRepo200ResponseCollaboratorsInner(BaseModel):
     """
     GetGithubRepo200ResponseCollaboratorsInner
     """ # noqa: E501
-    login: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    url: Optional[StrictStr] = None
+    login: Optional[StrictStr] = Field(default=None, description="GitHub 登录名。")
+    name: Optional[StrictStr] = Field(default=None, description="显示名称。")
+    email: Optional[StrictStr] = Field(default=None, description="公开邮箱。")
+    url: Optional[StrictStr] = Field(default=None, description="GitHub 主页链接。")
     __properties: ClassVar[List[str]] = ["login", "name", "email", "url"]
 
     model_config = ConfigDict(

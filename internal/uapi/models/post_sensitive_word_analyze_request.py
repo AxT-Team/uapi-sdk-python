@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +27,7 @@ class PostSensitiveWordAnalyzeRequest(BaseModel):
     """
     PostSensitiveWordAnalyzeRequest
     """ # noqa: E501
-    keywords: List[StrictStr] = Field(description="要分析的关键词列表，单次最多100个，每个关键词最长50字符。")
+    keywords: Annotated[List[Annotated[str, Field(strict=True, max_length=1000)]], Field(max_length=100)] = Field(description="要分析的关键词列表，单次最多100个。单条关键词最多1,000字符，总字符数最多20,000。")
     __properties: ClassVar[List[str]] = ["keywords"]
 
     model_config = ConfigDict(

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | Key must be 16, 24, or 32 bytes long to select AES-128, AES-192, or AES-256. | 
-**text** | **str** |  | 
+**key** | **str** | 密钥长度必须为 16、24 或 32 字节，分别对应 AES-128、AES-192、AES-256。 | 
+**text** | **str** | 待加密的明文文本。 | 
 
 ## Example
 

@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**list** | [**List[GetMiscHotboard200ResponseListInner]**](GetMiscHotboard200ResponseListInner.md) | 热榜条目列表。 | [optional] 
 **type** | **str** |  | [optional] 
-**update_time** | **str** |  | [optional] 
-**snapshot_time** | **int** | 时光机模式返回的快照实际时间戳（毫秒）。 | [optional] 
-**keyword** | **str** | 搜索模式返回的搜索关键词。 | [optional] 
-**count** | **int** | 搜索模式返回的结果数量。 | [optional] 
-**results** | [**List[GetMiscHotboard200ResponseResultsInner]**](GetMiscHotboard200ResponseResultsInner.md) | 搜索模式返回的结果数组。 | [optional] 
-**sources** | **List[str]** | 数据源列表模式返回的可用历史数据源数组。 | [optional] 
+**update_time** | **str** | 热榜更新时间。时光机无匹配快照时可能为空字符串。 | [optional] 
+**snapshot_time** | **int** | 时光机模式返回的快照实际时间戳（毫秒）。当前热榜模式下通常不返回。 | [optional] 
+**list** | [**List[GetMiscHotboard200ResponseOneOfListInner]**](GetMiscHotboard200ResponseOneOfListInner.md) | 热榜条目列表。 | [optional] 
+**keyword** | **str** | 搜索关键词。 | [optional] 
+**count** | **int** | 匹配到的结果数量。 | [optional] 
+**results** | [**List[GetMiscHotboard200ResponseOneOf1ResultsInner]**](GetMiscHotboard200ResponseOneOf1ResultsInner.md) | 搜索结果数组。 | [optional] 
+**sources** | **List[str]** | 支持历史数据的平台列表。 | [optional] 
 
 ## Example
 

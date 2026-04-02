@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **longitude** | **float** | 经度 | [optional] 
 **beginip** | **str** | IP段起始地址（标准查询） | [optional] 
 **endip** | **str** | IP段结束地址（标准查询） | [optional] 
-**district** | **str** | 行政区（商业查询） | [optional] 
 
 ## Example
 

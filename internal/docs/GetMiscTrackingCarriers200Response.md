@@ -5,9 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** |  | [optional] 
-**message** | **str** |  | [optional] 
-**data** | [**GetMiscTrackingCarriers200ResponseData**](GetMiscTrackingCarriers200ResponseData.md) |  | [optional] 
+**carriers** | [**List[GetMiscTrackingCarriers200ResponseCarriersInner]**](GetMiscTrackingCarriers200ResponseCarriersInner.md) | 快递公司列表 | [optional] 
+**total** | **int** | 支持的快递公司总数 | [optional] 
 
 ## Example
 

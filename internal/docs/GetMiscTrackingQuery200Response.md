@@ -5,9 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** |  | [optional] 
-**message** | **str** |  | [optional] 
-**data** | [**GetMiscTrackingQuery200ResponseData**](GetMiscTrackingQuery200ResponseData.md) |  | [optional] 
+**tracking_number** | **str** | 快递单号 | [optional] 
+**carrier_code** | **str** | 快递公司编码 | [optional] 
+**carrier_name** | **str** | 快递公司名称 | [optional] 
+**track_count** | **int** | 物流轨迹数量 | [optional] 
+**tracks** | [**List[GetMiscTrackingQuery200ResponseTracksInner]**](GetMiscTrackingQuery200ResponseTracksInner.md) | 物流轨迹列表，按时间倒序排列 | [optional] 
 
 ## Example
 

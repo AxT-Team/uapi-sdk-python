@@ -40,7 +40,7 @@ class GetMiscWeather200ResponseHourlyForecastInner(BaseModel):
     dew_point: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="露点温度 °C（可选）")
     visibility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="能见度 km（可选）")
     pop: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="降水概率 %（可选）")
-    uv_index: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="紫外线指数（可选）")
+    uv_index: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="紫外线指数（可选，国内城市通常不返回）")
     __properties: ClassVar[List[str]] = ["time", "temperature", "weather", "wind_direction", "wind_speed", "wind_scale", "humidity", "precip", "pressure", "cloud", "feels_like", "dew_point", "visibility", "pop", "uv_index"]
 
     model_config = ConfigDict(

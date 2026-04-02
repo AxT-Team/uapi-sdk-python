@@ -19,11 +19,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.post_ai_translate200_response_batch_data_inner import PostAiTranslate200ResponseBatchDataInner
-from uapi.models.post_ai_translate200_response_batch_summary import PostAiTranslate200ResponseBatchSummary
 from uapi.models.post_ai_translate200_response_data import PostAiTranslate200ResponseData
 from uapi.models.post_ai_translate200_response_performance import PostAiTranslate200ResponsePerformance
-from uapi.models.post_ai_translate200_response_quality_metrics import PostAiTranslate200ResponseQualityMetrics
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,13 +29,10 @@ class PostAiTranslate200Response(BaseModel):
     PostAiTranslate200Response
     """ # noqa: E501
     message: Optional[StrictStr] = None
-    is_batch: Optional[StrictBool] = Field(default=None, description="标识是否为批量翻译请求。")
     data: Optional[PostAiTranslate200ResponseData] = None
-    batch_data: Optional[List[PostAiTranslate200ResponseBatchDataInner]] = Field(default=None, description="批量翻译结果列表，仅在批量翻译时返回。")
-    batch_summary: Optional[PostAiTranslate200ResponseBatchSummary] = None
     performance: Optional[PostAiTranslate200ResponsePerformance] = None
-    quality_metrics: Optional[PostAiTranslate200ResponseQualityMetrics] = None
-    __properties: ClassVar[List[str]] = ["message", "is_batch", "data", "batch_data", "batch_summary", "performance", "quality_metrics"]
+    is_batch: Optional[StrictBool] = Field(default=None, description="是否为批量翻译请求。")
+    __properties: ClassVar[List[str]] = ["message", "data", "performance", "is_batch"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,22 +76,9 @@ class PostAiTranslate200Response(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
             _dict['data'] = self.data.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in batch_data (list)
-        _items = []
-        if self.batch_data:
-            for _item_batch_data in self.batch_data:
-                if _item_batch_data:
-                    _items.append(_item_batch_data.to_dict())
-            _dict['batch_data'] = _items
-        # override the default output from pydantic by calling `to_dict()` of batch_summary
-        if self.batch_summary:
-            _dict['batch_summary'] = self.batch_summary.to_dict()
         # override the default output from pydantic by calling `to_dict()` of performance
         if self.performance:
             _dict['performance'] = self.performance.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of quality_metrics
-        if self.quality_metrics:
-            _dict['quality_metrics'] = self.quality_metrics.to_dict()
         return _dict
 
     @classmethod
@@ -111,12 +92,9 @@ class PostAiTranslate200Response(BaseModel):
 
         _obj = cls.model_validate({
             "message": obj.get("message"),
-            "is_batch": obj.get("is_batch"),
             "data": PostAiTranslate200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "batch_data": [PostAiTranslate200ResponseBatchDataInner.from_dict(_item) for _item in obj["batch_data"]] if obj.get("batch_data") is not None else None,
-            "batch_summary": PostAiTranslate200ResponseBatchSummary.from_dict(obj["batch_summary"]) if obj.get("batch_summary") is not None else None,
             "performance": PostAiTranslate200ResponsePerformance.from_dict(obj["performance"]) if obj.get("performance") is not None else None,
-            "quality_metrics": PostAiTranslate200ResponseQualityMetrics.from_dict(obj["quality_metrics"]) if obj.get("quality_metrics") is not None else None
+            "is_batch": obj.get("is_batch")
         })
         return _obj
 

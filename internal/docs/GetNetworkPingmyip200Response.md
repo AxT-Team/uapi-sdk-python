@@ -5,12 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**avg** | **float** | 平均延迟(ms) | [optional] 
-**host** | **str** |  | [optional] 
-**ip** | **str** |  | [optional] 
-**location** | **str** |  | [optional] 
-**max** | **float** | 最大延迟(ms) | [optional] 
-**min** | **float** | 最小延迟(ms) | [optional] 
+**client_ip** | **str** | 当前客户端的公网 IP 地址。 | [optional] 
+**ping_successful** | **bool** | 是否成功完成对当前客户端 IP 的 Ping。 | [optional] 
+**message** | **str** | 操作结果说明。成功时通常会附带平均延迟信息。 | [optional] 
 
 ## Example
 

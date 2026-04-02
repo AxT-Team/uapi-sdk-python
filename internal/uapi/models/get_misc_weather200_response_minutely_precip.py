@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class GetMiscWeather200ResponseMinutelyPrecip(BaseModel):
     """
-    分钟级降水预报（minutely=true 时返回，仅国内城市可用）
+    分钟级降水预报（minutely=true 时返回，仅国内城市可用，精确到2分钟）
     """ # noqa: E501
     summary: Optional[StrictStr] = Field(default=None, description="降水描述")
     update_time: Optional[StrictStr] = Field(default=None, description="更新时间")
-    data: Optional[List[GetMiscWeather200ResponseMinutelyPrecipDataInner]] = Field(default=None, description="每5分钟一个数据点，共24个")
+    data: Optional[List[GetMiscWeather200ResponseMinutelyPrecipDataInner]] = Field(default=None, description="精确到2分钟的数据点")
     __properties: ClassVar[List[str]] = ["summary", "update_time", "data"]
 
     model_config = ConfigDict(

@@ -17,11 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uapi.models.get_social_bilibili_videoinfo200_response_desc_v2_inner import GetSocialBilibiliVideoinfo200ResponseDescV2Inner
+from uapi.models.get_social_bilibili_videoinfo200_response_dimension import GetSocialBilibiliVideoinfo200ResponseDimension
+from uapi.models.get_social_bilibili_videoinfo200_response_honor_reply import GetSocialBilibiliVideoinfo200ResponseHonorReply
 from uapi.models.get_social_bilibili_videoinfo200_response_owner import GetSocialBilibiliVideoinfo200ResponseOwner
 from uapi.models.get_social_bilibili_videoinfo200_response_pages_inner import GetSocialBilibiliVideoinfo200ResponsePagesInner
+from uapi.models.get_social_bilibili_videoinfo200_response_rights import GetSocialBilibiliVideoinfo200ResponseRights
+from uapi.models.get_social_bilibili_videoinfo200_response_staff_inner import GetSocialBilibiliVideoinfo200ResponseStaffInner
 from uapi.models.get_social_bilibili_videoinfo200_response_stat import GetSocialBilibiliVideoinfo200ResponseStat
+from uapi.models.get_social_bilibili_videoinfo200_response_subtitle import GetSocialBilibiliVideoinfo200ResponseSubtitle
+from uapi.models.get_social_bilibili_videoinfo200_response_ugc_season import GetSocialBilibiliVideoinfo200ResponseUgcSeason
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,6 +39,7 @@ class GetSocialBilibiliVideoinfo200Response(BaseModel):
     bvid: Optional[StrictStr] = Field(default=None, description="稿件的BV号。")
     aid: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="稿件的AV号。")
     videos: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="稿件分P总数。如果是单P视频，则为1。")
+    tid: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="视频所属的子分区 ID。")
     tname: Optional[StrictStr] = Field(default=None, description="视频所属的子分区名称。")
     copyright: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="视频类型。1代表原创，2代表转载。")
     pic: Optional[StrictStr] = Field(default=None, description="稿件封面图片的URL。这是一个可以直接在网页上展示的链接。")
@@ -39,11 +47,24 @@ class GetSocialBilibiliVideoinfo200Response(BaseModel):
     pubdate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="稿件发布时间的Unix时间戳（秒）。")
     ctime: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="用户投稿时间的Unix时间戳（秒）。")
     desc: Optional[StrictStr] = Field(default=None, description="视频简介。可能会包含HTML换行符。")
+    desc_v2: Optional[List[GetSocialBilibiliVideoinfo200ResponseDescV2Inner]] = Field(default=None, description="结构化简介片段。")
+    state: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="视频状态码。")
     duration: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="稿件总时长（所有分P累加），单位为秒。")
+    rights: Optional[GetSocialBilibiliVideoinfo200ResponseRights] = None
     owner: Optional[GetSocialBilibiliVideoinfo200ResponseOwner] = None
     stat: Optional[GetSocialBilibiliVideoinfo200ResponseStat] = None
+    dynamic: Optional[StrictStr] = Field(default=None, description="投稿时附带的动态文字。")
+    cid: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="主分P的 CID（弹幕 ID）。")
+    dimension: Optional[GetSocialBilibiliVideoinfo200ResponseDimension] = None
+    no_cache: Optional[StrictBool] = Field(default=None, description="不缓存标记。")
     pages: Optional[List[GetSocialBilibiliVideoinfo200ResponsePagesInner]] = Field(default=None, description="视频分P列表。即使是单P视频，该数组也包含一个元素。")
-    __properties: ClassVar[List[str]] = ["bvid", "aid", "videos", "tname", "copyright", "pic", "title", "pubdate", "ctime", "desc", "duration", "owner", "stat", "pages"]
+    subtitle: Optional[GetSocialBilibiliVideoinfo200ResponseSubtitle] = None
+    staff: Optional[List[GetSocialBilibiliVideoinfo200ResponseStaffInner]] = Field(default=None, description="联合投稿成员列表。")
+    ugc_season: Optional[GetSocialBilibiliVideoinfo200ResponseUgcSeason] = None
+    is_chargeable_season: Optional[StrictBool] = Field(default=None, description="是否为付费合集。")
+    is_story: Optional[StrictBool] = Field(default=None, description="是否为剧情类视频。")
+    honor_reply: Optional[GetSocialBilibiliVideoinfo200ResponseHonorReply] = None
+    __properties: ClassVar[List[str]] = ["bvid", "aid", "videos", "tid", "tname", "copyright", "pic", "title", "pubdate", "ctime", "desc", "desc_v2", "state", "duration", "rights", "owner", "stat", "dynamic", "cid", "dimension", "no_cache", "pages", "subtitle", "staff", "ugc_season", "is_chargeable_season", "is_story", "honor_reply"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,12 +105,25 @@ class GetSocialBilibiliVideoinfo200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in desc_v2 (list)
+        _items = []
+        if self.desc_v2:
+            for _item_desc_v2 in self.desc_v2:
+                if _item_desc_v2:
+                    _items.append(_item_desc_v2.to_dict())
+            _dict['desc_v2'] = _items
+        # override the default output from pydantic by calling `to_dict()` of rights
+        if self.rights:
+            _dict['rights'] = self.rights.to_dict()
         # override the default output from pydantic by calling `to_dict()` of owner
         if self.owner:
             _dict['owner'] = self.owner.to_dict()
         # override the default output from pydantic by calling `to_dict()` of stat
         if self.stat:
             _dict['stat'] = self.stat.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of dimension
+        if self.dimension:
+            _dict['dimension'] = self.dimension.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in pages (list)
         _items = []
         if self.pages:
@@ -97,6 +131,27 @@ class GetSocialBilibiliVideoinfo200Response(BaseModel):
                 if _item_pages:
                     _items.append(_item_pages.to_dict())
             _dict['pages'] = _items
+        # override the default output from pydantic by calling `to_dict()` of subtitle
+        if self.subtitle:
+            _dict['subtitle'] = self.subtitle.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in staff (list)
+        _items = []
+        if self.staff:
+            for _item_staff in self.staff:
+                if _item_staff:
+                    _items.append(_item_staff.to_dict())
+            _dict['staff'] = _items
+        # override the default output from pydantic by calling `to_dict()` of ugc_season
+        if self.ugc_season:
+            _dict['ugc_season'] = self.ugc_season.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of honor_reply
+        if self.honor_reply:
+            _dict['honor_reply'] = self.honor_reply.to_dict()
+        # set to None if ugc_season (nullable) is None
+        # and model_fields_set contains the field
+        if self.ugc_season is None and "ugc_season" in self.model_fields_set:
+            _dict['ugc_season'] = None
+
         return _dict
 
     @classmethod
@@ -112,6 +167,7 @@ class GetSocialBilibiliVideoinfo200Response(BaseModel):
             "bvid": obj.get("bvid"),
             "aid": obj.get("aid"),
             "videos": obj.get("videos"),
+            "tid": obj.get("tid"),
             "tname": obj.get("tname"),
             "copyright": obj.get("copyright"),
             "pic": obj.get("pic"),
@@ -119,10 +175,23 @@ class GetSocialBilibiliVideoinfo200Response(BaseModel):
             "pubdate": obj.get("pubdate"),
             "ctime": obj.get("ctime"),
             "desc": obj.get("desc"),
+            "desc_v2": [GetSocialBilibiliVideoinfo200ResponseDescV2Inner.from_dict(_item) for _item in obj["desc_v2"]] if obj.get("desc_v2") is not None else None,
+            "state": obj.get("state"),
             "duration": obj.get("duration"),
+            "rights": GetSocialBilibiliVideoinfo200ResponseRights.from_dict(obj["rights"]) if obj.get("rights") is not None else None,
             "owner": GetSocialBilibiliVideoinfo200ResponseOwner.from_dict(obj["owner"]) if obj.get("owner") is not None else None,
             "stat": GetSocialBilibiliVideoinfo200ResponseStat.from_dict(obj["stat"]) if obj.get("stat") is not None else None,
-            "pages": [GetSocialBilibiliVideoinfo200ResponsePagesInner.from_dict(_item) for _item in obj["pages"]] if obj.get("pages") is not None else None
+            "dynamic": obj.get("dynamic"),
+            "cid": obj.get("cid"),
+            "dimension": GetSocialBilibiliVideoinfo200ResponseDimension.from_dict(obj["dimension"]) if obj.get("dimension") is not None else None,
+            "no_cache": obj.get("no_cache"),
+            "pages": [GetSocialBilibiliVideoinfo200ResponsePagesInner.from_dict(_item) for _item in obj["pages"]] if obj.get("pages") is not None else None,
+            "subtitle": GetSocialBilibiliVideoinfo200ResponseSubtitle.from_dict(obj["subtitle"]) if obj.get("subtitle") is not None else None,
+            "staff": [GetSocialBilibiliVideoinfo200ResponseStaffInner.from_dict(_item) for _item in obj["staff"]] if obj.get("staff") is not None else None,
+            "ugc_season": GetSocialBilibiliVideoinfo200ResponseUgcSeason.from_dict(obj["ugc_season"]) if obj.get("ugc_season") is not None else None,
+            "is_chargeable_season": obj.get("is_chargeable_season"),
+            "is_story": obj.get("is_story"),
+            "honor_reply": GetSocialBilibiliVideoinfo200ResponseHonorReply.from_dict(obj["honor_reply"]) if obj.get("honor_reply") is not None else None
         })
         return _obj
 

@@ -371,19 +371,6 @@ No authorization required
 ### 数据源列表
 传 `sources=true`，返回所有支持历史数据的平台列表。
 
-## 可选值
-`type` 参数接受多种不同的值，每种值对应一个不同的热榜来源。以下是目前支持的所有值：
-
-| 分类       | 支持的 type 值 |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| 视频/社区  | bilibili（哔哩哔哩弹幕网）, acfun（A站弹幕视频网站）, weibo（新浪微博热搜）, zhihu（知乎热榜）, zhihu-daily（知乎日报热榜）, douyin（抖音热榜）, kuaishou（快手热榜）, douban-movie（豆瓣电影榜单）, douban-group（豆瓣小组话题）, tieba（百度贴吧热帖）, hupu（虎扑热帖）, ngabbs（NGA游戏论坛热帖）, v2ex（V2EX技术社区热帖）, 52pojie（吾爱破解热帖）, hostloc（全球主机交流论坛）, coolapk（酷安热榜） |
-| 新闻/资讯  | baidu（百度热搜）, thepaper（澎湃新闻热榜）, toutiao（今日头条热榜）, qq-news（腾讯新闻热榜）, sina（新浪热搜）, sina-news（新浪新闻热榜）, netease-news（网易新闻热榜）, huxiu（虎嗅网热榜）, ifanr（爱范儿热榜） |
-| 技术/IT    | sspai（少数派热榜）, ithome（IT之家热榜）, ithome-xijiayi（IT之家·喜加一栏目）, juejin（掘金社区热榜）, jianshu（简书热榜）, guokr（果壳热榜）, 36kr（36氪热榜）, 51cto（51CTO热榜）, csdn（CSDN博客热榜）, nodeseek（NodeSeek 技术社区）, hellogithub（HelloGitHub 项目推荐） |
-| 游戏       | lol（英雄联盟热帖）, genshin（原神热榜）, honkai（崩坏3热榜）, starrail（星穹铁道热榜） |
-| 音乐       | netease-music（网易云音乐热歌榜）, qq-music（QQ音乐热歌榜） |
-| 其他       | weread（微信读书热门书籍）, weatheralarm（天气预警信息）, earthquake（地震速报）, history（历史上的今天） |
-
-
 ### Example
 
 
@@ -404,13 +391,13 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.MiscApi(api_client)
-    type = 'weibo' # str | 你想要查询的热榜平台。支持多种主流平台类型，详见下方[可选值](#可选值)表格。
-    time = 1700000000000 # int | 时光机模式：毫秒时间戳，返回最接近该时间的热榜快照。不传则返回当前实时热榜。 (optional)
-    keyword = 'AI' # str | 搜索模式：搜索关键词，在历史热榜中搜索包含该关键词的条目。需配合 time_start 和 time_end 使用。 (optional)
-    time_start = 1699900000000 # int | 搜索模式必填：搜索起始时间戳（毫秒）。 (optional)
-    time_end = 1700100000000 # int | 搜索模式必填：搜索结束时间戳（毫秒）。 (optional)
-    limit = 50 # int | 搜索模式下最大返回条数，默认 50，最大 200。 (optional) (default to 50)
-    sources = true # bool | 设为 true 时列出所有可用的历史数据源，忽略其他参数。 (optional)
+    type = 'weibo' # str | 你想要查询的热榜平台。请从[支持的平台列表](#enum-list)中选择。
+    time = 56 # int | 时光机模式：毫秒时间戳，返回最接近该时间的热榜快照。不传则返回当前实时热榜。 (optional)
+    keyword = 'keyword_example' # str | 搜索模式：搜索关键词，在历史热榜中搜索包含该关键词的条目。需配合 time_start 和 time_end 使用。 (optional)
+    time_start = 56 # int | 搜索模式必填：搜索起始时间戳（毫秒）。 (optional)
+    time_end = 56 # int | 搜索模式必填：搜索结束时间戳（毫秒）。 (optional)
+    limit = 56 # int | 搜索模式下最大返回条数，默认 50，最大 200。 (optional)
+    sources = True # bool | 设为 true 时列出所有可用的历史数据源，忽略其他参数。 (optional)
 
     try:
         # 查询热榜
@@ -428,12 +415,12 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **type** | **str**| 你想要查询的热榜平台。支持多种主流平台类型，详见下方[可选值](#可选值)表格。 | 
+ **type** | **str**| 你想要查询的热榜平台。请从[支持的平台列表](#enum-list)中选择。 | 
  **time** | **int**| 时光机模式：毫秒时间戳，返回最接近该时间的热榜快照。不传则返回当前实时热榜。 | [optional] 
  **keyword** | **str**| 搜索模式：搜索关键词，在历史热榜中搜索包含该关键词的条目。需配合 time_start 和 time_end 使用。 | [optional] 
  **time_start** | **int**| 搜索模式必填：搜索起始时间戳（毫秒）。 | [optional] 
  **time_end** | **int**| 搜索模式必填：搜索结束时间戳（毫秒）。 | [optional] 
- **limit** | **int**| 搜索模式下最大返回条数，默认 50，最大 200。 | [optional] [default to 50]
+ **limit** | **int**| 搜索模式下最大返回条数，默认 50，最大 200。 | [optional] 
  **sources** | **bool**| 设为 true 时列出所有可用的历史数据源，忽略其他参数。 | [optional] 
 
 ### Return type
@@ -798,9 +785,6 @@ No authorization required
 
 不确定系统支持哪些快递公司？这个接口返回完整的支持列表。
 
-> [!VIP]
-> 本API目前处于**限时免费**阶段，我们鼓励开发者集成和测试。未来，它将转为付费API，为用户提供更稳定和强大的服务。
-
 ## 功能概述
 获取系统当前支持的所有快递公司列表，包括每家公司的标准编码（code）和中文名称（name）。
 
@@ -873,9 +857,6 @@ No authorization required
 
 不确定手里的快递单号属于哪家快递公司？这个接口专门做识别，不查物流。
 
-> [!VIP]
-> 本API目前处于**限时免费**阶段，我们鼓励开发者集成和测试。未来，它将转为付费API，为用户提供更稳定和强大的服务。
-
 ## 功能概述
 输入快递单号，系统会根据单号规则快速识别出最可能的快递公司。如果存在多个可能的匹配结果，还会在 `alternatives` 字段中返回备选项，供你参考选择。
 
@@ -941,7 +922,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | 识别成功！返回识别结果和可能的备选项。 |  -  |
+**200** | 识别成功！直接返回识别结果和可能的备选项。 |  -  |
 **404** | 无法识别该快递单号。 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -953,16 +934,15 @@ No authorization required
 
 买了东西想知道快递到哪儿了？这个接口帮你实时追踪物流状态。
 
-> [!VIP]
-> 本API目前处于**限时免费**阶段，我们鼓励开发者集成和测试。未来，它将转为付费API，为用户提供更稳定和强大的服务。
-
 ## 功能概述
-提供一个快递单号，系统会自动识别快递公司并返回完整的物流轨迹信息。支持中通、圆通、韵达、申通、极兔、顺丰、京东、EMS、德邦等60+国内外主流快递公司。
+提供一个快递单号，系统会自动识别快递公司并返回完整的物流轨迹信息。这个接口目前可以查询中通、圆通、韵达、申通、极兔、京东、EMS、德邦等主流快递公司的物流信息。
 
 ## 使用须知
+目前暂不支持顺丰快递单号的物流查询。
+
 - **自动识别**：不知道是哪家快递？系统会根据单号规则自动识别快递公司（推荐使用）
 - **手动指定**：如果已知快递公司，可以传递 `carrier_code` 参数，查询速度会更快
-- **手机尾号验证**：部分快递公司需要验证收件人手机尾号才能查询详细物流，如果返回「暂无物流信息」，建议尝试传入 `phone` 参数
+- **手机尾号验证**：部分快递公司需要验证收件人手机尾号才能查询详细物流，如果返回 `暂无物流信息`，建议尝试传入 `phone` 参数
 - **查询时效**：物流信息实时查询，响应时间通常在1-2秒内
 
 ### Example
@@ -985,7 +965,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.MiscApi(api_client)
-    tracking_number = 'tracking_number_example' # str | 快递单号，通常是一串10-20位的数字或字母数字组合。
+    tracking_number = 'YT1234567890123' # str | 快递单号，通常是一串10-20位的数字或字母数字组合。
     carrier_code = 'carrier_code_example' # str | 快递公司编码（可选）。不填写时系统会自动识别，填写后可加快查询速度。 (optional)
     phone = 'phone_example' # str | 收件人手机尾号，4位数字（可选）。部分快递公司需要验证手机尾号才能查询详细物流信息。 (optional)
 
@@ -1026,7 +1006,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | 查询成功！返回快递的完整物流轨迹。 |  -  |
+**200** | 查询成功！直接返回快递的完整物流轨迹。 |  -  |
 **400** | 参数错误，请检查快递单号是否正确。 |  -  |
 **404** | 当前没有查询到物流轨迹时会返回 404，并附带错误码和提示信息。如果返回此错误，建议尝试传入 &#x60;phone&#x60; 参数（收件人手机尾号）再次查询。 |  -  |
 
@@ -1049,9 +1029,9 @@ No authorization required
 
 ## 可选功能模块
 - `extended=true`：扩展气象字段（体感温度、能见度、气压、紫外线、空气质量及污染物分项数据）
-- `forecast=true`：多天预报（最多7天，含日出日落、风速等详细数据）
+- `forecast=true`：多天预报（最多7天，会额外返回每天的最高温度、最低温度，以及日出日落、风速等详细数据）
 - `hourly=true`：逐小时预报（24小时）
-- `minutely=true`：分钟级降水预报（仅国内城市）
+- `minutely=true`：分钟级降水预报（仅国内城市，精确到2分钟）
 - `indices=true`：18项生活指数（穿衣、紫外线、洗车、运动、花粉等）
 
 ## 天气字段说明
@@ -1059,7 +1039,7 @@ No authorization required
 
 常见值包括：晴、多云、阴、小雨、中雨、大雨、雷阵雨、小雪、中雪、大雪、雨夹雪、雾、霾、沙尘。
 
-如果你的业务需要稳定分类，建议结合 `weather_code` 做自己的映射归类。
+如果你的业务需要稳定的天气分类，建议使用 `weather_code` 进行映射。完整的天气图标代码请参考[天气图标代码表](#enum-list)。
 
 ### Example
 
@@ -1084,9 +1064,9 @@ with uapi.ApiClient(configuration) as api_client:
     city = '北京' # str | 城市名称，支持中文（`北京`）和英文（`Tokyo`）。可选参数，不传时会尝试 IP 自动定位。 (optional)
     adcode = 'adcode_example' # str | 城市行政区划代码（如 `110000`），优先级高于 city。可选参数，不传时会尝试 IP 自动定位。 (optional)
     extended = True # bool | 返回扩展气象字段（体感温度、能见度、气压、紫外线、降水量、云量、空气质量指数及污染物分项数据）。 (optional)
-    forecast = True # bool | 返回多天预报数据（最多7天），含白天夜间天气、风向风力、日出日落等。 (optional)
+    forecast = True # bool | 返回多天预报数据（最多7天），含每天的最高温度、最低温度、白天夜间天气、风向风力、日出日落等。 (optional)
     hourly = True # bool | 返回逐小时预报（24小时），含温度、天气、风向风速、湿度、降水概率等。 (optional)
-    minutely = True # bool | 返回分钟级降水预报（仅国内城市），每5分钟一个数据点，共24个。 (optional)
+    minutely = True # bool | 返回分钟级降水预报（仅国内城市），精确到2分钟。 (optional)
     indices = True # bool | 返回18项生活指数（穿衣、紫外线、洗车、晾晒、空调、感冒、运动、舒适度、出行、钓鱼、过敏、防晒、心情、啤酒、雨伞、交通、空气净化器、花粉）。 (optional)
     lang = zh # str | 返回语言。`zh` 返回中文（默认），`en` 返回英文。城市名翻译覆盖 7000+ 城市。生活指数（`indices`）目前仅支持中文。 (optional) (default to zh)
 
@@ -1109,9 +1089,9 @@ Name | Type | Description  | Notes
  **city** | **str**| 城市名称，支持中文（&#x60;北京&#x60;）和英文（&#x60;Tokyo&#x60;）。可选参数，不传时会尝试 IP 自动定位。 | [optional] 
  **adcode** | **str**| 城市行政区划代码（如 &#x60;110000&#x60;），优先级高于 city。可选参数，不传时会尝试 IP 自动定位。 | [optional] 
  **extended** | **bool**| 返回扩展气象字段（体感温度、能见度、气压、紫外线、降水量、云量、空气质量指数及污染物分项数据）。 | [optional] 
- **forecast** | **bool**| 返回多天预报数据（最多7天），含白天夜间天气、风向风力、日出日落等。 | [optional] 
+ **forecast** | **bool**| 返回多天预报数据（最多7天），含每天的最高温度、最低温度、白天夜间天气、风向风力、日出日落等。 | [optional] 
  **hourly** | **bool**| 返回逐小时预报（24小时），含温度、天气、风向风速、湿度、降水概率等。 | [optional] 
- **minutely** | **bool**| 返回分钟级降水预报（仅国内城市），每5分钟一个数据点，共24个。 | [optional] 
+ **minutely** | **bool**| 返回分钟级降水预报（仅国内城市），精确到2分钟。 | [optional] 
  **indices** | **bool**| 返回18项生活指数（穿衣、紫外线、洗车、晾晒、空调、感冒、运动、舒适度、出行、钓鱼、过敏、防晒、心情、啤酒、雨伞、交通、空气净化器、花粉）。 | [optional] 
  **lang** | **str**| 返回语言。&#x60;zh&#x60; 返回中文（默认），&#x60;en&#x60; 返回英文。城市名翻译覆盖 7000+ 城市。生活指数（&#x60;indices&#x60;）目前仅支持中文。 | [optional] [default to zh]
 
@@ -1250,7 +1230,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.MiscApi(api_client)
-    post_misc_date_diff_request = uapi.PostMiscDateDiffRequest() # PostMiscDateDiffRequest | 包含日期信息的JSON对象
+    post_misc_date_diff_request = uapi.PostMiscDateDiffRequest() # PostMiscDateDiffRequest | 
 
     try:
         # 计算两个日期之间的时间差值
@@ -1268,7 +1248,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_misc_date_diff_request** | [**PostMiscDateDiffRequest**](PostMiscDateDiffRequest.md)| 包含日期信息的JSON对象 | 
+ **post_misc_date_diff_request** | [**PostMiscDateDiffRequest**](PostMiscDateDiffRequest.md)|  | 
 
 ### Return type
 

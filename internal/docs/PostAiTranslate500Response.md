@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **code** | **int** |  | [optional] 
 **message** | **str** |  | [optional] 
 **error** | **str** |  | [optional] 
-**is_batch** | **bool** |  | [optional] 
 
 ## Example
 

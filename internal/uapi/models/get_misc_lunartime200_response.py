@@ -17,9 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_misc_lunartime200_response_data import GetMiscLunartime200ResponseData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +26,29 @@ class GetMiscLunartime200Response(BaseModel):
     """
     GetMiscLunartime200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = Field(default=None, description="业务状态码，200 表示成功。")
-    message: Optional[StrictStr] = Field(default=None, description="状态描述。")
-    data: Optional[GetMiscLunartime200ResponseData] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "data"]
+    query_timestamp: Optional[StrictStr] = Field(default=None, description="原始 ts 入参。")
+    query_timezone: Optional[StrictStr] = Field(default=None, description="原始 timezone 入参。")
+    timezone: Optional[StrictStr] = Field(default=None, description="解析后的时区。")
+    datetime: Optional[StrictStr] = Field(default=None, description="本地化时间，格式 YYYY-MM-DD HH:mm:ss。")
+    datetime_rfc3339: Optional[StrictStr] = Field(default=None, description="RFC3339 时间格式。")
+    timestamp_unix: Optional[StrictInt] = Field(default=None, description="秒级 Unix 时间戳。")
+    weekday: Optional[StrictStr] = Field(default=None, description="星期英文。")
+    weekday_cn: Optional[StrictStr] = Field(default=None, description="星期中文。")
+    lunar_year: Optional[StrictInt] = Field(default=None, description="农历年份（数字）。")
+    lunar_month: Optional[StrictInt] = Field(default=None, description="农历月份（数字）。")
+    lunar_day: Optional[StrictInt] = Field(default=None, description="农历日期（数字）。")
+    is_leap_month: Optional[StrictBool] = Field(default=None, description="是否闰月。")
+    lunar_year_cn: Optional[StrictStr] = Field(default=None, description="农历年份中文表示。")
+    lunar_month_cn: Optional[StrictStr] = Field(default=None, description="农历月份中文表示。")
+    lunar_day_cn: Optional[StrictStr] = Field(default=None, description="农历日期中文表示。")
+    ganzhi_year: Optional[StrictStr] = Field(default=None, description="干支年。")
+    ganzhi_month: Optional[StrictStr] = Field(default=None, description="干支月。")
+    ganzhi_day: Optional[StrictStr] = Field(default=None, description="干支日。")
+    zodiac: Optional[StrictStr] = Field(default=None, description="生肖。")
+    solar_term: Optional[StrictStr] = Field(default=None, description="节气名称。有值时返回，无值时可能为空字符串或不返回。")
+    lunar_festivals: Optional[List[StrictStr]] = Field(default=None, description="农历节日数组。")
+    solar_festivals: Optional[List[StrictStr]] = Field(default=None, description="公历节日数组。")
+    __properties: ClassVar[List[str]] = ["query_timestamp", "query_timezone", "timezone", "datetime", "datetime_rfc3339", "timestamp_unix", "weekday", "weekday_cn", "lunar_year", "lunar_month", "lunar_day", "is_leap_month", "lunar_year_cn", "lunar_month_cn", "lunar_day_cn", "ganzhi_year", "ganzhi_month", "ganzhi_day", "zodiac", "solar_term", "lunar_festivals", "solar_festivals"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,9 +89,6 @@ class GetMiscLunartime200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
@@ -86,9 +101,28 @@ class GetMiscLunartime200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "data": GetMiscLunartime200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "query_timestamp": obj.get("query_timestamp"),
+            "query_timezone": obj.get("query_timezone"),
+            "timezone": obj.get("timezone"),
+            "datetime": obj.get("datetime"),
+            "datetime_rfc3339": obj.get("datetime_rfc3339"),
+            "timestamp_unix": obj.get("timestamp_unix"),
+            "weekday": obj.get("weekday"),
+            "weekday_cn": obj.get("weekday_cn"),
+            "lunar_year": obj.get("lunar_year"),
+            "lunar_month": obj.get("lunar_month"),
+            "lunar_day": obj.get("lunar_day"),
+            "is_leap_month": obj.get("is_leap_month"),
+            "lunar_year_cn": obj.get("lunar_year_cn"),
+            "lunar_month_cn": obj.get("lunar_month_cn"),
+            "lunar_day_cn": obj.get("lunar_day_cn"),
+            "ganzhi_year": obj.get("ganzhi_year"),
+            "ganzhi_month": obj.get("ganzhi_month"),
+            "ganzhi_day": obj.get("ganzhi_day"),
+            "zodiac": obj.get("zodiac"),
+            "solar_term": obj.get("solar_term"),
+            "lunar_festivals": obj.get("lunar_festivals"),
+            "solar_festivals": obj.get("solar_festivals")
         })
         return _obj
 

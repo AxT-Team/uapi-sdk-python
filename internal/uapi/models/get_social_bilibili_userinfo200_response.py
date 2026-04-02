@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_social_bilibili_userinfo200_response_data import GetSocialBilibiliUserinfo200ResponseData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +26,20 @@ class GetSocialBilibiliUserinfo200Response(BaseModel):
     """
     GetSocialBilibiliUserinfo200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
-    data: Optional[GetSocialBilibiliUserinfo200ResponseData] = None
-    message: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["code", "data", "message"]
+    mid: Optional[StrictInt] = None
+    name: Optional[StrictStr] = None
+    sex: Optional[StrictStr] = None
+    face: Optional[StrictStr] = None
+    sign: Optional[StrictStr] = None
+    level: Optional[StrictInt] = None
+    birthday: Optional[StrictStr] = None
+    vip_type: Optional[StrictInt] = None
+    vip_status: Optional[StrictInt] = None
+    following: Optional[StrictInt] = None
+    follower: Optional[StrictInt] = None
+    archive_count: Optional[StrictInt] = None
+    article_count: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["mid", "name", "sex", "face", "sign", "level", "birthday", "vip_type", "vip_status", "following", "follower", "archive_count", "article_count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,9 +80,6 @@ class GetSocialBilibiliUserinfo200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
@@ -86,9 +92,19 @@ class GetSocialBilibiliUserinfo200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "data": GetSocialBilibiliUserinfo200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "message": obj.get("message")
+            "mid": obj.get("mid"),
+            "name": obj.get("name"),
+            "sex": obj.get("sex"),
+            "face": obj.get("face"),
+            "sign": obj.get("sign"),
+            "level": obj.get("level"),
+            "birthday": obj.get("birthday"),
+            "vip_type": obj.get("vip_type"),
+            "vip_status": obj.get("vip_status"),
+            "following": obj.get("following"),
+            "follower": obj.get("follower"),
+            "archive_count": obj.get("archive_count"),
+            "article_count": obj.get("article_count")
         })
         return _obj
 

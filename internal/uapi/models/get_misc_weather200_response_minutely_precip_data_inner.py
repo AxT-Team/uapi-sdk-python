@@ -27,7 +27,7 @@ class GetMiscWeather200ResponseMinutelyPrecipDataInner(BaseModel):
     GetMiscWeather200ResponseMinutelyPrecipDataInner
     """ # noqa: E501
     time: Optional[StrictStr] = Field(default=None, description="预报时间 ISO8601")
-    precip: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="5分钟累计降水量 mm")
+    precip: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="该时间点的降水量 mm")
     type: Optional[StrictStr] = Field(default=None, description="降水类型：rain / snow")
     __properties: ClassVar[List[str]] = ["time", "precip", "type"]
 

@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +27,7 @@ class PostTranslateTextRequest(BaseModel):
     """
     PostTranslateTextRequest
     """ # noqa: E501
-    text: StrictStr = Field(description="待翻译的文本内容。")
+    text: Annotated[str, Field(strict=True, max_length=3000)] = Field(description="待翻译的文本内容，最大长度3000字符。")
     __properties: ClassVar[List[str]] = ["text"]
 
     model_config = ConfigDict(

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,6 +26,7 @@ class GetSocialBilibiliVideoinfo200ResponseStat(BaseModel):
     """
     视频的核心数据统计。
     """ # noqa: E501
+    aid: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="AV 号。")
     view: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="播放数。")
     danmaku: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="弹幕数。")
     reply: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="评论数。")
@@ -33,7 +34,12 @@ class GetSocialBilibiliVideoinfo200ResponseStat(BaseModel):
     coin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="投币数。")
     share: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="分享数。")
     like: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="获赞数。")
-    __properties: ClassVar[List[str]] = ["view", "danmaku", "reply", "favorite", "coin", "share", "like"]
+    now_rank: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="当前全站/分区排名。")
+    his_rank: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="历史排名。")
+    dislike: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="点踩量（通常为 0）。")
+    evaluation: Optional[StrictStr] = Field(default=None, description="评分/评估文案，通常为空。")
+    vt: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="视频类型相关历史字段。")
+    __properties: ClassVar[List[str]] = ["aid", "view", "danmaku", "reply", "favorite", "coin", "share", "like", "now_rank", "his_rank", "dislike", "evaluation", "vt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,13 +92,19 @@ class GetSocialBilibiliVideoinfo200ResponseStat(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "aid": obj.get("aid"),
             "view": obj.get("view"),
             "danmaku": obj.get("danmaku"),
             "reply": obj.get("reply"),
             "favorite": obj.get("favorite"),
             "coin": obj.get("coin"),
             "share": obj.get("share"),
-            "like": obj.get("like")
+            "like": obj.get("like"),
+            "now_rank": obj.get("now_rank"),
+            "his_rank": obj.get("his_rank"),
+            "dislike": obj.get("dislike"),
+            "evaluation": obj.get("evaluation"),
+            "vt": obj.get("vt")
         })
         return _obj
 

@@ -130,7 +130,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_aes_decrypt_request = uapi.PostTextAesDecryptRequest() # PostTextAesDecryptRequest | 包含待解密文本 'text'、密钥 'key' 和随机数 'nonce' 的JSON对象
+    post_text_aes_decrypt_request = uapi.PostTextAesDecryptRequest() # PostTextAesDecryptRequest | 
 
     try:
         # AES 解密
@@ -148,7 +148,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_aes_decrypt_request** | [**PostTextAesDecryptRequest**](PostTextAesDecryptRequest.md)| 包含待解密文本 &#39;text&#39;、密钥 &#39;key&#39; 和随机数 &#39;nonce&#39; 的JSON对象 | 
+ **post_text_aes_decrypt_request** | [**PostTextAesDecryptRequest**](PostTextAesDecryptRequest.md)|  | 
 
 ### Return type
 
@@ -240,7 +240,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_aes_decrypt_advanced_request = uapi.PostTextAesDecryptAdvancedRequest() # PostTextAesDecryptAdvancedRequest | 包含解密配置的JSON对象
+    post_text_aes_decrypt_advanced_request = uapi.PostTextAesDecryptAdvancedRequest() # PostTextAesDecryptAdvancedRequest | 
 
     try:
         # AES高级解密
@@ -258,7 +258,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_aes_decrypt_advanced_request** | [**PostTextAesDecryptAdvancedRequest**](PostTextAesDecryptAdvancedRequest.md)| 包含解密配置的JSON对象 | 
+ **post_text_aes_decrypt_advanced_request** | [**PostTextAesDecryptAdvancedRequest**](PostTextAesDecryptAdvancedRequest.md)|  | 
 
 ### Return type
 
@@ -317,7 +317,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_aes_encrypt_request = uapi.PostTextAesEncryptRequest() # PostTextAesEncryptRequest | 包含待加密文本 'text' 和密钥 'key' 的JSON对象
+    post_text_aes_encrypt_request = uapi.PostTextAesEncryptRequest() # PostTextAesEncryptRequest | 
 
     try:
         # AES 加密
@@ -335,7 +335,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_aes_encrypt_request** | [**PostTextAesEncryptRequest**](PostTextAesEncryptRequest.md)| 包含待加密文本 &#39;text&#39; 和密钥 &#39;key&#39; 的JSON对象 | 
+ **post_text_aes_encrypt_request** | [**PostTextAesEncryptRequest**](PostTextAesEncryptRequest.md)|  | 
 
 ### Return type
 
@@ -479,7 +479,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_aes_encrypt_advanced_request = uapi.PostTextAesEncryptAdvancedRequest() # PostTextAesEncryptAdvancedRequest | 包含加密配置的JSON对象
+    post_text_aes_encrypt_advanced_request = uapi.PostTextAesEncryptAdvancedRequest() # PostTextAesEncryptAdvancedRequest | 
 
     try:
         # AES高级加密
@@ -497,7 +497,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_aes_encrypt_advanced_request** | [**PostTextAesEncryptAdvancedRequest**](PostTextAesEncryptAdvancedRequest.md)| 包含加密配置的JSON对象 | 
+ **post_text_aes_encrypt_advanced_request** | [**PostTextAesEncryptAdvancedRequest**](PostTextAesEncryptAdvancedRequest.md)|  | 
 
 ### Return type
 
@@ -552,7 +552,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_analyze_request = uapi.PostTextAnalyzeRequest() # PostTextAnalyzeRequest | 包含待分析文本 'text' 的JSON对象
+    post_text_analyze_request = uapi.PostTextAnalyzeRequest() # PostTextAnalyzeRequest | 
 
     try:
         # 文本分析
@@ -570,7 +570,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_analyze_request** | [**PostTextAnalyzeRequest**](PostTextAnalyzeRequest.md)| 包含待分析文本 &#39;text&#39; 的JSON对象 | 
+ **post_text_analyze_request** | [**PostTextAnalyzeRequest**](PostTextAnalyzeRequest.md)|  | 
 
 ### Return type
 
@@ -625,7 +625,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_base64_decode_request = uapi.PostTextBase64DecodeRequest() # PostTextBase64DecodeRequest | 包含待解码文本 'text' 的JSON对象
+    post_text_base64_decode_request = uapi.PostTextBase64DecodeRequest() # PostTextBase64DecodeRequest | 
 
     try:
         # Base64 解码
@@ -643,7 +643,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_base64_decode_request** | [**PostTextBase64DecodeRequest**](PostTextBase64DecodeRequest.md)| 包含待解码文本 &#39;text&#39; 的JSON对象 | 
+ **post_text_base64_decode_request** | [**PostTextBase64DecodeRequest**](PostTextBase64DecodeRequest.md)|  | 
 
 ### Return type
 
@@ -698,7 +698,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_base64_encode_request = uapi.PostTextBase64EncodeRequest() # PostTextBase64EncodeRequest | 包含待编码文本 'text' 的JSON对象
+    post_text_base64_encode_request = uapi.PostTextBase64EncodeRequest() # PostTextBase64EncodeRequest | 
 
     try:
         # Base64 编码
@@ -716,7 +716,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_base64_encode_request** | [**PostTextBase64EncodeRequest**](PostTextBase64EncodeRequest.md)| 包含待编码文本 &#39;text&#39; 的JSON对象 | 
+ **post_text_base64_encode_request** | [**PostTextBase64EncodeRequest**](PostTextBase64EncodeRequest.md)|  | 
 
 ### Return type
 
@@ -779,7 +779,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_convert_request = uapi.PostTextConvertRequest() # PostTextConvertRequest | 包含转换配置的JSON对象
+    post_text_convert_request = uapi.PostTextConvertRequest() # PostTextConvertRequest | 
 
     try:
         # 格式转换
@@ -797,7 +797,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_convert_request** | [**PostTextConvertRequest**](PostTextConvertRequest.md)| 包含转换配置的JSON对象 | 
+ **post_text_convert_request** | [**PostTextConvertRequest**](PostTextConvertRequest.md)|  | 
 
 ### Return type
 
@@ -925,7 +925,7 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.TextApi(api_client)
-    post_text_md5_verify_request = uapi.PostTextMd5VerifyRequest() # PostTextMd5VerifyRequest | 包含待校验文本 'text' 和哈希值 'hash' 的JSON对象
+    post_text_md5_verify_request = uapi.PostTextMd5VerifyRequest() # PostTextMd5VerifyRequest | 
 
     try:
         # MD5 校验
@@ -943,7 +943,7 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_text_md5_verify_request** | [**PostTextMd5VerifyRequest**](PostTextMd5VerifyRequest.md)| 包含待校验文本 &#39;text&#39; 和哈希值 &#39;hash&#39; 的JSON对象 | 
+ **post_text_md5_verify_request** | [**PostTextMd5VerifyRequest**](PostTextMd5VerifyRequest.md)|  | 
 
 ### Return type
 

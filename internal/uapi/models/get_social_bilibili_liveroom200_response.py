@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uapi.models.get_social_bilibili_liveroom200_response_new_pendants import GetSocialBilibiliLiveroom200ResponseNewPendants
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,20 +31,23 @@ class GetSocialBilibiliLiveroom200Response(BaseModel):
     room_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="直播间的真实房间号（长号）。")
     short_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="直播间的短号（靓号）。如果没有设置，则为0。")
     attention: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="主播的粉丝数（关注数量）。")
-    online: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="直播间当前的人气值。注意这不是真实在线人数。")
+    online: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="直播间当前的人气值（对应你文档里的 PopularValue，不代表真实在线人数）。")
+    is_portrait: Optional[StrictBool] = Field(default=None, description="是否为竖屏直播。")
     live_status: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="直播状态。0:未开播, 1:直播中, 2:轮播中。")
     area_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="分区ID。")
     parent_area_name: Optional[StrictStr] = Field(default=None, description="父分区名称。")
+    parent_area_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="父分区 ID。")
     area_name: Optional[StrictStr] = Field(default=None, description="子分区名称。")
     background: Optional[StrictStr] = Field(default=None, description="直播间背景图的URL。")
     title: Optional[StrictStr] = Field(default=None, description="当前直播间的标题。")
     user_cover: Optional[StrictStr] = Field(default=None, description="用户设置的直播间封面URL。")
     description: Optional[StrictStr] = Field(default=None, description="直播间公告或描述，支持换行符。")
     live_time: Optional[StrictStr] = Field(default=None, description="本次直播开始的时间，格式为 `YYYY-MM-DD HH:mm:ss`。如果未开播，则为空字符串。")
+    keyframe: Optional[StrictStr] = Field(default=None, description="关键帧封面图链接。")
     tags: Optional[StrictStr] = Field(default=None, description="直播间设置的标签，以逗号分隔。")
     hot_words: Optional[List[StrictStr]] = Field(default=None, description="直播间热词列表，通常用于弹幕互动。")
-    new_pendants: Optional[Dict[str, Any]] = Field(default=None, description="主播佩戴的头像框、大航海等级等信息，结构可能比较复杂。")
-    __properties: ClassVar[List[str]] = ["uid", "room_id", "short_id", "attention", "online", "live_status", "area_id", "parent_area_name", "area_name", "background", "title", "user_cover", "description", "live_time", "tags", "hot_words", "new_pendants"]
+    new_pendants: Optional[GetSocialBilibiliLiveroom200ResponseNewPendants] = None
+    __properties: ClassVar[List[str]] = ["uid", "room_id", "short_id", "attention", "online", "is_portrait", "live_status", "area_id", "parent_area_name", "parent_area_id", "area_name", "background", "title", "user_cover", "description", "live_time", "keyframe", "tags", "hot_words", "new_pendants"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +88,14 @@ class GetSocialBilibiliLiveroom200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of new_pendants
+        if self.new_pendants:
+            _dict['new_pendants'] = self.new_pendants.to_dict()
+        # set to None if new_pendants (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_pendants is None and "new_pendants" in self.model_fields_set:
+            _dict['new_pendants'] = None
+
         return _dict
 
     @classmethod
@@ -101,18 +113,21 @@ class GetSocialBilibiliLiveroom200Response(BaseModel):
             "short_id": obj.get("short_id"),
             "attention": obj.get("attention"),
             "online": obj.get("online"),
+            "is_portrait": obj.get("is_portrait"),
             "live_status": obj.get("live_status"),
             "area_id": obj.get("area_id"),
             "parent_area_name": obj.get("parent_area_name"),
+            "parent_area_id": obj.get("parent_area_id"),
             "area_name": obj.get("area_name"),
             "background": obj.get("background"),
             "title": obj.get("title"),
             "user_cover": obj.get("user_cover"),
             "description": obj.get("description"),
             "live_time": obj.get("live_time"),
+            "keyframe": obj.get("keyframe"),
             "tags": obj.get("tags"),
             "hot_words": obj.get("hot_words"),
-            "new_pendants": obj.get("new_pendants")
+            "new_pendants": GetSocialBilibiliLiveroom200ResponseNewPendants.from_dict(obj["new_pendants"]) if obj.get("new_pendants") is not None else None
         })
         return _obj
 

@@ -884,7 +884,7 @@ class RandomApi:
     @validate_call
     def post_answerbook_ask(
         self,
-        post_answerbook_ask_request: Annotated[PostAnswerbookAskRequest, Field(description="包含问题的JSON对象")],
+        post_answerbook_ask_request: PostAnswerbookAskRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -902,7 +902,7 @@ class RandomApi:
 
         通过POST请求向答案之书提问并获得神秘答案。  ## 功能概述 与GET方式相同，但通过JSON请求体发送问题，适合在需要发送较长问题或希望避免URL编码问题的场景中使用。  ## 请求体格式 请求体必须是有效的JSON格式，包含question字段。
 
-        :param post_answerbook_ask_request: 包含问题的JSON对象 (required)
+        :param post_answerbook_ask_request:  (required)
         :type post_answerbook_ask_request: PostAnswerbookAskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -953,7 +953,7 @@ class RandomApi:
     @validate_call
     def post_answerbook_ask_with_http_info(
         self,
-        post_answerbook_ask_request: Annotated[PostAnswerbookAskRequest, Field(description="包含问题的JSON对象")],
+        post_answerbook_ask_request: PostAnswerbookAskRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -971,7 +971,7 @@ class RandomApi:
 
         通过POST请求向答案之书提问并获得神秘答案。  ## 功能概述 与GET方式相同，但通过JSON请求体发送问题，适合在需要发送较长问题或希望避免URL编码问题的场景中使用。  ## 请求体格式 请求体必须是有效的JSON格式，包含question字段。
 
-        :param post_answerbook_ask_request: 包含问题的JSON对象 (required)
+        :param post_answerbook_ask_request:  (required)
         :type post_answerbook_ask_request: PostAnswerbookAskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1022,7 +1022,7 @@ class RandomApi:
     @validate_call
     def post_answerbook_ask_without_preload_content(
         self,
-        post_answerbook_ask_request: Annotated[PostAnswerbookAskRequest, Field(description="包含问题的JSON对象")],
+        post_answerbook_ask_request: PostAnswerbookAskRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1040,7 +1040,7 @@ class RandomApi:
 
         通过POST请求向答案之书提问并获得神秘答案。  ## 功能概述 与GET方式相同，但通过JSON请求体发送问题，适合在需要发送较长问题或希望避免URL编码问题的场景中使用。  ## 请求体格式 请求体必须是有效的JSON格式，包含question字段。
 
-        :param post_answerbook_ask_request: 包含问题的JSON对象 (required)
+        :param post_answerbook_ask_request:  (required)
         :type post_answerbook_ask_request: PostAnswerbookAskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

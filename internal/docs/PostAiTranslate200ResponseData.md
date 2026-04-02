@@ -1,17 +1,12 @@
 # PostAiTranslate200ResponseData
 
-单个翻译的详细结果，仅在单个翻译时返回。
+翻译结果的详细信息。
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**original_text** | **str** |  | [optional] 
 **translated_text** | **str** |  | [optional] 
-**detected_lang** | **str** |  | [optional] 
-**confidence_score** | **float** |  | [optional] 
-**alternatives** | **List[str]** |  | [optional] 
-**explanation** | [**PostAiTranslate200ResponseDataExplanation**](PostAiTranslate200ResponseDataExplanation.md) |  | [optional] 
 
 ## Example
 

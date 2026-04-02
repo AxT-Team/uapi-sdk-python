@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,23 +31,6 @@ class PostTranslateStreamRequest(BaseModel):
     from_lang: Optional[StrictStr] = Field(default='auto', description="源语言，支持：中文、英文、auto（自动检测）。默认为auto")
     tone: Optional[StrictStr] = Field(default=None, description="语气参数，可选")
     __properties: ClassVar[List[str]] = ["query", "to_lang", "from_lang", "tone"]
-
-    @field_validator('to_lang')
-    def to_lang_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['中文', '英文']):
-            raise ValueError("must be one of enum values ('中文', '英文')")
-        return value
-
-    @field_validator('from_lang')
-    def from_lang_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['中文', '英文', 'auto']):
-            raise ValueError("must be one of enum values ('中文', '英文', 'auto')")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

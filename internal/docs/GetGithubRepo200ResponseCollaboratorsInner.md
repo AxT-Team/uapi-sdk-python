@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**email** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
+**login** | **str** | GitHub 登录名。 | [optional] 
+**name** | **str** | 显示名称。 | [optional] 
+**email** | **str** | 公开邮箱。 | [optional] 
+**url** | **str** | GitHub 主页链接。 | [optional] 
 
 ## Example
 

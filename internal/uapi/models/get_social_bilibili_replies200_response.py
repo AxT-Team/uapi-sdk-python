@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from uapi.models.get_social_bilibili_replies200_response_page import GetSocialBilibiliReplies200ResponsePage
 from uapi.models.get_social_bilibili_replies200_response_replies_inner import GetSocialBilibiliReplies200ResponseRepliesInner
 from typing import Optional, Set
@@ -29,9 +29,17 @@ class GetSocialBilibiliReplies200Response(BaseModel):
     GetSocialBilibiliReplies200Response
     """ # noqa: E501
     page: Optional[GetSocialBilibiliReplies200ResponsePage] = None
+    config: Optional[Dict[str, Any]] = Field(default=None, description="评论区配置。不同视频或不同权限下可能为 null。")
     hots: Optional[List[Dict[str, Any]]] = Field(default=None, description="热门评论列表。结构与 `replies` 中的对象一致。如果当前页是第一页，且有热门评论，则此数组非空。")
     replies: Optional[List[GetSocialBilibiliReplies200ResponseRepliesInner]] = Field(default=None, description="当前页的评论列表。")
-    __properties: ClassVar[List[str]] = ["page", "hots", "replies"]
+    upper: Optional[Dict[str, Any]] = Field(default=None, description="UP 主相关信息。无数据时为 null。")
+    top: Optional[Dict[str, Any]] = Field(default=None, description="置顶评论信息。没有置顶评论时为 null。")
+    notice: Optional[Dict[str, Any]] = Field(default=None, description="评论区公告信息。没有公告时为 null。")
+    vote: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="评论区投票相关状态值。没有投票时通常为 0。")
+    folder: Optional[Dict[str, Any]] = Field(default=None, description="评论折叠相关信息。没有数据时为 null。")
+    control: Optional[Dict[str, Any]] = Field(default=None, description="评论区控制信息。没有数据时为 null。")
+    cursor: Optional[Dict[str, Any]] = Field(default=None, description="游标翻页信息。部分场景下为 null。")
+    __properties: ClassVar[List[str]] = ["page", "config", "hots", "replies", "upper", "top", "notice", "vote", "folder", "control", "cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,10 +90,45 @@ class GetSocialBilibiliReplies200Response(BaseModel):
                 if _item_replies:
                     _items.append(_item_replies.to_dict())
             _dict['replies'] = _items
+        # set to None if config (nullable) is None
+        # and model_fields_set contains the field
+        if self.config is None and "config" in self.model_fields_set:
+            _dict['config'] = None
+
         # set to None if hots (nullable) is None
         # and model_fields_set contains the field
         if self.hots is None and "hots" in self.model_fields_set:
             _dict['hots'] = None
+
+        # set to None if upper (nullable) is None
+        # and model_fields_set contains the field
+        if self.upper is None and "upper" in self.model_fields_set:
+            _dict['upper'] = None
+
+        # set to None if top (nullable) is None
+        # and model_fields_set contains the field
+        if self.top is None and "top" in self.model_fields_set:
+            _dict['top'] = None
+
+        # set to None if notice (nullable) is None
+        # and model_fields_set contains the field
+        if self.notice is None and "notice" in self.model_fields_set:
+            _dict['notice'] = None
+
+        # set to None if folder (nullable) is None
+        # and model_fields_set contains the field
+        if self.folder is None and "folder" in self.model_fields_set:
+            _dict['folder'] = None
+
+        # set to None if control (nullable) is None
+        # and model_fields_set contains the field
+        if self.control is None and "control" in self.model_fields_set:
+            _dict['control'] = None
+
+        # set to None if cursor (nullable) is None
+        # and model_fields_set contains the field
+        if self.cursor is None and "cursor" in self.model_fields_set:
+            _dict['cursor'] = None
 
         return _dict
 
@@ -100,8 +143,16 @@ class GetSocialBilibiliReplies200Response(BaseModel):
 
         _obj = cls.model_validate({
             "page": GetSocialBilibiliReplies200ResponsePage.from_dict(obj["page"]) if obj.get("page") is not None else None,
+            "config": obj.get("config"),
             "hots": obj.get("hots"),
-            "replies": [GetSocialBilibiliReplies200ResponseRepliesInner.from_dict(_item) for _item in obj["replies"]] if obj.get("replies") is not None else None
+            "replies": [GetSocialBilibiliReplies200ResponseRepliesInner.from_dict(_item) for _item in obj["replies"]] if obj.get("replies") is not None else None,
+            "upper": obj.get("upper"),
+            "top": obj.get("top"),
+            "notice": obj.get("notice"),
+            "vote": obj.get("vote"),
+            "folder": obj.get("folder"),
+            "control": obj.get("control"),
+            "cursor": obj.get("cursor")
         })
         return _obj
 

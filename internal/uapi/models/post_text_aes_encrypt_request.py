@@ -26,8 +26,8 @@ class PostTextAesEncryptRequest(BaseModel):
     """
     PostTextAesEncryptRequest
     """ # noqa: E501
-    key: StrictStr = Field(description="Key must be 16, 24, or 32 bytes long to select AES-128, AES-192, or AES-256.")
-    text: StrictStr
+    key: StrictStr = Field(description="密钥长度必须为 16、24 或 32 字节，分别对应 AES-128、AES-192、AES-256。")
+    text: StrictStr = Field(description="待加密的明文文本。")
     __properties: ClassVar[List[str]] = ["key", "text"]
 
     model_config = ConfigDict(

@@ -17,9 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_misc_tracking_query200_response_data import GetMiscTrackingQuery200ResponseData
+from uapi.models.get_misc_tracking_query200_response_tracks_inner import GetMiscTrackingQuery200ResponseTracksInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +27,12 @@ class GetMiscTrackingQuery200Response(BaseModel):
     """
     GetMiscTrackingQuery200Response
     """ # noqa: E501
-    code: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
-    data: Optional[GetMiscTrackingQuery200ResponseData] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "data"]
+    tracking_number: Optional[StrictStr] = Field(default=None, description="快递单号")
+    carrier_code: Optional[StrictStr] = Field(default=None, description="快递公司编码")
+    carrier_name: Optional[StrictStr] = Field(default=None, description="快递公司名称")
+    track_count: Optional[StrictInt] = Field(default=None, description="物流轨迹数量")
+    tracks: Optional[List[GetMiscTrackingQuery200ResponseTracksInner]] = Field(default=None, description="物流轨迹列表，按时间倒序排列")
+    __properties: ClassVar[List[str]] = ["tracking_number", "carrier_code", "carrier_name", "track_count", "tracks"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,9 +73,13 @@ class GetMiscTrackingQuery200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in tracks (list)
+        _items = []
+        if self.tracks:
+            for _item_tracks in self.tracks:
+                if _item_tracks:
+                    _items.append(_item_tracks.to_dict())
+            _dict['tracks'] = _items
         return _dict
 
     @classmethod
@@ -86,9 +92,11 @@ class GetMiscTrackingQuery200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "data": GetMiscTrackingQuery200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "tracking_number": obj.get("tracking_number"),
+            "carrier_code": obj.get("carrier_code"),
+            "carrier_name": obj.get("carrier_name"),
+            "track_count": obj.get("track_count"),
+            "tracks": [GetMiscTrackingQuery200ResponseTracksInner.from_dict(_item) for _item in obj["tracks"]] if obj.get("tracks") is not None else None
         })
         return _obj
 

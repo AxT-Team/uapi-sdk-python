@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **processing_time_ms** | **int** |  | [optional] 
-**cache_hit** | **bool** |  | [optional] 
 
 ## Example
 

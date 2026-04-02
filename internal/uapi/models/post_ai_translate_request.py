@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,15 +26,12 @@ class PostAiTranslateRequest(BaseModel):
     """
     PostAiTranslateRequest
     """ # noqa: E501
-    text: Optional[StrictStr] = Field(default=None, description="单个翻译时使用的待翻译文本，与texts参数二选一。最大长度10,000字符。")
-    texts: Optional[List[StrictStr]] = Field(default=None, description="批量翻译时使用的待翻译文本列表，与text参数二选一。最多50条，总计最大100,000字符。")
+    text: StrictStr = Field(description="待翻译的文本内容。最大长度10,000字符。")
     source_lang: Optional[StrictStr] = Field(default=None, description="源语言代码，可选。如果不指定，系统会自动检测源语言。")
     style: Optional[StrictStr] = Field(default='professional', description="翻译风格，可选。支持casual(随意口语化)、professional(专业商务，默认)、academic(学术正式)、literary(文学艺术)。")
     context: Optional[StrictStr] = Field(default='general', description="翻译上下文场景，可选。支持general(通用，默认)、business(商务)、technical(技术)、medical(医疗)、legal(法律)、marketing(市场营销)、entertainment(娱乐)、education(教育)、news(新闻)。")
     preserve_format: Optional[StrictBool] = Field(default=True, description="是否保留原文格式，包括换行、缩进等。")
-    fast_mode: Optional[StrictBool] = Field(default=False, description="是否启用快速模式。快速模式响应时间约800ms，准确率95%+；普通模式响应时间约2000ms，准确率98%+。")
-    max_concurrency: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = Field(default=3, description="批量翻译时的最大并发数，范围1-10。仅在批量翻译时有效。")
-    __properties: ClassVar[List[str]] = ["text", "texts", "source_lang", "style", "context", "preserve_format", "fast_mode", "max_concurrency"]
+    __properties: ClassVar[List[str]] = ["text", "source_lang", "style", "context", "preserve_format"]
 
     @field_validator('style')
     def style_validate_enum(cls, value):
@@ -109,13 +105,10 @@ class PostAiTranslateRequest(BaseModel):
 
         _obj = cls.model_validate({
             "text": obj.get("text"),
-            "texts": obj.get("texts"),
             "source_lang": obj.get("source_lang"),
             "style": obj.get("style") if obj.get("style") is not None else 'professional',
             "context": obj.get("context") if obj.get("context") is not None else 'general',
-            "preserve_format": obj.get("preserve_format") if obj.get("preserve_format") is not None else True,
-            "fast_mode": obj.get("fast_mode") if obj.get("fast_mode") is not None else False,
-            "max_concurrency": obj.get("max_concurrency") if obj.get("max_concurrency") is not None else 3
+            "preserve_format": obj.get("preserve_format") if obj.get("preserve_format") is not None else True
         })
         return _obj
 

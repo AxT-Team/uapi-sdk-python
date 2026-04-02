@@ -17,9 +17,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uapi.models.get_misc_holiday_calendar200_response_data import GetMiscHolidayCalendar200ResponseData
+from uapi.models.get_misc_holiday_calendar200_response_days_inner import GetMiscHolidayCalendar200ResponseDaysInner
+from uapi.models.get_misc_holiday_calendar200_response_holidays_inner import GetMiscHolidayCalendar200ResponseHolidaysInner
+from uapi.models.get_misc_holiday_calendar200_response_nearby import GetMiscHolidayCalendar200ResponseNearby
+from uapi.models.get_misc_holiday_calendar200_response_query import GetMiscHolidayCalendar200ResponseQuery
+from uapi.models.get_misc_holiday_calendar200_response_summary import GetMiscHolidayCalendar200ResponseSummary
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +31,13 @@ class GetMiscHolidayCalendar200Response(BaseModel):
     """
     GetMiscHolidayCalendar200Response
     """ # noqa: E501
-    code: Optional[StrictInt] = None
-    message: Optional[StrictStr] = None
-    data: Optional[GetMiscHolidayCalendar200ResponseData] = None
-    __properties: ClassVar[List[str]] = ["code", "message", "data"]
+    mode: Optional[StrictStr] = Field(default=None, description="查询模式：day、month、year。")
+    query: Optional[GetMiscHolidayCalendar200ResponseQuery] = None
+    summary: Optional[GetMiscHolidayCalendar200ResponseSummary] = None
+    days: Optional[List[GetMiscHolidayCalendar200ResponseDaysInner]] = Field(default=None, description="日期明细列表。")
+    holidays: Optional[List[GetMiscHolidayCalendar200ResponseHolidaysInner]] = Field(default=None, description="节日事件列表。")
+    nearby: Optional[GetMiscHolidayCalendar200ResponseNearby] = None
+    __properties: ClassVar[List[str]] = ["mode", "query", "summary", "days", "holidays", "nearby"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,9 +78,29 @@ class GetMiscHolidayCalendar200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of query
+        if self.query:
+            _dict['query'] = self.query.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of summary
+        if self.summary:
+            _dict['summary'] = self.summary.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in days (list)
+        _items = []
+        if self.days:
+            for _item_days in self.days:
+                if _item_days:
+                    _items.append(_item_days.to_dict())
+            _dict['days'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in holidays (list)
+        _items = []
+        if self.holidays:
+            for _item_holidays in self.holidays:
+                if _item_holidays:
+                    _items.append(_item_holidays.to_dict())
+            _dict['holidays'] = _items
+        # override the default output from pydantic by calling `to_dict()` of nearby
+        if self.nearby:
+            _dict['nearby'] = self.nearby.to_dict()
         return _dict
 
     @classmethod
@@ -86,9 +113,12 @@ class GetMiscHolidayCalendar200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "data": GetMiscHolidayCalendar200ResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "mode": obj.get("mode"),
+            "query": GetMiscHolidayCalendar200ResponseQuery.from_dict(obj["query"]) if obj.get("query") is not None else None,
+            "summary": GetMiscHolidayCalendar200ResponseSummary.from_dict(obj["summary"]) if obj.get("summary") is not None else None,
+            "days": [GetMiscHolidayCalendar200ResponseDaysInner.from_dict(_item) for _item in obj["days"]] if obj.get("days") is not None else None,
+            "holidays": [GetMiscHolidayCalendar200ResponseHolidaysInner.from_dict(_item) for _item in obj["holidays"]] if obj.get("holidays") is not None else None,
+            "nearby": GetMiscHolidayCalendar200ResponseNearby.from_dict(obj["nearby"]) if obj.get("nearby") is not None else None
         })
         return _obj
 

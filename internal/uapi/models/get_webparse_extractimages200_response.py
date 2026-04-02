@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +26,9 @@ class GetWebparseExtractimages200Response(BaseModel):
     """
     GetWebparseExtractimages200Response
     """ # noqa: E501
-    count: Optional[StrictInt] = None
-    images: Optional[List[StrictStr]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["count", "images", "url"]
+    page_url: Optional[StrictStr] = Field(default=None, description="实际解析的网页地址。")
+    image_urls: Optional[List[StrictStr]] = Field(default=None, description="页面中提取到的图片链接列表。")
+    __properties: ClassVar[List[str]] = ["page_url", "image_urls"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,9 +81,8 @@ class GetWebparseExtractimages200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "images": obj.get("images"),
-            "url": obj.get("url")
+            "page_url": obj.get("page_url"),
+            "image_urls": obj.get("image_urls")
         })
         return _obj
 

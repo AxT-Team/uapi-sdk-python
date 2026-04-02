@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uapi.models.get_social_bilibili_videoinfo200_response_pages_inner_dimension import GetSocialBilibiliVideoinfo200ResponsePagesInnerDimension
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,8 +30,12 @@ class GetSocialBilibiliVideoinfo200ResponsePagesInner(BaseModel):
     cid: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="分P的唯一标识CID，用于获取弹幕等。")
     page: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="分P的序号，从1开始。")
     part: Optional[StrictStr] = Field(default=None, description="分P的标题。对于单P视频，通常是视频主标题。")
+    var_from: Optional[StrictStr] = Field(default=None, description="视频来源。", alias="from")
     duration: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="该分P的持续时间，单位为秒。")
-    __properties: ClassVar[List[str]] = ["cid", "page", "part", "duration"]
+    vid: Optional[StrictStr] = Field(default=None, description="外部视频源 ID，通常为空。")
+    weblink: Optional[StrictStr] = Field(default=None, description="外链地址，通常为空。")
+    dimension: Optional[GetSocialBilibiliVideoinfo200ResponsePagesInnerDimension] = None
+    __properties: ClassVar[List[str]] = ["cid", "page", "part", "from", "duration", "vid", "weblink", "dimension"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +76,9 @@ class GetSocialBilibiliVideoinfo200ResponsePagesInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of dimension
+        if self.dimension:
+            _dict['dimension'] = self.dimension.to_dict()
         return _dict
 
     @classmethod
@@ -86,7 +94,11 @@ class GetSocialBilibiliVideoinfo200ResponsePagesInner(BaseModel):
             "cid": obj.get("cid"),
             "page": obj.get("page"),
             "part": obj.get("part"),
-            "duration": obj.get("duration")
+            "from": obj.get("from"),
+            "duration": obj.get("duration"),
+            "vid": obj.get("vid"),
+            "weblink": obj.get("weblink"),
+            "dimension": GetSocialBilibiliVideoinfo200ResponsePagesInnerDimension.from_dict(obj["dimension"]) if obj.get("dimension") is not None else None
         })
         return _obj
 

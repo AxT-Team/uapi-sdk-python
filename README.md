@@ -19,9 +19,11 @@ pip install uapi-sdk-python
 from uapi import UapiClient
 
 client = UapiClient("https://uapis.cn", "YOUR_API_KEY")
-result = client.social.get_social_qq_userinfo(qq="10001")
+result = client.misc.get_misc_hotboard(type="weibo")
 print(result)
 ```
+
+这个接口默认只要传 `type` 就可以拿当前热榜。`time`、`keyword`、`time_start`、`time_end`、`limit`、`sources` 都是按场景再传的可选参数。
 
 > [!TIP]
 > 请使用与运行脚本相同的 Python 解释器安装依赖，例如执行 `python -m pip install uapi-sdk-python` 后再运行 `python main.py`。在 VS Code / Pyright 中若提示 “Import uapi could not be resolved”，将解释器切换到当前虚拟环境即可恢复补全。

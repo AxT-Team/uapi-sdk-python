@@ -54,11 +54,17 @@ from uapi import UapiClient, UapiError
 client = UapiClient("https://uapis.cn", "YOUR_API_KEY")
 
 # 成功路径
-result = client.social.get_social_qq_userinfo(qq="10001")
+client.social.get_social_qq_userinfo(qq="10001")
 meta = client.last_response_meta
 if meta:
+    print("这次请求原价:", meta.credits_requested or 0, "积分")
+    print("这次实际扣费:", meta.credits_charged or 0, "积分")
+    print("特殊计价:", meta.credits_pricing or "原价")
     print("余额剩余:", meta.balance_remaining_cents or 0, "分")
     print("资源包剩余:", meta.quota_remaining_credits or 0, "积分")
+    print("当前有效额度桶:", meta.active_quota_buckets or 0)
+    print("额度用空即停:", meta.stop_on_empty)
+    print("Key QPS:", meta.billing_key_rate_remaining or 0, "/", meta.billing_key_rate_limit or 0, meta.billing_key_rate_unit or "req")
     print("Request ID:", meta.request_id)
 
 # 失败路径
@@ -66,7 +72,9 @@ try:
     client.social.get_social_qq_userinfo(qq="10001")
 except UapiError as err:
     if err.meta:
-        print(f"限流，{err.meta.retry_after_seconds or 0}s 后重试")
+        print("Retry-After 秒数:", err.meta.retry_after_seconds)
+        print("Retry-After 原始值:", err.meta.retry_after_raw)
+        print("访客 QPS:", err.meta.visitor_rate_remaining or 0, "/", err.meta.visitor_rate_limit or 0)
         print("Request ID:", err.meta.request_id)
 ```
 
@@ -74,12 +82,18 @@ except UapiError as err:
 
 | 字段 | 说明 |
 |------|------|
+| `credits_requested` | 这次请求原本要扣多少积分，也就是请求价 |
+| `credits_charged` | 这次请求实际扣了多少积分 |
+| `credits_pricing` | 特殊计价原因，例如缓存半价 `cache-hit-half-price` |
 | `balance_remaining_cents` | 账户余额剩余（分） |
 | `quota_remaining_credits` | 资源包剩余积分 |
-| `visitor_quota_remaining_credits` | 访客配额剩余积分 |
-| `retry_after_seconds` | 触发限流后的建议等待时长 |
+| `active_quota_buckets` | 当前还有多少个有效额度桶参与计费 |
+| `stop_on_empty` | 额度耗尽后是否直接停止服务 |
+| `retry_after_seconds` / `retry_after_raw` | 限流后的等待时长；当服务端返回 HTTP 时间字符串时看 `retry_after_raw` |
 | `request_id` | 请求唯一 ID，排障时使用 |
-| `debit_status` | 本次计费状态 |
+| `billing_key_rate_limit` / `billing_key_rate_remaining` | Billing Key 当前 QPS 规则的上限与剩余 |
+| `billing_ip_rate_limit` / `billing_ip_rate_remaining` | Billing Key 单 IP 当前 QPS 规则的上限与剩余 |
+| `visitor_rate_limit` / `visitor_rate_remaining` | 访客当前 QPS 规则的上限与剩余 |
 | `rate_limit_policies` / `rate_limits` | 完整结构化限流策略数据 |
 
 ## 进阶实践

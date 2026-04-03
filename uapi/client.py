@@ -12,6 +12,13 @@ class _Config:
     token: Optional[str] = None
     timeout: float = 15.0
 
+
+def _normalize_base_url(base_url: str) -> str:
+    normalized = base_url.rstrip("/")
+    if normalized.endswith("/api/v1"):
+        normalized = normalized[: -len("/api/v1")]
+    return normalized
+
 class _HTTP:
     def __init__(self, cfg: _Config):
         self._cfg = cfg
@@ -43,7 +50,7 @@ class UapiClient:
     """
 
     def __init__(self, base_url: str, token: str | None = None, timeout: float = 15.0):
-        self._http = _HTTP(_Config(base_url, token, timeout))
+        self._http = _HTTP(_Config(_normalize_base_url(base_url), token, timeout))
         # 动态挂载每个 Tag 的 API 门面
         _clipzy_zai_xian_jian_tie_ban = _ClipzyZaiXianJianTieBanApi(self._http)
         self.clipzy_zai_xian_jian_tie_ban = _clipzy_zai_xian_jian_tie_ban
@@ -2608,4 +2615,3 @@ UAPI Pro Search 是一个智能搜索引擎，采用机器学习算法对搜索�
         
         return self._http.request("POST", path, params=params, json=body if body else None)
     
-

@@ -18,7 +18,7 @@ pip install uapi-sdk-python
 ```python
 from uapi import UapiClient
 
-client = UapiClient("https://uapis.cn/api/v1")
+client = UapiClient("https://uapis.cn", "YOUR_API_KEY")
 result = client.social.get_social_qq_userinfo(qq="10001")
 print(result)
 ```
@@ -49,7 +49,7 @@ print(result)
 ```python
 from uapi import UapiClient, UapiError
 
-client = UapiClient("https://uapis.cn/api/v1")
+client = UapiClient("https://uapis.cn", "YOUR_API_KEY")
 
 # 成功路径
 result = client.social.get_social_qq_userinfo(qq="10001")
@@ -88,7 +88,7 @@ except UapiError as err:
 from functools import lru_cache
 from uapi import UapiClient
 
-client = UapiClient("https://uapis.cn/api/v1", token="<TOKEN>")
+client = UapiClient("https://uapis.cn", token="YOUR_API_KEY")
 
 @lru_cache(maxsize=128)
 def cached_lookup(qq: str):
@@ -99,34 +99,19 @@ user = cached_lookup("10001")
 
 也可以在 FastAPI / Django 项目里配合 Redis，将 SDK 的响应序列化后写入缓存，命中即直接返回。
 
-### 注入自定义 httpx.Client
+### 调整超时与环境
 
 ```python
-import httpx
-from httpx import Auth
 from uapi import UapiClient
 
-class StaticToken(Auth):
-    def __init__(self, token: str):
-        self.token = token
-    def auth_flow(self, request):
-        request.headers["Authorization"] = f"Bearer {self.token}"
-        yield request
-
-http_client = httpx.Client(
-    timeout=5,
-    transport=httpx.HTTPTransport(retries=3),
-    event_hooks={"request": [lambda request: print("->", request.url)]},
-)
-
 client = UapiClient(
-    "https://uapis.cn/api/v1",
-    client=http_client,
-    auth=StaticToken("<TOKEN>"),
+    "https://uapis.cn",
+    token="YOUR_API_KEY",
+    timeout=5.0,
 )
 ```
 
-通过自定义 `client` / `transport` / `auth`，可以无缝植入代理、重试策略或 APM 埋点。
+如果你需要切换到别的环境，直接改 `base_url` 就可以；如果你只想缩短等待时间，传 `timeout` 就够了。
 
 ## 错误模型概览
 

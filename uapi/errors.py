@@ -20,7 +20,6 @@ class RateLimitStateEntry:
 @dataclass
 class ResponseMeta:
     request_id: Optional[str] = None
-    retry_after_raw: Optional[str] = None
     retry_after_seconds: Optional[int] = None
     debit_status: Optional[str] = None
     credits_requested: Optional[int] = None
@@ -38,21 +37,6 @@ class ResponseMeta:
     quota_remaining_credits: Optional[int] = None
     visitor_quota_limit_credits: Optional[int] = None
     visitor_quota_remaining_credits: Optional[int] = None
-    billing_key_rate_limit: Optional[int] = None
-    billing_key_rate_remaining: Optional[int] = None
-    billing_key_rate_unit: Optional[str] = None
-    billing_key_rate_window_seconds: Optional[int] = None
-    billing_key_rate_reset_after_seconds: Optional[int] = None
-    billing_ip_rate_limit: Optional[int] = None
-    billing_ip_rate_remaining: Optional[int] = None
-    billing_ip_rate_unit: Optional[str] = None
-    billing_ip_rate_window_seconds: Optional[int] = None
-    billing_ip_rate_reset_after_seconds: Optional[int] = None
-    visitor_rate_limit: Optional[int] = None
-    visitor_rate_remaining: Optional[int] = None
-    visitor_rate_unit: Optional[str] = None
-    visitor_rate_window_seconds: Optional[int] = None
-    visitor_rate_reset_after_seconds: Optional[int] = None
     raw_headers: Dict[str, str] = field(default_factory=dict)
 
 class UapiError(Exception):
@@ -246,16 +230,8 @@ def extract_meta(headers: Mapping[str, str]) -> ResponseMeta:
             reset_after_seconds=_parse_int(params.get("t")),
         )
 
-    billing_key_rate_policy = rate_limit_policies.get("billing-key-rate")
-    billing_key_rate_state = rate_limits.get("billing-key-rate")
-    billing_ip_rate_policy = rate_limit_policies.get("billing-ip-rate")
-    billing_ip_rate_state = rate_limits.get("billing-ip-rate")
-    visitor_rate_policy = rate_limit_policies.get("visitor-rate")
-    visitor_rate_state = rate_limits.get("visitor-rate")
-
     return ResponseMeta(
         request_id=raw_headers.get("x-request-id"),
-        retry_after_raw=raw_headers.get("retry-after"),
         retry_after_seconds=_parse_int(raw_headers.get("retry-after")),
         debit_status=raw_headers.get("uapi-debit-status"),
         credits_requested=_parse_int(raw_headers.get("uapi-credits-requested")),
@@ -273,21 +249,6 @@ def extract_meta(headers: Mapping[str, str]) -> ResponseMeta:
         quota_remaining_credits=rate_limits.get("billing-quota").remaining if "billing-quota" in rate_limits else None,
         visitor_quota_limit_credits=rate_limit_policies.get("visitor-quota").quota if "visitor-quota" in rate_limit_policies else None,
         visitor_quota_remaining_credits=rate_limits.get("visitor-quota").remaining if "visitor-quota" in rate_limits else None,
-        billing_key_rate_limit=billing_key_rate_policy.quota if billing_key_rate_policy else None,
-        billing_key_rate_remaining=billing_key_rate_state.remaining if billing_key_rate_state else None,
-        billing_key_rate_unit=billing_key_rate_policy.unit if billing_key_rate_policy and billing_key_rate_policy.unit is not None else (billing_key_rate_state.unit if billing_key_rate_state else None),
-        billing_key_rate_window_seconds=billing_key_rate_policy.window_seconds if billing_key_rate_policy else None,
-        billing_key_rate_reset_after_seconds=billing_key_rate_state.reset_after_seconds if billing_key_rate_state else None,
-        billing_ip_rate_limit=billing_ip_rate_policy.quota if billing_ip_rate_policy else None,
-        billing_ip_rate_remaining=billing_ip_rate_state.remaining if billing_ip_rate_state else None,
-        billing_ip_rate_unit=billing_ip_rate_policy.unit if billing_ip_rate_policy and billing_ip_rate_policy.unit is not None else (billing_ip_rate_state.unit if billing_ip_rate_state else None),
-        billing_ip_rate_window_seconds=billing_ip_rate_policy.window_seconds if billing_ip_rate_policy else None,
-        billing_ip_rate_reset_after_seconds=billing_ip_rate_state.reset_after_seconds if billing_ip_rate_state else None,
-        visitor_rate_limit=visitor_rate_policy.quota if visitor_rate_policy else None,
-        visitor_rate_remaining=visitor_rate_state.remaining if visitor_rate_state else None,
-        visitor_rate_unit=visitor_rate_policy.unit if visitor_rate_policy and visitor_rate_policy.unit is not None else (visitor_rate_state.unit if visitor_rate_state else None),
-        visitor_rate_window_seconds=visitor_rate_policy.window_seconds if visitor_rate_policy else None,
-        visitor_rate_reset_after_seconds=visitor_rate_state.reset_after_seconds if visitor_rate_state else None,
         raw_headers=raw_headers,
     )
 

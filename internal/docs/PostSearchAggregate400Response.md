@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
-**timestamp** | **datetime** |  | [optional] 
 
 ## Example
 

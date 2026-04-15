@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **city** | **str** |  | [optional] 
 **province** | **str** |  | [optional] 
-**sp** | **str** | 运营商 (Service Provider) 名称。 | [optional] 
+**sp** | **str** | 运营商名称。 | [optional] 
 
 ## Example
 

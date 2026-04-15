@@ -9,11 +9,10 @@ Name | Type | Description | Notes
 **url** | **str** | 结果链接 | [optional] 
 **snippet** | **str** | 结果摘要/描述 | [optional] 
 **domain** | **str** | 来源域名 | [optional] 
-**source** | **str** | 搜索引擎标识 | [optional] 
+**source** | **str** |  | [optional] 
 **position** | **int** | 原始排名位置 | [optional] 
-**score** | **float** | 综合得分 (0-1，经过机器学习排序) | [optional] 
-**publish_time** | **datetime** | 发布时间 (ISO 8601 格式) | [optional] 
-**author** | **str** | 作者信息 | [optional] 
+**score** | **float** | 综合得分（0-1，已经过排序） | [optional] 
+**publish_time** | **datetime** | 发布时间（ISO 8601 格式） | [optional] 
 
 ## Example
 

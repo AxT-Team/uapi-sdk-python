@@ -260,7 +260,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_misc_holiday_calendar**
-> GetMiscHolidayCalendar200Response get_misc_holiday_calendar(var_date=var_date, month=month, year=year, timezone=timezone, holiday_type=holiday_type, include_nearby=include_nearby, nearby_limit=nearby_limit)
+> GetMiscHolidayCalendar200Response get_misc_holiday_calendar(var_date=var_date, month=month, year=year, timezone=timezone, holiday_type=holiday_type, include_nearby=include_nearby, nearby_limit=nearby_limit, exclude_past=exclude_past)
 
 查询节假日与万年历
 
@@ -272,6 +272,8 @@ No authorization required
 如果你只关心某一类事件，可以通过 `holiday_type` 进行筛选，例如只看法定休假/调休、公历节日、农历节日或节气。
 
 在 `date` 模式下，传 `include_nearby=true` 可以额外返回该日期前后最近的节日；返回数量由 `nearby_limit` 控制，默认 7，最大 30。
+
+如果你只想保留今天和之后的节日，可以再传 `exclude_past=true` 过滤已经过去的节日。
 
 ### Example
 
@@ -300,10 +302,11 @@ with uapi.ApiClient(configuration) as api_client:
     holiday_type = all # str | 节日筛选类型，默认 all。 (optional) (default to all)
     include_nearby = False # bool | 是否返回前后最近节日，仅 date 模式生效，默认 false。month/year 模式会忽略此参数。 (optional) (default to False)
     nearby_limit = 7 # int | 返回最近节日数量限制，默认 7，最大 30。仅 date 模式 + include_nearby=true 生效。 (optional) (default to 7)
+    exclude_past = False # bool | 传 true 时，会过滤今天之前已经过去的节日。默认 false。 (optional) (default to False)
 
     try:
         # 查询节假日与万年历
-        api_response = api_instance.get_misc_holiday_calendar(var_date=var_date, month=month, year=year, timezone=timezone, holiday_type=holiday_type, include_nearby=include_nearby, nearby_limit=nearby_limit)
+        api_response = api_instance.get_misc_holiday_calendar(var_date=var_date, month=month, year=year, timezone=timezone, holiday_type=holiday_type, include_nearby=include_nearby, nearby_limit=nearby_limit, exclude_past=exclude_past)
         print("The response of MiscApi->get_misc_holiday_calendar:\n")
         pprint(api_response)
     except Exception as e:
@@ -324,6 +327,7 @@ Name | Type | Description  | Notes
  **holiday_type** | **str**| 节日筛选类型，默认 all。 | [optional] [default to all]
  **include_nearby** | **bool**| 是否返回前后最近节日，仅 date 模式生效，默认 false。month/year 模式会忽略此参数。 | [optional] [default to False]
  **nearby_limit** | **int**| 返回最近节日数量限制，默认 7，最大 30。仅 date 模式 + include_nearby&#x3D;true 生效。 | [optional] [default to 7]
+ **exclude_past** | **bool**| 传 true 时，会过滤今天之前已经过去的节日。默认 false。 | [optional] [default to False]
 
 ### Return type
 
@@ -348,7 +352,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_misc_hotboard**
-> GetMiscHotboard200Response get_misc_hotboard(type, time=time, keyword=keyword, time_start=time_start, time_end=time_end, limit=limit, sources=sources)
+> GetMiscHotboard200Response get_misc_hotboard(type, time=time, keyword=keyword, time_start=time_start, time_end=time_end, limit=limit)
 
 查询热榜
 
@@ -367,9 +371,6 @@ No authorization required
 
 ### 搜索模式
 传 `type` + `keyword` + `time_start` + `time_end` 参数，在指定时间范围内搜索包含关键词的热榜条目。可选传 `limit` 限制返回数量。
-
-### 数据源列表
-传 `sources=true`，返回所有支持历史数据的平台列表。
 
 ### Example
 
@@ -397,11 +398,10 @@ with uapi.ApiClient(configuration) as api_client:
     time_start = 56 # int | 搜索模式必填：搜索起始时间戳（毫秒）。 (optional)
     time_end = 56 # int | 搜索模式必填：搜索结束时间戳（毫秒）。 (optional)
     limit = 56 # int | 搜索模式下最大返回条数，默认 50，最大 200。 (optional)
-    sources = True # bool | 设为 true 时列出所有可用的历史数据源，忽略其他参数。 (optional)
 
     try:
         # 查询热榜
-        api_response = api_instance.get_misc_hotboard(type, time=time, keyword=keyword, time_start=time_start, time_end=time_end, limit=limit, sources=sources)
+        api_response = api_instance.get_misc_hotboard(type, time=time, keyword=keyword, time_start=time_start, time_end=time_end, limit=limit)
         print("The response of MiscApi->get_misc_hotboard:\n")
         pprint(api_response)
     except Exception as e:
@@ -421,7 +421,6 @@ Name | Type | Description  | Notes
  **time_start** | **int**| 搜索模式必填：搜索起始时间戳（毫秒）。 | [optional] 
  **time_end** | **int**| 搜索模式必填：搜索结束时间戳（毫秒）。 | [optional] 
  **limit** | **int**| 搜索模式下最大返回条数，默认 50，最大 200。 | [optional] 
- **sources** | **bool**| 设为 true 时列出所有可用的历史数据源，忽略其他参数。 | [optional] 
 
 ### Return type
 
@@ -440,10 +439,10 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | 查询成功！返回指定平台的热榜列表数据。不同模式返回格式不同：默认模式和时光机模式返回 list 数组；搜索模式返回 results 数组；数据源列表模式返回 sources 数组。 |  -  |
+**200** | 查询成功！返回指定平台的热榜列表数据。不同模式返回格式不同：默认模式和时光机模式返回 list 数组；搜索模式返回 results 数组。 |  -  |
 **400** | 请求参数错误。你提供的 &#x60;type&#x60; 参数不是我们支持的平台类型，请检查拼写。 |  -  |
 **500** | 获取热榜失败。服务器在处理数据时发生内部错误。 |  -  |
-**502** | 上游服务错误。我们从目标平台（如微博）获取数据时失败，可能是对方接口暂时不可用或有反爬策略。 |  -  |
+**502** | 暂时无法获取相关数据，请稍后重试。 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -928,21 +927,19 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_misc_tracking_query**
-> GetMiscTrackingQuery200Response get_misc_tracking_query(tracking_number, carrier_code=carrier_code, phone=phone)
+> GetMiscTrackingQuery200Response get_misc_tracking_query(tracking_number, carrier_code=carrier_code, phone=phone, full=full)
 
 查询快递物流信息
 
 买了东西想知道快递到哪儿了？这个接口帮你实时追踪物流状态。
 
 ## 功能概述
-提供一个快递单号，系统会自动识别快递公司并返回完整的物流轨迹信息。这个接口目前可以查询中通、圆通、韵达、申通、极兔、京东、EMS、德邦等主流快递公司的物流信息。
+提供一个快递单号，系统会自动识别快递公司并返回完整的物流轨迹信息。这个接口目前可以查询中通、圆通、韵达、申通、极兔、顺丰、京东、EMS、德邦等主流快递公司的物流信息。
 
 ## 使用须知
-目前暂不支持顺丰快递单号的物流查询。
-
 - **自动识别**：不知道是哪家快递？系统会根据单号规则自动识别快递公司（推荐使用）
 - **手动指定**：如果已知快递公司，可以传递 `carrier_code` 参数，查询速度会更快
-- **手机尾号验证**：部分快递公司需要验证收件人手机尾号才能查询详细物流，如果返回 `暂无物流信息`，建议尝试传入 `phone` 参数
+- **手机尾号验证**：顺丰等部分快递公司需要验证收件人手机尾号才能查询详细物流，如果返回 `暂无物流信息`，建议尝试传入 `phone` 参数
 - **查询时效**：物流信息实时查询，响应时间通常在1-2秒内
 
 ### Example
@@ -968,10 +965,11 @@ with uapi.ApiClient(configuration) as api_client:
     tracking_number = 'YT1234567890123' # str | 快递单号，通常是一串10-20位的数字或字母数字组合。
     carrier_code = 'carrier_code_example' # str | 快递公司编码（可选）。不填写时系统会自动识别，填写后可加快查询速度。 (optional)
     phone = 'phone_example' # str | 收件人手机尾号，4位数字（可选）。部分快递公司需要验证手机尾号才能查询详细物流信息。 (optional)
+    full = True # bool | 使用这个参数可以获得完整的物流信息。但会消耗34积分/一次（不过缓存命中半价）。因为成本实在太贵了，否则非常非常亏说是 (optional)
 
     try:
         # 查询快递物流信息
-        api_response = api_instance.get_misc_tracking_query(tracking_number, carrier_code=carrier_code, phone=phone)
+        api_response = api_instance.get_misc_tracking_query(tracking_number, carrier_code=carrier_code, phone=phone, full=full)
         print("The response of MiscApi->get_misc_tracking_query:\n")
         pprint(api_response)
     except Exception as e:
@@ -988,6 +986,7 @@ Name | Type | Description  | Notes
  **tracking_number** | **str**| 快递单号，通常是一串10-20位的数字或字母数字组合。 | 
  **carrier_code** | **str**| 快递公司编码（可选）。不填写时系统会自动识别，填写后可加快查询速度。 | [optional] 
  **phone** | **str**| 收件人手机尾号，4位数字（可选）。部分快递公司需要验证手机尾号才能查询详细物流信息。 | [optional] 
+ **full** | **bool**| 使用这个参数可以获得完整的物流信息。但会消耗34积分/一次（不过缓存命中半价）。因为成本实在太贵了，否则非常非常亏说是 | [optional] 
 
 ### Return type
 

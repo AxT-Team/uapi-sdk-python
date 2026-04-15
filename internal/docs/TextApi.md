@@ -13,6 +13,8 @@ Method | HTTP request | Description
 [**post_text_base64_decode**](TextApi.md#post_text_base64_decode) | **POST** /text/base64/decode | Base64 解码
 [**post_text_base64_encode**](TextApi.md#post_text_base64_encode) | **POST** /text/base64/encode | Base64 编码
 [**post_text_convert**](TextApi.md#post_text_convert) | **POST** /text/convert | 格式转换
+[**post_text_markdown_to_html**](TextApi.md#post_text_markdown_to_html) | **POST** /text/markdown-to-html | Markdown 转 HTML
+[**post_text_markdown_to_pdf**](TextApi.md#post_text_markdown_to_pdf) | **POST** /text/markdown-to-pdf | Markdown 转 PDF
 [**post_text_md5**](TextApi.md#post_text_md5) | **POST** /text/md5 | MD5 哈希 (POST)
 [**post_text_md5_verify**](TextApi.md#post_text_md5_verify) | **POST** /text/md5/verify | MD5 校验
 
@@ -388,7 +390,7 @@ AES高级加密
 
 ### 输出格式支持
 - **base64**（默认）：标准Base64编码输出，适合传输和存储
-- **hex**：十六进制编码输出，方便与在线加密工具对比验证
+- **hex**：十六进制编码输出，方便进行结果核对
 
 通过 `output_format` 参数可以直接获取HEX格式的密文，无需额外调用转换接口。
 
@@ -443,7 +445,6 @@ AES高级加密
 - **加密算法**: AES-256
 - **编码格式**: Base64/HEX（输入/输出）
 - **IV长度**: 16字节（128位）
-- **版本标注**: v3.4.8+
 
 > [!NOTE]
 > **关于IV（初始化向量）**
@@ -454,7 +455,7 @@ AES高级加密
 
 > [!TIP]
 > **关于输出格式**
-> - 如需与在线加密工具（如 toolhelper.cn）对比结果，建议使用 `output_format: "hex"` 
+> - 如需核对输出结果，建议使用 `output_format: "hex"`
 > - Base64格式更适合网络传输和API调用
 > - 两种格式可以相互转换，数据完全一致
 
@@ -818,6 +819,167 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | 转换成功 |  -  |
 **400** | 转换失败或参数错误 |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **post_text_markdown_to_html**
+> PostTextMarkdownToHtml200Response post_text_markdown_to_html(post_text_markdown_to_html_request)
+
+Markdown 转 HTML
+
+直接调用这个接口，就可以把 Markdown 文本转换成带样式的 HTML，而且它不只适合程序里动态注入，也适合在开发阶段直接预览。
+
+## 如何使用与预览
+- **默认模式：返回 JSON 里的 HTML 片段**：不传 `format` 时，接口会返回 JSON。您只需要读取响应里的 `data.html`，再赋值给前端容器，例如 `element.innerHTML = data.html`、Vue 的 `v-html`，或者 React 里配合 `dangerouslySetInnerHTML` 使用。
+- **预览模式：直接返回完整 HTML 网页**：如果您想在浏览器里直接打开结果，或者想把响应保存成一个独立的 `.html` 文件，请传 `format="html"`。这个模式下，接口会直接返回带 `<!DOCTYPE html><html>...` 的完整网页源码。
+
+## 功能概述
+- **自带精美排版，无需手写 CSS**：返回结果已经内置样式，标题、引用、表格、任务列表和代码块都可以直接显示。
+- **支持丰富的排版元素**：除了标准 Markdown，这个接口也可以正确处理 GFM 常见语法，例如表格、任务列表和带语言标记的代码块。
+- **安全处理用户内容**：默认开启安全模式，会自动过滤原始 HTML 里的风险脚本。如果内容来源绝对可信，并且您确实需要保留原始 HTML，可以把 `sanitize` 设为 `false`。
+
+### Example
+
+
+```python
+import uapi
+from uapi.models.post_text_markdown_to_html200_response import PostTextMarkdownToHtml200Response
+from uapi.models.post_text_markdown_to_html_request import PostTextMarkdownToHtmlRequest
+from uapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = uapi.Configuration(
+    host = "https://uapis.cn/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with uapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = uapi.TextApi(api_client)
+    post_text_markdown_to_html_request = uapi.PostTextMarkdownToHtmlRequest() # PostTextMarkdownToHtmlRequest | 请求体使用 `application/json`。`text` 必填；`format` 和 `sanitize` 可选。
+
+    try:
+        # Markdown 转 HTML
+        api_response = api_instance.post_text_markdown_to_html(post_text_markdown_to_html_request)
+        print("The response of TextApi->post_text_markdown_to_html:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TextApi->post_text_markdown_to_html: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **post_text_markdown_to_html_request** | [**PostTextMarkdownToHtmlRequest**](PostTextMarkdownToHtmlRequest.md)| 请求体使用 &#x60;application/json&#x60;。&#x60;text&#x60; 必填；&#x60;format&#x60; 和 &#x60;sanitize&#x60; 可选。 | 
+
+### Return type
+
+[**PostTextMarkdownToHtml200Response**](PostTextMarkdownToHtml200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, text/html
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | 转换成功。具体返回 JSON 还是纯 HTML，由 &#x60;format&#x60; 参数决定。 |  -  |
+**400** | 请求参数错误。可能是请求体格式错误、&#x60;text&#x60; 为空，或者 &#x60;format&#x60; 取值不合法。 |  -  |
+**413** | Markdown 文本超过当前大小限制。 |  -  |
+**500** | 转换过程中发生错误，请稍后再试。 |  -  |
+**503** | 服务暂时不可用。 |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **post_text_markdown_to_pdf**
+> bytearray post_text_markdown_to_pdf(post_text_markdown_to_pdf_request)
+
+Markdown 转 PDF
+
+当您的业务系统需要提供“导出为 PDF”的功能时，无需在后端部署复杂的排版引擎，只需将 Markdown 文本发给这个接口，即可直接获取打印级的 PDF 文件。
+
+## 功能概述
+- **服务端直接生成**：接口直接返回 PDF 文件二进制流，前端无需任何处理即可触发下载，后端也能轻松存盘归档。
+- **多种精美主题与纸张**：内置了 GitHub、暗黑等多种专业排版主题，并支持 A4、Letter 等标准纸张。只需简单配置，就能生成符合业务场景的专业文档。
+- **公网图片也可以直接带入 PDF**：除了纯文本和标准 Markdown 语法，这个接口也可以处理 `data URI` 图片，或者公网可访问的 `http`、`https` 图片链接。服务端会先通过代理抓取图片，并在渲染前内联到文档里，同时带有超时控制。
+
+### Example
+
+
+```python
+import uapi
+from uapi.models.post_text_markdown_to_pdf_request import PostTextMarkdownToPdfRequest
+from uapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = uapi.Configuration(
+    host = "https://uapis.cn/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with uapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = uapi.TextApi(api_client)
+    post_text_markdown_to_pdf_request = uapi.PostTextMarkdownToPdfRequest() # PostTextMarkdownToPdfRequest | 请求体使用 `application/json`。`text` 必填，`theme` 和 `paper_size` 可选。
+
+    try:
+        # Markdown 转 PDF
+        api_response = api_instance.post_text_markdown_to_pdf(post_text_markdown_to_pdf_request)
+        print("The response of TextApi->post_text_markdown_to_pdf:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TextApi->post_text_markdown_to_pdf: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **post_text_markdown_to_pdf_request** | [**PostTextMarkdownToPdfRequest**](PostTextMarkdownToPdfRequest.md)| 请求体使用 &#x60;application/json&#x60;。&#x60;text&#x60; 必填，&#x60;theme&#x60; 和 &#x60;paper_size&#x60; 可选。 | 
+
+### Return type
+
+**bytearray**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/pdf, application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | 转换成功。响应体是 PDF 二进制文件流。 |  * Content-Disposition - 提示客户端按 PDF 文件处理，默认文件名为 &#x60;markdown.pdf&#x60;。 <br>  * Cache-Control - 禁止缓存本次导出的 PDF 响应。 <br>  |
+**400** | 请求参数不合法，或者 Markdown 内容包含当前不允许的内容。 |  -  |
+**413** | Markdown 文本，或 Markdown 中引用的图片资源超过当前大小限制。 |  -  |
+**500** | PDF 生成失败，请稍后再试。 |  -  |
+**502** | Markdown 中引用的图片下载失败，或远端返回的不是可识别的图片内容。 |  -  |
+**503** | PDF 渲染服务暂时不可用。 |  -  |
+**504** | Markdown 中引用的图片下载超时。 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

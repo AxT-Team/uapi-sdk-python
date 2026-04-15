@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **keyword** | **str** | 搜索关键词。 | [optional] 
 **count** | **int** | 匹配到的结果数量。 | [optional] 
 **results** | [**List[GetMiscHotboard200ResponseOneOf1ResultsInner]**](GetMiscHotboard200ResponseOneOf1ResultsInner.md) | 搜索结果数组。 | [optional] 
-**sources** | **List[str]** | 支持历史数据的平台列表。 | [optional] 
 
 ## Example
 

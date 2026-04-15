@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**result_count** | **int** |  | [optional] 
-**elapsed_ms** | **int** |  | [optional] 
-**first_result_host** | **str** |  | [optional] 
+**name** | **str** | 搜索引擎版本 | [optional] 
+**status** | **str** | 本次搜索引擎调用状态 | [optional] 
+**result_count** | **int** | 该搜索引擎返回的结果数 | [optional] 
+**elapsed_ms** | **int** | 该搜索引擎的耗时（毫秒） | [optional] 
+**first_result_host** | **str** | 该搜索源首条结果的域名 | [optional] 
 
 ## Example
 

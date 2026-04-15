@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**query** | **str** | 实际执行的搜索查询 | [optional] 
-**total_results** | **int** | 搜索结果总数 | [optional] 
+**query** | **str** | 执行的搜索查询 | [optional] 
+**total_results** | **int** | 返回的搜索结果总数 | [optional] 
 **results** | [**List[PostSearchAggregate200ResponseResultsInner]**](PostSearchAggregate200ResponseResultsInner.md) | 搜索结果列表 | [optional] 
-**sources** | [**List[PostSearchAggregate200ResponseSourcesInner]**](PostSearchAggregate200ResponseSourcesInner.md) | 各搜索源的结果统计 | [optional] 
-**process_time_ms** | **int** | 处理耗时（毫秒） | [optional] 
-**cached** | **bool** | 结果是否来自缓存 | [optional] 
+**sources** | [**List[PostSearchAggregate200ResponseSourcesInner]**](PostSearchAggregate200ResponseSourcesInner.md) | 本次请求实际命中的搜索引擎信息 | [optional] 
+**process_time_ms** | **int** | 本次请求总耗时（毫秒） | [optional] 
+**metadata** | [**PostSearchAggregate200ResponseMetadata**](PostSearchAggregate200ResponseMetadata.md) |  | [optional] 
 
 ## Example
 

@@ -5,11 +5,34 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "uapi-sdk-python"
 version = "0.1.17"
-description = "Idiomatic UAPI SDK for Python"
+description = "Official Python SDK for UAPI / uapis.cn — strongly-typed wrapper around 100+ free public-API endpoints (network, text, image, social, translation, search). Generated from the live OpenAPI 3.1 spec."
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.9"
 authors = [{name = "UAPI", email = "dev@uapis.cn"}]
+keywords = ["uapi", "uapis", "uapis.cn", "sdk", "python", "rest", "rest-api", "openapi", "httpx", "public-api", "free-api", "agent", "ai", "mcp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
 dependencies = ["httpx>=0.24.1"]
+
+[project.urls]
+Homepage = "https://uapis.cn/docs/sdk/python"
+Documentation = "https://uapis.cn/docs"
+Repository = "https://github.com/AxT-Team/uapi-sdk-python"
+Issues = "https://github.com/AxT-Team/uapi-sdk-python/issues"
+"OpenAPI Spec" = "https://uapis.cn/openapi.json"
 
 [project.optional-dependencies]
 dev = ["pytest", "mypy", "black", "isort"]

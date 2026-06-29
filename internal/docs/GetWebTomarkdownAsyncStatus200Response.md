@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
-**progress** | **int** |  | [optional] 
 **created_at** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
-**started_at** | **str** |  | [optional] 
+**progress** | **int** |  | [optional] 
+**status** | **str** |  | [optional] 
+**task_id** | **str** |  | [optional] 
+**url** | **str** |  | [optional] 
 **elapsed** | **float** |  | [optional] 
+**started_at** | **str** |  | [optional] 
 **completed_at** | **str** |  | [optional] 
 **duration** | **float** |  | [optional] 
 **result** | [**GetWebTomarkdownAsyncStatus200ResponseAnyOf2Result**](GetWebTomarkdownAsyncStatus200ResponseAnyOf2Result.md) |  | [optional] 

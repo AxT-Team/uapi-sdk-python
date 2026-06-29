@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**width** | **float** | 视频宽度。 | [optional] 
 **height** | **float** | 视频高度。 | [optional] 
 **rotate** | **float** | 旋转角度。 | [optional] 
+**width** | **float** | 视频宽度。 | [optional] 
 
 ## Example
 

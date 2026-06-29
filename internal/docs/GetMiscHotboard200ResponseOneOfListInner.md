@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**cover** | **str** | 封面图 URL，音乐类热榜返回专辑封面，其他平台一般不返回。 | [optional] 
 **extra** | **Dict[str, object]** | 额外信息，不同平台该字段内容不同，例如微博热搜的标签（如“新”“爆”）。 | [optional] 
 **hot_value** | **str** |  | [optional] 
 **index** | **int** |  | [optional] 
 **title** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
-**cover** | **str** | 封面图 URL，音乐类热榜返回专辑封面，其他平台一般不返回。 | [optional] 
 
 ## Example
 

@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**desc** | **str** | 头像框描述。 | [optional] 
 **name** | **str** | 头像框名称。 | [optional] 
 **value** | **str** | 头像框值。 | [optional] 
-**desc** | **str** | 头像框描述。 | [optional] 
 
 ## Example
 

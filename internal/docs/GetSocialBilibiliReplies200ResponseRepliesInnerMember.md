@@ -6,10 +6,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uname** | **str** | 用户昵称。 | [optional] 
-**sex** | **str** | 用户性别。 | [optional] 
 **avatar** | **str** | 用户头像的URL。 | [optional] 
 **level_info** | [**GetSocialBilibiliReplies200ResponseRepliesInnerMemberLevelInfo**](GetSocialBilibiliReplies200ResponseRepliesInnerMemberLevelInfo.md) |  | [optional] 
+**sex** | **str** | 用户性别。 | [optional] 
+**uname** | **str** | 用户昵称。 | [optional] 
 
 ## Example
 

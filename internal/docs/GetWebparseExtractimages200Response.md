@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**page_url** | **str** | 实际解析的网页地址。 | [optional] 
 **image_urls** | **List[str]** | 页面中提取到的图片链接列表。 | [optional] 
+**page_url** | **str** | 实际解析的网页地址。 | [optional] 
 
 ## Example
 

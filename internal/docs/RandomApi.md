@@ -1,6 +1,6 @@
 # uapi.RandomApi
 
-All URIs are relative to *https://uapis.cn/api/v1*
+All URIs are relative to *https://uapis.cn*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -20,15 +20,6 @@ Method | HTTP request | Description
 ## 功能概述
 通过向答案之书提问，你将获得一个充满智慧（或许）的随机答案。这个API支持通过查询参数或POST请求体两种方式提问。
 
-## 使用须知
-
-> [!TIP]
-> **提问技巧**
-> - 提出明确的问题会获得更好的体验
-> - 问题不能为空
-> - 支持中文问题
-> - 答案具有随机性，仅供娱乐参考
-
 ### Example
 
 
@@ -38,10 +29,10 @@ from uapi.models.get_answerbook_ask200_response import GetAnswerbookAsk200Respon
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -145,10 +136,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -232,10 +223,10 @@ from uapi.models.get_random_string200_response import GetRandomString200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -311,10 +302,10 @@ from uapi.models.post_answerbook_ask_request import PostAnswerbookAskRequest
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 

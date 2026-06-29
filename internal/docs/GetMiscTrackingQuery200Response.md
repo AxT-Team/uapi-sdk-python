@@ -5,10 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tracking_number** | **str** | 快递单号 | [optional] 
 **carrier_code** | **str** | 快递公司编码 | [optional] 
 **carrier_name** | **str** | 快递公司名称 | [optional] 
+**completed_at** | **str** | 完成时间。仅已完成时返回签收或妥投对应的轨迹时间；未完成时为空字符串。 | [optional] 
+**is_completed** | **bool** | 快递是否已完成。仅当状态识别为已签收/已妥投/已完成时为 true。 | [optional] 
+**status** | **str** | 快递状态中文名称，例如：待揽收、已揽收、运输中、派送中、已完成、异常、未知。 | [optional] 
+**status_code** | **str** | 快递状态编码。可能值：pending、picked_up、in_transit、out_for_delivery、delivered、exception、unknown。 | [optional] 
 **track_count** | **int** | 物流轨迹数量 | [optional] 
+**tracking_number** | **str** | 快递单号 | [optional] 
 **tracks** | [**List[GetMiscTrackingQuery200ResponseTracksInner]**](GetMiscTrackingQuery200ResponseTracksInner.md) | 物流轨迹列表，按时间倒序排列 | [optional] 
 
 ## Example

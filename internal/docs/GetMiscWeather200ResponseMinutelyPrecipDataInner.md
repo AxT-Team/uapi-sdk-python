@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**time** | **str** | 预报时间 ISO8601 | [optional] 
 **precip** | **float** | 该时间点的降水量 mm | [optional] 
+**time** | **str** | 预报时间 ISO8601 | [optional] 
 **type** | **str** | 降水类型：rain / snow | [optional] 
 
 ## Example

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source_lang** | **str** | The source language detected. | [optional] 
-**translated_text** | **str** | The translated text. | [optional] 
+**text** | **str** | 原始文本。 | [optional] 
+**translate** | **str** | 翻译后的文本。 | [optional] 
 
 ## Example
 

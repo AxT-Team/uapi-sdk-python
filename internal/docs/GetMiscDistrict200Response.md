@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total** | **int** | 结果总数。 | [optional] 
 **results** | [**List[GetMiscDistrict200ResponseResultsInner]**](GetMiscDistrict200ResponseResultsInner.md) | 结果列表。 | [optional] 
+**total** | **int** | 结果总数。 | [optional] 
 
 ## Example
 

@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | 徽章名称。 | [optional] 
 **desc** | **str** | 徽章描述。 | [optional] 
+**name** | **str** | 徽章名称。 | [optional] 
 
 ## Example
 

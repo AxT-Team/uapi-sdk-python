@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login** | **str** | 组织登录名。 | [optional] 
+**avatar_url** | **str** | 组织头像链接。 | [optional] 
 **description** | **str** | 组织简介。 | [optional] 
 **html_url** | **str** | 组织主页链接。 | [optional] 
-**avatar_url** | **str** | 组织头像链接。 | [optional] 
+**login** | **str** | 组织登录名。 | [optional] 
 
 ## Example
 

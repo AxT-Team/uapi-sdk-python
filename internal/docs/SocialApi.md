@@ -1,6 +1,6 @@
 # uapi.SocialApi
 
-All URIs are relative to *https://uapis.cn/api/v1*
+All URIs are relative to *https://uapis.cn*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -40,10 +40,10 @@ from uapi.models.get_github_repo200_response import GetGithubRepo200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -95,7 +95,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_github_user**
-> GetGithubUser200Response get_github_user(user, activity=activity, activity_scope=activity_scope, org=org)
+> GetGithubUser200Response get_github_user(user, activity=activity, activity_scope=activity_scope, org=org, pinned=pinned, repos=repos, repos_limit=repos_limit)
 
 查询 GitHub 用户信息
 
@@ -115,10 +115,10 @@ from uapi.models.get_github_user200_response import GetGithubUser200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -130,10 +130,13 @@ with uapi.ApiClient(configuration) as api_client:
     activity = False # bool | 是否获取最近一年的贡献活动数据（如贡献图、时间线）。传入 true 开启，其他值均视为不开启。 (optional) (default to False)
     activity_scope = all # str | 活动数据范围。可选 all 或 organization。只有开启 activity 时才有意义。 (optional) (default to all)
     org = 'org_example' # str | 组织登录名。如果传入此参数，会自动视为开启 organization 级别的贡献查询，切勿再同时传 activity_scope=all。 (optional)
+    pinned = False # bool | 是否附带该用户在 GitHub 主页展示的 pinned 仓库数据。传入 true 开启，其他值均视为不开启。 (optional) (default to False)
+    repos = False # bool | 是否附带该用户最近活跃的公开仓库列表。传入 true 开启，其他值均视为不开启。 (optional) (default to False)
+    repos_limit = 6 # int | 公开仓库列表的返回数量。只有开启 repos 时才有意义；如果单独传入 repos_limit，也会自动视为开启 repos。 (optional) (default to 6)
 
     try:
         # 查询 GitHub 用户信息
-        api_response = api_instance.get_github_user(user, activity=activity, activity_scope=activity_scope, org=org)
+        api_response = api_instance.get_github_user(user, activity=activity, activity_scope=activity_scope, org=org, pinned=pinned, repos=repos, repos_limit=repos_limit)
         print("The response of SocialApi->get_github_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -151,6 +154,9 @@ Name | Type | Description  | Notes
  **activity** | **bool**| 是否获取最近一年的贡献活动数据（如贡献图、时间线）。传入 true 开启，其他值均视为不开启。 | [optional] [default to False]
  **activity_scope** | **str**| 活动数据范围。可选 all 或 organization。只有开启 activity 时才有意义。 | [optional] [default to all]
  **org** | **str**| 组织登录名。如果传入此参数，会自动视为开启 organization 级别的贡献查询，切勿再同时传 activity_scope&#x3D;all。 | [optional] 
+ **pinned** | **bool**| 是否附带该用户在 GitHub 主页展示的 pinned 仓库数据。传入 true 开启，其他值均视为不开启。 | [optional] [default to False]
+ **repos** | **bool**| 是否附带该用户最近活跃的公开仓库列表。传入 true 开启，其他值均视为不开启。 | [optional] [default to False]
+ **repos_limit** | **int**| 公开仓库列表的返回数量。只有开启 repos 时才有意义；如果单独传入 repos_limit，也会自动视为开启 repos。 | [optional] [default to 6]
 
 ### Return type
 
@@ -221,10 +227,10 @@ from uapi.models.get_social_bilibili_archives200_response import GetSocialBilibi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -306,10 +312,10 @@ from uapi.models.get_social_bilibili_liveroom200_response import GetSocialBilibi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -392,10 +398,10 @@ from uapi.models.get_social_bilibili_replies200_response import GetSocialBilibil
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -469,10 +475,10 @@ from uapi.models.get_social_bilibili_userinfo200_response import GetSocialBilibi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -549,10 +555,10 @@ from uapi.models.get_social_bilibili_videoinfo200_response import GetSocialBilib
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -643,10 +649,10 @@ from uapi.models.get_social_qq_groupinfo200_response import GetSocialQqGroupinfo
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -715,6 +721,7 @@ No authorization required
 
 ### Example
 
+* Bearer (JWT) Authentication (BearerAuth):
 
 ```python
 import uapi
@@ -722,12 +729,21 @@ from uapi.models.get_social_qq_userinfo200_response import GetSocialQqUserinfo20
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): BearerAuth
+configuration = uapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with uapi.ApiClient(configuration) as api_client:
@@ -759,7 +775,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

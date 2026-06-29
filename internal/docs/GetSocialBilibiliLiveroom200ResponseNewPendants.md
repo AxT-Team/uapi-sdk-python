@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**frame** | [**GetSocialBilibiliLiveroom200ResponseNewPendantsFrame**](GetSocialBilibiliLiveroom200ResponseNewPendantsFrame.md) |  | [optional] 
 **badge** | [**GetSocialBilibiliLiveroom200ResponseNewPendantsBadge**](GetSocialBilibiliLiveroom200ResponseNewPendantsBadge.md) |  | [optional] 
+**frame** | [**GetSocialBilibiliLiveroom200ResponseNewPendantsFrame**](GetSocialBilibiliLiveroom200ResponseNewPendantsFrame.md) |  | [optional] 
 
 ## Example
 

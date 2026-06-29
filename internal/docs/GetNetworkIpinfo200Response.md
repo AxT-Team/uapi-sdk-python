@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ip** | **str** | 查询的IP地址 | [optional] 
-**region** | **str** | 地理位置，格式：国家 省份 城市 | [optional] 
-**isp** | **str** | 运营商名称 | [optional] 
-**llc** | **str** | 归属机构 | [optional] 
 **asn** | **str** | 自治系统编号 | [optional] 
-**latitude** | **float** | 纬度 | [optional] 
-**longitude** | **float** | 经度 | [optional] 
 **beginip** | **str** | IP段起始地址（标准查询） | [optional] 
 **endip** | **str** | IP段结束地址（标准查询） | [optional] 
+**ip** | **str** | 查询的IP地址 | [optional] 
+**isp** | **str** | 运营商名称 | [optional] 
+**latitude** | **float** | 纬度 | [optional] 
+**llc** | **str** | 归属机构 | [optional] 
+**longitude** | **float** | 经度 | [optional] 
+**region** | **str** | 地理位置，格式：国家 省份 城市 | [optional] 
 
 ## Example
 

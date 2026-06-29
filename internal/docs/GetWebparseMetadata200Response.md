@@ -5,17 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**page_url** | **str** |  | [optional] 
-**title** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
-**keywords** | **List[str]** |  | [optional] 
-**favicon_url** | **str** |  | [optional] 
-**language** | **str** |  | [optional] 
 **author** | **str** |  | [optional] 
-**published_time** | **str** |  | [optional] 
 **canonical_url** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
+**favicon_url** | **str** |  | [optional] 
 **generator** | **str** |  | [optional] 
+**keywords** | **List[str]** |  | [optional] 
+**language** | **str** |  | [optional] 
 **open_graph** | **object** |  | [optional] 
+**page_url** | **str** |  | [optional] 
+**published_time** | **str** |  | [optional] 
+**title** | **str** |  | [optional] 
 
 ## Example
 

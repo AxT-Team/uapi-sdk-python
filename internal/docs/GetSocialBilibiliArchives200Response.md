@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total** | **int** | 总稿件数 | [optional] 
 **page** | **int** | 当前页码 | [optional] 
 **size** | **int** | 每页数量 | [optional] 
+**total** | **int** | 总稿件数 | [optional] 
 **videos** | [**List[GetSocialBilibiliArchives200ResponseVideosInner]**](GetSocialBilibiliArchives200ResponseVideosInner.md) | 视频列表 | [optional] 
 
 ## Example

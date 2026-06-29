@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** |  | [optional] 
-**original_text** | **str** |  | [optional] 
-**masked_text** | **str** |  | [optional] 
 **forbidden_words** | **List[str]** |  | [optional] 
+**masked_text** | **str** |  | [optional] 
+**original_text** | **str** |  | [optional] 
+**status** | **str** |  | [optional] 
 
 ## Example
 

@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **endpoints** | [**List[GetStatusUsage200ResponseAnyOfEndpointsInner]**](GetStatusUsage200ResponseAnyOfEndpointsInner.md) |  | [optional] 
 **unaggregated** | [**GetStatusUsage200ResponseAnyOfUnaggregated**](GetStatusUsage200ResponseAnyOfUnaggregated.md) |  | [optional] 
-**path** | **str** |  | [optional] 
 **count** | **int** |  | [optional] 
+**path** | **str** |  | [optional] 
 
 ## Example
 

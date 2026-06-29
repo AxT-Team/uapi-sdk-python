@@ -1,6 +1,6 @@
 # uapi.NetworkApi
 
-All URIs are relative to *https://uapis.cn/api/v1*
+All URIs are relative to *https://uapis.cn*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -35,10 +35,10 @@ from uapi.models.get_network_dns200_response import GetNetworkDns200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -114,10 +114,10 @@ from uapi.models.get_network_icp200_response import GetNetworkIcp200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -189,10 +189,10 @@ from uapi.models.get_network_ipinfo200_response import GetNetworkIpinfo200Respon
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -267,10 +267,10 @@ from uapi.models.get_network_myip200_response import GetNetworkMyip200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -340,10 +340,10 @@ from uapi.models.get_network_ping200_response import GetNetworkPing200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -413,10 +413,10 @@ from uapi.models.get_network_pingmyip200_response import GetNetworkPingmyip200Re
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -482,10 +482,10 @@ from uapi.models.get_network_portscan200_response import GetNetworkPortscan200Re
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -559,10 +559,10 @@ from uapi.models.get_network_urlstatus200_response import GetNetworkUrlstatus200
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -639,10 +639,10 @@ from uapi.models.get_network_whois200_response import GetNetworkWhois200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -714,10 +714,10 @@ from uapi.models.get_network_wxdomain200_response import GetNetworkWxdomain200Re
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 

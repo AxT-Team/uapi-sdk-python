@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**code** | **int** |  | [optional] 
 **error** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
-**code** | **int** |  | [optional] 
 
 ## Example
 

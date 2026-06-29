@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error_code** | **str** |  | [optional] 
-**error_message** | **str** |  | [optional] 
 **error_details** | **str** |  | [optional] 
+**error_message** | **str** |  | [optional] 
 
 ## Example
 

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error** | **str** | 错误描述 | [optional] 
 **code** | **str** |  | [optional] 
+**error** | **str** | 错误描述 | [optional] 
 
 ## Example
 

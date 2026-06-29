@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**author** | [**GetSocialBilibiliVideoinfo200ResponseSubtitleListInnerAuthor**](GetSocialBilibiliVideoinfo200ResponseSubtitleListInnerAuthor.md) |  | [optional] 
+**author_mid** | **float** | 字幕作者 UID。 | [optional] 
 **id** | **float** | 字幕 ID。 | [optional] 
+**is_lock** | **bool** | 是否锁定。 | [optional] 
 **lan** | **str** | 语言代码。 | [optional] 
 **lan_doc** | **str** | 语言名称。 | [optional] 
-**is_lock** | **bool** | 是否锁定。 | [optional] 
-**author_mid** | **float** | 字幕作者 UID。 | [optional] 
 **subtitle_url** | **str** | 字幕文件链接。 | [optional] 
-**author** | [**GetSocialBilibiliVideoinfo200ResponseSubtitleListInnerAuthor**](GetSocialBilibiliVideoinfo200ResponseSubtitleListInnerAuthor.md) |  | [optional] 
 
 ## Example
 

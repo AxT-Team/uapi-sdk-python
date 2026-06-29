@@ -1,10 +1,11 @@
 # uapi.PoemApi
 
-All URIs are relative to *https://uapis.cn/api/v1*
+All URIs are relative to *https://uapis.cn*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_saying**](PoemApi.md#get_saying) | **GET** /saying | 一言
+[**get_saying_random**](PoemApi.md#get_saying_random) | **GET** /saying/random | 一言（随机/每日/场景/此刻）
 
 
 # **get_saying**
@@ -26,10 +27,10 @@ from uapi.models.get_saying200_response import GetSaying200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -72,6 +73,105 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | 请求成功！返回一条随机的语录。 |  -  |
 **500** | 当语料库为空或无法读取时。 |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_saying_random**
+> GetSayingRandom200Response get_saying_random(mode=mode, scene=scene, source=source, category=category, tag=tag)
+
+一言（随机/每日/场景/此刻）
+
+一言接口，返回一条随机语录。通过 `mode` 参数切换四种返回方式，并支持按来源、分类、标签过滤。
+
+## 四种模式（`mode`）
+- **`random`（默认）**：每次调用随机返回一条语录。
+- **`daily`**：同一天内返回固定的同一条，适合每日打卡、签到等场景。
+- **`recommend`**：配合 `scene` 参数，返回指定场景（如 `night`、`morning`）的语录。
+- **`moment`**：根据请求时所处时段，自动返回应景语录。
+
+## 语言控制
+语料分中英文两类，可通过 `source` 或 `category` 控制：
+- 需要中文：`source` 选「综合句子语料库 / 曹星宇句子集」，或 `category` 选中文分类（如 影视、文学、诗词）。
+- 需要英文：`source` 选「Quotable / 英文历史名言」。
+
+## 使用须知
+> [!NOTE]
+> - `source`、`category`、`tag` 支持多值，用英文逗号 `,` 或分号 `;` 分隔。
+> - `scene` 仅在 `mode=recommend` 时生效且必填，其他模式下会被忽略。
+> - 请求示例：
+>   - 随机：`GET /api/v1/saying/random`
+>   - 每日：`GET /api/v1/saying/random?mode=daily`
+>   - 场景：`GET /api/v1/saying/random?mode=recommend&scene=night`
+>   - 此刻：`GET /api/v1/saying/random?mode=moment`
+
+### Example
+
+
+```python
+import uapi
+from uapi.models.get_saying_random200_response import GetSayingRandom200Response
+from uapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://uapis.cn
+# See configuration.py for a list of all supported configuration parameters.
+configuration = uapi.Configuration(
+    host = "https://uapis.cn"
+)
+
+
+# Enter a context with an instance of the API client
+with uapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = uapi.PoemApi(api_client)
+    mode = random # str | 运行模式。不传或 random 为随机一言；可选 daily、recommend、moment。 (optional) (default to random)
+    scene = 'scene_example' # str | 推荐场景。当 mode=recommend 时必填，例如 night、morning、work 等。请从[支持的场景列表](#enum-list)中选择。 (optional)
+    source = 'source_example' # str | 语料来源过滤。支持重复传参，或使用逗号/分号分隔多个值。请从[支持的来源列表](#enum-list)中选择。 (optional)
+    category = 'category_example' # str | 分类过滤。支持重复传参，或使用逗号/分号分隔多个值。请从[支持的分类列表](#enum-list)中选择。 (optional)
+    tag = 'tag_example' # str | 标签过滤。支持重复传参，或使用逗号/分号分隔多个值。请从[支持的标签列表](#enum-list)中选择。 (optional)
+
+    try:
+        # 一言（随机/每日/场景/此刻）
+        api_response = api_instance.get_saying_random(mode=mode, scene=scene, source=source, category=category, tag=tag)
+        print("The response of PoemApi->get_saying_random:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PoemApi->get_saying_random: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **mode** | **str**| 运行模式。不传或 random 为随机一言；可选 daily、recommend、moment。 | [optional] [default to random]
+ **scene** | **str**| 推荐场景。当 mode&#x3D;recommend 时必填，例如 night、morning、work 等。请从[支持的场景列表](#enum-list)中选择。 | [optional] 
+ **source** | **str**| 语料来源过滤。支持重复传参，或使用逗号/分号分隔多个值。请从[支持的来源列表](#enum-list)中选择。 | [optional] 
+ **category** | **str**| 分类过滤。支持重复传参，或使用逗号/分号分隔多个值。请从[支持的分类列表](#enum-list)中选择。 | [optional] 
+ **tag** | **str**| 标签过滤。支持重复传参，或使用逗号/分号分隔多个值。请从[支持的标签列表](#enum-list)中选择。 | [optional] 
+
+### Return type
+
+[**GetSayingRandom200Response**](GetSayingRandom200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | 请求成功。&#x60;random&#x60; 模式直接返回语录对象；&#x60;daily&#x60; / &#x60;recommend&#x60; / &#x60;moment&#x60; 模式返回带模式信息的包装对象，语录本体在 &#x60;item&#x60; 字段中。 |  -  |
+**400** | 参数无效。通常是由于指定的推荐场景不存在，或者过滤参数格式有误。 |  -  |
+**404** | 未找到满足当前过滤条件的语录数据。 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

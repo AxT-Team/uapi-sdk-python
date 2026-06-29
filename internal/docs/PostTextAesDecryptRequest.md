@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **str** | 密钥，长度必须为16、24或32字节，对应AES-128/192/256。 | 
-**text** | **str** | Base64编码的密文。 | 
 **nonce** | **str** | 16字节的IV/Nonce，必须为16个字符 | [optional] 
+**text** | **str** | Base64编码的密文。 | 
 
 ## Example
 

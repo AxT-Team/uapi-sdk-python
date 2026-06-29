@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aid** | **float** | 关联 AV 号。 | [optional] 
-**type** | **float** | 荣誉类型。 | [optional] 
 **desc** | **str** | 荣誉名称。 | [optional] 
+**type** | **float** | 荣誉类型。 | [optional] 
 **weekly_recommend_num** | **float** | 周推荐序号。 | [optional] 
 
 ## Example

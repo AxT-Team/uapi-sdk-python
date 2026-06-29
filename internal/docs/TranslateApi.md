@@ -1,6 +1,6 @@
 # uapi.TranslateApi
 
-All URIs are relative to *https://uapis.cn/api/v1*
+All URIs are relative to *https://uapis.cn*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,10 +26,10 @@ from uapi.models.get_ai_translate_languages200_response import GetAiTranslateLan
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -102,10 +102,10 @@ from uapi.models.post_ai_translate_request import PostAiTranslateRequest
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -191,10 +191,10 @@ from uapi.models.post_translate_stream_request import PostTranslateStreamRequest
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -268,10 +268,10 @@ from uapi.models.post_translate_text_request import PostTranslateTextRequest
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 

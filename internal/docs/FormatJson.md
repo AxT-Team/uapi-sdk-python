@@ -5,21 +5,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_date** | **str** |  | [optional] 
-**market** | **str** |  | [optional] 
-**title** | **str** |  | [optional] 
-**subtitle** | **str** |  | [optional] 
-**headline** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
 **copyright** | **str** |  | [optional] 
 **copyright_link** | **str** |  | [optional] 
-**quiz_id** | **str** |  | [optional] 
-**trivia** | [**FormatJsonTrivia**](FormatJsonTrivia.md) |  | [optional] 
-**resolution** | **str** |  | [optional] 
-**image_url** | **str** |  | [optional] 
-**image_url_4k** | **str** |  | [optional] 
-**image_url_1080** | **str** |  | [optional] 
+**var_date** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
 **fetched_at** | **str** |  | [optional] 
+**headline** | **str** |  | [optional] 
+**image_url** | **str** |  | [optional] 
+**image_url_1080** | **str** |  | [optional] 
+**image_url_4k** | **str** |  | [optional] 
+**market** | **str** |  | [optional] 
+**quiz_id** | **str** |  | [optional] 
+**resolution** | **str** |  | [optional] 
+**subtitle** | **str** |  | [optional] 
+**title** | **str** |  | [optional] 
+**trivia** | [**FormatJsonTrivia**](FormatJsonTrivia.md) |  | [optional] 
 **updated_at** | **str** |  | [optional] 
 
 ## Example

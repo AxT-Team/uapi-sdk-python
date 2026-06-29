@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**fetch_full** | **bool** | 是否获取页面完整正文（会影响响应时间） | [optional] [default to False]
+**filetype** | **str** | 限制文件类型，不需要 &#x60;filetype:&#x60; 前缀。支持 pdf、doc、docx、ppt、pptx、xls、xlsx、txt 等 | [optional] 
 **query** | **str** | 搜索查询关键词，支持中英文 | 
 **site** | **str** | 限制搜索特定网站，不需要 &#x60;site:&#x60; 前缀 | [optional] 
-**filetype** | **str** | 限制文件类型，不需要 &#x60;filetype:&#x60; 前缀。支持 pdf、doc、docx、ppt、pptx、xls、xlsx、txt 等 | [optional] 
-**fetch_full** | **bool** | 是否获取页面完整正文（会影响响应时间） | [optional] [default to False]
 **sort** | **str** | 排序方式 | [optional] [default to 'relevance']
 **time_range** | **str** | 时间范围过滤 | [optional] 
 

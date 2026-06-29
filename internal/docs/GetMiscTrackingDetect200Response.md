@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tracking_number** | **str** | 查询的快递单号 | [optional] 
+**alternatives** | [**List[GetMiscTrackingDetect200ResponseAlternativesInner]**](GetMiscTrackingDetect200ResponseAlternativesInner.md) | 其他可能的快递公司列表。如果没有备选项，会返回空数组。 | [optional] 
 **carrier_code** | **str** | 识别出的快递公司编码 | [optional] 
 **carrier_name** | **str** | 识别出的快递公司名称 | [optional] 
-**alternatives** | [**List[GetMiscTrackingDetect200ResponseAlternativesInner]**](GetMiscTrackingDetect200ResponseAlternativesInner.md) | 其他可能的快递公司列表。如果没有备选项，会返回空数组。 | [optional] 
+**tracking_number** | **str** | 查询的快递单号 | [optional] 
 
 ## Example
 

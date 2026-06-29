@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**resolution** | **str** |  | [optional] 
 **items** | [**List[GetImageBingDailyHistory200ResponseItemsInner]**](GetImageBingDailyHistory200ResponseItemsInner.md) |  | [optional] 
 **pagination** | [**GetImageBingDailyHistory200ResponsePagination**](GetImageBingDailyHistory200ResponsePagination.md) |  | [optional] 
+**resolution** | **str** |  | [optional] 
 
 ## Example
 

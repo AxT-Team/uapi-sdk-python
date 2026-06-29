@@ -67,7 +67,7 @@ class UapiError(Exception):
 
 class ApiErrorError(UapiError):
     """上游/内部错误 (API_ERROR)"""
-    DEFAULT_STATUS = 504
+    DEFAULT_STATUS = 503
 
 class AvatarNotFoundError(UapiError):
     """头像未找到 (AVATAR_NOT_FOUND)"""

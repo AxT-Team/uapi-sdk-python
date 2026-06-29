@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**k** | **str** |  | [optional] 
-**label** | **str** |  | [optional] 
 **category** | **str** |  | [optional] 
 **confidence** | **float** |  | [optional] 
+**k** | **str** |  | [optional] 
+**label** | **str** |  | [optional] 
 
 ## Example
 

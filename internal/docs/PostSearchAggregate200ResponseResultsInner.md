@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**domain** | **str** | 来源域名 | [optional] 
+**position** | **int** | 原始排名位置 | [optional] 
+**publish_time** | **datetime** | 发布时间（ISO 8601 格式） | [optional] 
+**score** | **float** | 综合得分（0-1，已经过排序） | [optional] 
+**snippet** | **str** | 结果摘要/描述 | [optional] 
+**source** | **str** |  | [optional] 
 **title** | **str** | 结果标题 | [optional] 
 **url** | **str** | 结果链接 | [optional] 
-**snippet** | **str** | 结果摘要/描述 | [optional] 
-**domain** | **str** | 来源域名 | [optional] 
-**source** | **str** |  | [optional] 
-**position** | **int** | 原始排名位置 | [optional] 
-**score** | **float** | 综合得分（0-1，已经过排序） | [optional] 
-**publish_time** | **datetime** | 发布时间（ISO 8601 格式） | [optional] 
 
 ## Example
 

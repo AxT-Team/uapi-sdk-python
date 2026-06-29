@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
-**progress** | **int** |  | [optional] 
 **created_at** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
+**progress** | **int** |  | [optional] 
+**status** | **str** |  | [optional] 
+**task_id** | **str** |  | [optional] 
+**url** | **str** |  | [optional] 
 
 ## Example
 

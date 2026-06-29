@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**time** | **str** | 物流更新时间 | [optional] 
 **context** | **str** | 物流状态描述 | [optional] 
+**time** | **str** | 物流更新时间 | [optional] 
 
 ## Example
 

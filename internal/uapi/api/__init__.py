@@ -5,6 +5,7 @@ from uapi.api.default_api import DefaultApi
 from uapi.api.clipzy_api import ClipzyApi
 from uapi.api.convert_api import ConvertApi
 from uapi.api.daily_api import DailyApi
+from uapi.api.dictionary_api import DictionaryApi
 from uapi.api.game_api import GameApi
 from uapi.api.image_api import ImageApi
 from uapi.api.misc_api import MiscApi
@@ -16,4 +17,5 @@ from uapi.api.status_api import StatusApi
 from uapi.api.text_api import TextApi
 from uapi.api.translate_api import TranslateApi
 from uapi.api.web_parse_api import WebParseApi
+from uapi.api.aigc_api import AIGCApi
 

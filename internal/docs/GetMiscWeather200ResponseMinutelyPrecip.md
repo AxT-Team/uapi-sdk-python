@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data** | [**List[GetMiscWeather200ResponseMinutelyPrecipDataInner]**](GetMiscWeather200ResponseMinutelyPrecipDataInner.md) | 精确到2分钟的数据点 | [optional] 
 **summary** | **str** | 降水描述 | [optional] 
 **update_time** | **str** | 更新时间 | [optional] 
-**data** | [**List[GetMiscWeather200ResponseMinutelyPrecipDataInner]**](GetMiscWeather200ResponseMinutelyPrecipDataInner.md) | 精确到2分钟的数据点 | [optional] 
 
 ## Example
 

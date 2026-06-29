@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mid** | **float** | 成员 UID。 | [optional] 
-**title** | **str** | 成员角色标题。 | [optional] 
-**name** | **str** | 成员昵称。 | [optional] 
 **face** | **str** | 成员头像链接。 | [optional] 
 **follower** | **float** | 成员粉丝数。 | [optional] 
+**mid** | **float** | 成员 UID。 | [optional] 
+**name** | **str** | 成员昵称。 | [optional] 
+**title** | **str** | 成员角色标题。 | [optional] 
 
 ## Example
 

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** | 操作结果描述。 | [optional] 
 **data** | [**List[GetGameEpicFree200ResponseDataInner]**](GetGameEpicFree200ResponseDataInner.md) | 免费游戏列表数组。 | [optional] 
+**message** | **str** | 操作结果描述。 | [optional] 
 
 ## Example
 

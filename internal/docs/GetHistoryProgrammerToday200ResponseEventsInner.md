@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**year** | **int** |  | [optional] 
-**title** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
 **category** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
 **importance** | **int** |  | [optional] 
 **relevance_score** | **float** |  | [optional] 
+**title** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
+**year** | **int** |  | [optional] 
 
 ## Example
 

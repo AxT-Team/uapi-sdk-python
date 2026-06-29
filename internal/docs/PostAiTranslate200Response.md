@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** |  | [optional] 
 **data** | [**PostAiTranslate200ResponseData**](PostAiTranslate200ResponseData.md) |  | [optional] 
-**performance** | [**PostAiTranslate200ResponsePerformance**](PostAiTranslate200ResponsePerformance.md) |  | [optional] 
 **is_batch** | **bool** | 是否为批量翻译请求。 | [optional] 
+**message** | **str** |  | [optional] 
+**performance** | [**PostAiTranslate200ResponsePerformance**](PostAiTranslate200ResponsePerformance.md) |  | [optional] 
 
 ## Example
 

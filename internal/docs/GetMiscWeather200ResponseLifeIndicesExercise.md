@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**level** | **str** |  | [optional] 
-**brief** | **str** |  | [optional] 
 **advice** | **str** |  | [optional] 
+**brief** | **str** |  | [optional] 
+**level** | **str** |  | [optional] 
 
 ## Example
 

@@ -1,6 +1,6 @@
 # uapi.ImageApi
 
-All URIs are relative to *https://uapis.cn/api/v1*
+All URIs are relative to *https://uapis.cn*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -35,10 +35,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -85,7 +85,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: image/*, application/json
+ - **Accept**: image/png, application/json
 
 ### HTTP response details
 
@@ -98,7 +98,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_image_bing_daily**
-> bytearray get_image_bing_daily(var_date=var_date, resolution=resolution, format=format)
+> bytearray get_image_bing_daily(var_date=var_date, random=random, resolution=resolution, format=format)
 
 获取必应每日壁纸
 
@@ -123,10 +123,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -135,12 +135,13 @@ with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.ImageApi(api_client)
     var_date = 'var_date_example' # str | 壁纸日期，格式是 `YYYY-MM-DD`。不传时返回当天壁纸。 (optional)
+    random = False # bool | 是否每次请求随机返回一张历史壁纸。传 `true` 时生效；不能和 `date` 同时使用。不传或传 `false` 时保持默认当天/指定日期逻辑。 (optional) (default to False)
     resolution = 4k # str | 返回图片的目标分辨率。可以传 `4k` 或 `1080`，不传时默认是 `4k`。 (optional) (default to 4k)
     format = image # str | 响应格式。可以传 `image`、`json` 或 `redirect`。不传时默认是 `image`。 (optional) (default to image)
 
     try:
         # 获取必应每日壁纸
-        api_response = api_instance.get_image_bing_daily(var_date=var_date, resolution=resolution, format=format)
+        api_response = api_instance.get_image_bing_daily(var_date=var_date, random=random, resolution=resolution, format=format)
         print("The response of ImageApi->get_image_bing_daily:\n")
         pprint(api_response)
     except Exception as e:
@@ -155,6 +156,7 @@ with uapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **var_date** | **str**| 壁纸日期，格式是 &#x60;YYYY-MM-DD&#x60;。不传时返回当天壁纸。 | [optional] 
+ **random** | **bool**| 是否每次请求随机返回一张历史壁纸。传 &#x60;true&#x60; 时生效；不能和 &#x60;date&#x60; 同时使用。不传或传 &#x60;false&#x60; 时保持默认当天/指定日期逻辑。 | [optional] [default to False]
  **resolution** | **str**| 返回图片的目标分辨率。可以传 &#x60;4k&#x60; 或 &#x60;1080&#x60;，不传时默认是 &#x60;4k&#x60;。 | [optional] [default to 4k]
  **format** | **str**| 响应格式。可以传 &#x60;image&#x60;、&#x60;json&#x60; 或 &#x60;redirect&#x60;。不传时默认是 &#x60;image&#x60;。 | [optional] [default to image]
 
@@ -211,10 +213,10 @@ from uapi.models.get_image_bing_daily_history200_response import GetImageBingDai
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -294,10 +296,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -368,10 +370,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -451,10 +453,10 @@ from uapi.models.get_image_tobase64200_response import GetImageTobase64200Respon
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -548,10 +550,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -594,7 +596,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: image/*, application/json
+ - **Accept**: image/png, application/json
 
 ### HTTP response details
 
@@ -631,10 +633,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -642,8 +644,8 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.ImageApi(api_client)
-    width = 56 # int | 目标宽度，单位是像素。可以单独传，也可以和 `height` 一起传。与 `max_width`、`max_height` 互斥。 (optional)
-    height = 56 # int | 目标高度，单位是像素。可以单独传，也可以和 `width` 一起传。与 `max_width`、`max_height` 互斥。 (optional)
+    width = 800 # int | 目标宽度，单位是像素。可以单独传，也可以和 `height` 一起传。与 `max_width`、`max_height` 互斥。 (optional)
+    height = 600 # int | 目标高度，单位是像素。可以单独传，也可以和 `width` 一起传。与 `max_width`、`max_height` 互斥。 (optional)
     max_width = 56 # int | 最大宽度，单位是像素。只有在不传 `width`、`height` 时才生效，会按原比例缩放。 (optional)
     max_height = 56 # int | 最大高度，单位是像素。只有在不传 `width`、`height` 时才生效，会按原比例缩放。 (optional)
     format = bmp # str | 输出格式。可以传 `bmp`、`rgb565` 或 `rgb888`，不传时默认是 `bmp`。 (optional) (default to bmp)
@@ -733,10 +735,10 @@ from uapi.models.post_image_frombase64_request import PostImageFrombase64Request
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -788,7 +790,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_image_motou**
-> bytearray post_image_motou(image_url=image_url, file=file, bg_color=bg_color)
+> bytearray post_image_motou(bg_color=bg_color, file=file, image_url=image_url)
 
 生成摸摸头GIF
 
@@ -812,10 +814,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -823,13 +825,13 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.ImageApi(api_client)
-    image_url = 'image_url_example' # str | 图片的URL地址。如果提供此项，将优先使用该URL的图片。 (optional)
-    file = None # bytearray | 上传的图片文件。支持JPG、PNG、GIF等常见格式。 (optional)
     bg_color = 'bg_color_example' # str | GIF的背景颜色。可选值为 'white', 'black', 'transparent'。 (optional)
+    file = None # bytearray | 上传的图片文件。支持JPG、PNG、GIF等常见格式。 (optional)
+    image_url = 'image_url_example' # str | 图片的URL地址。如果提供此项，将优先使用该URL的图片。 (optional)
 
     try:
         # 生成摸摸头GIF
-        api_response = api_instance.post_image_motou(image_url=image_url, file=file, bg_color=bg_color)
+        api_response = api_instance.post_image_motou(bg_color=bg_color, file=file, image_url=image_url)
         print("The response of ImageApi->post_image_motou:\n")
         pprint(api_response)
     except Exception as e:
@@ -843,9 +845,9 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **image_url** | **str**| 图片的URL地址。如果提供此项，将优先使用该URL的图片。 | [optional] 
- **file** | **bytearray**| 上传的图片文件。支持JPG、PNG、GIF等常见格式。 | [optional] 
  **bg_color** | **str**| GIF的背景颜色。可选值为 &#39;white&#39;, &#39;black&#39;, &#39;transparent&#39;。 | [optional] 
+ **file** | **bytearray**| 上传的图片文件。支持JPG、PNG、GIF等常见格式。 | [optional] 
+ **image_url** | **str**| 图片的URL地址。如果提供此项，将优先使用该URL的图片。 | [optional] 
 
 ### Return type
 
@@ -898,6 +900,7 @@ No authorization required
 
 ### Example
 
+* Bearer (JWT) Authentication (BearerAuth):
 
 ```python
 import uapi
@@ -905,12 +908,21 @@ from uapi.models.post_image_nsfw200_response import PostImageNsfw200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): BearerAuth
+configuration = uapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with uapi.ApiClient(configuration) as api_client:
@@ -944,7 +956,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -963,7 +975,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_image_ocr**
-> PostImageOcr200Response post_image_ocr(file=file, url=url, image_base64=image_base64, image_name=image_name, need_location=need_location, return_markdown=return_markdown, enable_cls=enable_cls)
+> PostImageOcr200Response post_image_ocr(enable_cls=enable_cls, file=file, image_base64=image_base64, image_name=image_name, need_location=need_location, return_markdown=return_markdown, url=url)
 
 通用 OCR 文字识别
 
@@ -987,10 +999,10 @@ from uapi.models.post_image_ocr200_response import PostImageOcr200Response
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -998,17 +1010,17 @@ configuration = uapi.Configuration(
 with uapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = uapi.ImageApi(api_client)
+    enable_cls = false # str | 是否开启额外的文字方向校正。请传 `true` 或 `false`，不传时默认是 `false`。 (optional) (default to false)
     file = None # bytearray | 待识别的图片文件。支持 JPG、JPEG、PNG、BMP、GIF、WebP 等常见格式，最大不超过 10MB。请勿与 url 或 image_base64 同时提交。 (optional)
-    url = 'url_example' # str | 公网可直接访问的图片地址。请勿与 file 或 image_base64 同时提交。 (optional)
     image_base64 = 'image_base64_example' # str | 图片的 Base64 字符串。可以传完整 Data URI，也可以只传纯 Base64 内容。请勿与 file 或 url 同时提交。 (optional)
     image_name = 'image_name_example' # str | 自定义图片文件名。传链接或纯 Base64 时建议一起传，便于保留或推断扩展名。 (optional)
     need_location = true # str | 是否返回文字坐标信息。请传 `true` 或 `false`，不传时默认是 `true`。 (optional) (default to true)
     return_markdown = false # str | 是否额外返回整理后的 Markdown 文本。请传 `true` 或 `false`，不传时默认是 `false`。 (optional) (default to false)
-    enable_cls = false # str | 是否开启额外的文字方向校正。请传 `true` 或 `false`，不传时默认是 `false`。 (optional) (default to false)
+    url = 'url_example' # str | 公网可直接访问的图片地址。请勿与 file 或 image_base64 同时提交。 (optional)
 
     try:
         # 通用 OCR 文字识别
-        api_response = api_instance.post_image_ocr(file=file, url=url, image_base64=image_base64, image_name=image_name, need_location=need_location, return_markdown=return_markdown, enable_cls=enable_cls)
+        api_response = api_instance.post_image_ocr(enable_cls=enable_cls, file=file, image_base64=image_base64, image_name=image_name, need_location=need_location, return_markdown=return_markdown, url=url)
         print("The response of ImageApi->post_image_ocr:\n")
         pprint(api_response)
     except Exception as e:
@@ -1022,13 +1034,13 @@ with uapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **enable_cls** | **str**| 是否开启额外的文字方向校正。请传 &#x60;true&#x60; 或 &#x60;false&#x60;，不传时默认是 &#x60;false&#x60;。 | [optional] [default to false]
  **file** | **bytearray**| 待识别的图片文件。支持 JPG、JPEG、PNG、BMP、GIF、WebP 等常见格式，最大不超过 10MB。请勿与 url 或 image_base64 同时提交。 | [optional] 
- **url** | **str**| 公网可直接访问的图片地址。请勿与 file 或 image_base64 同时提交。 | [optional] 
  **image_base64** | **str**| 图片的 Base64 字符串。可以传完整 Data URI，也可以只传纯 Base64 内容。请勿与 file 或 url 同时提交。 | [optional] 
  **image_name** | **str**| 自定义图片文件名。传链接或纯 Base64 时建议一起传，便于保留或推断扩展名。 | [optional] 
  **need_location** | **str**| 是否返回文字坐标信息。请传 &#x60;true&#x60; 或 &#x60;false&#x60;，不传时默认是 &#x60;true&#x60;。 | [optional] [default to true]
  **return_markdown** | **str**| 是否额外返回整理后的 Markdown 文本。请传 &#x60;true&#x60; 或 &#x60;false&#x60;，不传时默认是 &#x60;false&#x60;。 | [optional] [default to false]
- **enable_cls** | **str**| 是否开启额外的文字方向校正。请传 &#x60;true&#x60; 或 &#x60;false&#x60;，不传时默认是 &#x60;false&#x60;。 | [optional] [default to false]
+ **url** | **str**| 公网可直接访问的图片地址。请勿与 file 或 image_base64 同时提交。 | [optional] 
 
 ### Return type
 
@@ -1077,10 +1089,10 @@ from uapi.models.post_image_speechless_request import PostImageSpeechlessRequest
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -1149,10 +1161,10 @@ import uapi
 from uapi.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://uapis.cn/api/v1
+# Defining the host is optional and defaults to https://uapis.cn
 # See configuration.py for a list of all supported configuration parameters.
 configuration = uapi.Configuration(
-    host = "https://uapis.cn/api/v1"
+    host = "https://uapis.cn"
 )
 
 
@@ -1199,7 +1211,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: image/*, application/json
+ - **Accept**: image/png, application/json
 
 ### HTTP response details
 

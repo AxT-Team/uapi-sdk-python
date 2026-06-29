@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**first_day** | **str** | 这一周的第一天日期。 | [optional] 
 **contribution_days** | [**List[GetGithubUser200ResponseActivityContributionCalendarWeeksInnerContributionDaysInner]**](GetGithubUser200ResponseActivityContributionCalendarWeeksInnerContributionDaysInner.md) | 这一周中每天的贡献明细。 | [optional] 
+**first_day** | **str** | 这一周的第一天日期。 | [optional] 
 
 ## Example
 

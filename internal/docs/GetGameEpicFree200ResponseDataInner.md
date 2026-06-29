@@ -5,19 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 游戏的唯一标识ID。 | [optional] 
-**title** | **str** | 游戏的完整标题名称。 | [optional] 
 **cover** | **str** | 游戏封面图片的URL地址。 | [optional] 
-**original_price** | **float** | 游戏的原价，单位为人民币元。 | [optional] 
-**original_price_desc** | **str** | 格式化后的原价描述字符串。 | [optional] 
 **description** | **str** | 游戏的简介描述。 | [optional] 
-**seller** | **str** | 游戏的发行商或销售商。 | [optional] 
-**is_free_now** | **bool** | 当前是否处于免费状态。 | [optional] 
-**free_start** | **str** | 免费开始时间的可读字符串格式。 | [optional] 
-**free_start_at** | **int** | 免费开始时间的13位毫秒时间戳。 | [optional] 
 **free_end** | **str** | 免费结束时间的可读字符串格式。 | [optional] 
 **free_end_at** | **int** | 免费结束时间的13位毫秒时间戳。 | [optional] 
+**free_start** | **str** | 免费开始时间的可读字符串格式。 | [optional] 
+**free_start_at** | **int** | 免费开始时间的13位毫秒时间戳。 | [optional] 
+**id** | **str** | 游戏的唯一标识ID。 | [optional] 
+**is_free_now** | **bool** | 当前是否处于免费状态。 | [optional] 
 **link** | **str** | 游戏在Epic Games商店的详情页链接。 | [optional] 
+**original_price** | **float** | 游戏的原价，单位为人民币元。 | [optional] 
+**original_price_desc** | **str** | 格式化后的原价描述字符串。 | [optional] 
+**seller** | **str** | 游戏的发行商或销售商。 | [optional] 
+**title** | **str** | 游戏的完整标题名称。 | [optional] 
 
 ## Example
 

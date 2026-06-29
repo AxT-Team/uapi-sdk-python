@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**face** | **str** | 作者头像链接。 | [optional] 
 **mid** | **float** | 作者 UID。 | [optional] 
 **name** | **str** | 作者昵称。 | [optional] 
-**face** | **str** | 作者头像链接。 | [optional] 
 
 ## Example
 

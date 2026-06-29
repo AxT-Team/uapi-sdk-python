@@ -6,8 +6,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**previous** | [**List[GetMiscHolidayCalendar200ResponseNearbyPreviousInner]**](GetMiscHolidayCalendar200ResponseNearbyPreviousInner.md) | 当前查询日期之前最近的节日列表（按时间倒序）。 | [optional] 
 **next** | [**List[GetMiscHolidayCalendar200ResponseNearbyNextInner]**](GetMiscHolidayCalendar200ResponseNearbyNextInner.md) | 当前查询日期之后最近的节日列表（按时间正序）。 | [optional] 
+**previous** | [**List[GetMiscHolidayCalendar200ResponseNearbyPreviousInner]**](GetMiscHolidayCalendar200ResponseNearbyPreviousInner.md) | 当前查询日期之前最近的节日列表（按时间倒序）。 | [optional] 
 
 ## Example
 

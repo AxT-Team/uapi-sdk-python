@@ -1,0 +1,31 @@
+# GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**definition** | **str** |  | [optional] 
+**examples** | **List[str]** |  | [optional] 
+**part_of_speech** | **str** |  | [optional] 
+
+## Example
+
+```python
+from uapi.models.get_dictionary_lookup200_response_entry_english_definitions_inner import GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner from a JSON string
+get_dictionary_lookup200_response_entry_english_definitions_inner_instance = GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner.from_json(json)
+# print the JSON string representation of the object
+print(GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner.to_json())
+
+# convert the object into a dict
+get_dictionary_lookup200_response_entry_english_definitions_inner_dict = get_dictionary_lookup200_response_entry_english_definitions_inner_instance.to_dict()
+# create an instance of GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner from a dict
+get_dictionary_lookup200_response_entry_english_definitions_inner_from_dict = GetDictionaryLookup200ResponseEntryEnglishDefinitionsInner.from_dict(get_dictionary_lookup200_response_entry_english_definitions_inner_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

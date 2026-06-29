@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**face** | **str** | UP主头像的URL。 | [optional] 
 **mid** | **float** | UP主的UID。 | [optional] 
 **name** | **str** | UP主昵称。 | [optional] 
-**face** | **str** | UP主头像的URL。 | [optional] 
 
 ## Example
 

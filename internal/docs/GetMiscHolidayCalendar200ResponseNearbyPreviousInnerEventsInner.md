@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | **str** | 事件日期。 | [optional] 
+**is_workday** | **bool** | 仅调休上班事件返回。 | [optional] 
 **name** | **str** | 事件名称。 | [optional] 
 **type** | **str** | 事件类型。 | [optional] 
-**is_workday** | **bool** | 仅调休上班事件返回。 | [optional] 
 
 ## Example
 

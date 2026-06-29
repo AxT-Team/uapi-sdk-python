@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] 
-**keyword** | **str** | 搜索关键词。 | [optional] 
 **count** | **int** | 匹配到的结果数量。 | [optional] 
+**keyword** | **str** | 搜索关键词。 | [optional] 
 **results** | [**List[GetMiscHotboard200ResponseOneOf1ResultsInner]**](GetMiscHotboard200ResponseOneOf1ResultsInner.md) | 搜索结果数组。 | [optional] 
+**type** | **str** |  | [optional] 
 
 ## Example
 

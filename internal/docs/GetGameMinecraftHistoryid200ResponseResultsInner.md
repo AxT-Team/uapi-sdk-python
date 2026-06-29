@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 玩家当前的用户名。 | [optional] 
-**uuid** | **str** | 玩家的UUID（带连字符格式）。 | [optional] 
-**name_num** | **int** | 历史名称的总数。 | [optional] 
 **history** | [**List[GetGameMinecraftHistoryid200ResponseResultsInnerHistoryInner]**](GetGameMinecraftHistoryid200ResponseResultsInnerHistoryInner.md) | 历史用户名数组。 | [optional] 
+**id** | **str** | 玩家当前的用户名。 | [optional] 
+**name_num** | **int** | 历史名称的总数。 | [optional] 
+**uuid** | **str** | 玩家的UUID（带连字符格式）。 | [optional] 
 
 ## Example
 

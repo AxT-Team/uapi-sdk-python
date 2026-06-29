@@ -6,9 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**width** | **float** | 宽度。 | [optional] 
 **height** | **float** | 高度。 | [optional] 
 **rotate** | **float** | 旋转角度。 | [optional] 
+**width** | **float** | 宽度。 | [optional] 
 
 ## Example
 

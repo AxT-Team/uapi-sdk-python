@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** |  | [optional] 
 **data** | [**GetAiTranslateLanguages200ResponseData**](GetAiTranslateLanguages200ResponseData.md) |  | [optional] 
+**message** | **str** |  | [optional] 
 **performance** | [**GetAiTranslateLanguages200ResponsePerformance**](GetAiTranslateLanguages200ResponsePerformance.md) |  | [optional] 
 
 ## Example

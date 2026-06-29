@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**contexts** | [**List[GetAiTranslateLanguages200ResponseDataContextsInner]**](GetAiTranslateLanguages200ResponseDataContextsInner.md) |  | [optional] 
 **languages** | [**List[GetAiTranslateLanguages200ResponseDataLanguagesInner]**](GetAiTranslateLanguages200ResponseDataLanguagesInner.md) |  | [optional] 
 **styles** | [**List[GetAiTranslateLanguages200ResponseDataStylesInner]**](GetAiTranslateLanguages200ResponseDataStylesInner.md) |  | [optional] 
-**contexts** | [**List[GetAiTranslateLanguages200ResponseDataContextsInner]**](GetAiTranslateLanguages200ResponseDataContextsInner.md) |  | [optional] 
 
 ## Example
 

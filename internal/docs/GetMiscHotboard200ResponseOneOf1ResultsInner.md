@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** |  | [optional] 
 **hot_value** | **str** |  | [optional] 
+**title** | **str** |  | [optional] 
 **url** | **str** |  | [optional] 
 
 ## Example

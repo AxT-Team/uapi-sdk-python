@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_id** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
-**progress** | **int** |  | [optional] 
 **created_at** | **str** |  | [optional] 
-**started_at** | **str** |  | [optional] 
 **elapsed** | **float** |  | [optional] 
 **message** | **str** |  | [optional] 
+**progress** | **int** |  | [optional] 
+**started_at** | **str** |  | [optional] 
+**status** | **str** |  | [optional] 
+**task_id** | **str** |  | [optional] 
+**url** | **str** |  | [optional] 
 
 ## Example
 

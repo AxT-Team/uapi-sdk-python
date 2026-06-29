@@ -1,12 +1,12 @@
 [project]
 name = "uapi"
 version = "1.0.0"
-description = "UAPI"
+description = "UAPI OpenAPI"
 authors = [
   {name = "OpenAPI Generator Community",email = "team@openapitools.org"},
 ]
 readme = "README.md"
-keywords = ["OpenAPI", "OpenAPI-Generator", "UAPI"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "UAPI OpenAPI"]
 requires-python = ">=3.9"
 
 dependencies = [

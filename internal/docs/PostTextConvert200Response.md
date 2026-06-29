@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result** | **str** | 转换结果 | [optional] 
 **var_from** | **str** | 源格式 | [optional] 
-**to** | **str** | 目标格式 | [optional] 
-**length** | **int** | 结果长度 | [optional] 
 **info** | **str** | 额外信息（如哈希不可逆提示） | [optional] 
+**length** | **int** | 结果长度 | [optional] 
+**result** | **str** | 转换结果 | [optional] 
+**to** | **str** | 目标格式 | [optional] 
 
 ## Example
 

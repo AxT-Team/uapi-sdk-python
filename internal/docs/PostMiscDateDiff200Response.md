@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **days** | **int** | 总天数 | [optional] 
 **hours** | **int** | 总小时数 | [optional] 
+**human_readable** | **str** | 人性化显示格式 | [optional] 
 **minutes** | **int** | 总分钟数 | [optional] 
 **seconds** | **int** | 总秒数 | [optional] 
 **weeks** | **int** | 总周数 | [optional] 
-**human_readable** | **str** | 人性化显示格式 | [optional] 
 
 ## Example
 

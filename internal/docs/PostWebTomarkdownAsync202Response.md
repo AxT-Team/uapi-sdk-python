@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_id** | **str** | 任务唯一标识符 | [optional] 
-**status** | **str** | 任务状态 | [optional] 
-**url** | **str** | 要转换的URL | [optional] 
 **created_at** | **str** | 任务创建时间（ISO 8601格式） | [optional] 
 **message** | **str** | 提示信息 | [optional] 
+**status** | **str** | 任务状态 | [optional] 
+**task_id** | **str** | 任务唯一标识符 | [optional] 
+**url** | **str** | 要转换的URL | [optional] 
 
 ## Example
 

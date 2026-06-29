@@ -6,12 +6,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **float** | 合集 ID。 | [optional] 
-**title** | **str** | 合集标题。 | [optional] 
 **cover** | **str** | 合集封面。 | [optional] 
-**mid** | **float** | 合集作者 UID。 | [optional] 
-**intro** | **str** | 合集简介。 | [optional] 
 **ep_count** | **float** | 合集内视频数量。 | [optional] 
+**id** | **float** | 合集 ID。 | [optional] 
+**intro** | **str** | 合集简介。 | [optional] 
+**mid** | **float** | 合集作者 UID。 | [optional] 
+**title** | **str** | 合集标题。 | [optional] 
 
 ## Example
 

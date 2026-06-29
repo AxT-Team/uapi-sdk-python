@@ -6,12 +6,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | 引擎标识名称 | [optional] 
-**display_name** | **str** | 引擎显示名称 | [optional] 
-**description** | **str** | 引擎描述 | [optional] 
 **available** | **bool** | 引擎是否可用 | [optional] 
-**version** | **str** | 配置版本标识 | [optional] 
+**description** | **str** | 引擎描述 | [optional] 
+**display_name** | **str** | 引擎显示名称 | [optional] 
 **features** | **List[str]** | 支持的特性列表 | [optional] 
+**name** | **str** | 引擎标识名称 | [optional] 
+**version** | **str** | 配置版本标识 | [optional] 
 
 ## Example
 

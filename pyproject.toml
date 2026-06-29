@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "uapi-sdk-python"
-version = "0.1.17"
+version = "0.1.18"
 description = "Official Python SDK for UAPI / uapis.cn — strongly-typed wrapper around 100+ free public-API endpoints (network, text, image, social, translation, search). Generated from the live OpenAPI 3.1 spec."
 readme = "README.md"
 license = {text = "MIT"}

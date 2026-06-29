@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**question** | **str** |  | [optional] 
 **options** | [**List[FormatJsonTriviaOptionsInner]**](FormatJsonTriviaOptionsInner.md) |  | [optional] 
+**question** | **str** |  | [optional] 
 
 ## Example
 

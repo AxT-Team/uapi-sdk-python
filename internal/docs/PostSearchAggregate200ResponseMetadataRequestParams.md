@@ -6,11 +6,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**query** | **str** | 实际执行的搜索词 | [optional] 
 **limit** | **int** | 实际生效的返回条数 | [optional] 
 **page** | **int** | 实际生效的页码 | [optional] 
-**timeout_ms** | **int** | 实际生效的超时时间（毫秒） | [optional] 
+**query** | **str** | 实际执行的搜索词 | [optional] 
 **sort** | **str** | 实际生效的排序方式 | [optional] 
+**timeout_ms** | **int** | 实际生效的超时时间（毫秒） | [optional] 
 
 ## Example
 

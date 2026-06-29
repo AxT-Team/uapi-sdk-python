@@ -5,19 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**archive_count** | **int** |  | [optional] 
+**article_count** | **int** |  | [optional] 
+**birthday** | **str** |  | [optional] 
+**face** | **str** |  | [optional] 
+**follower** | **int** |  | [optional] 
+**following** | **int** |  | [optional] 
+**level** | **int** |  | [optional] 
 **mid** | **int** |  | [optional] 
 **name** | **str** |  | [optional] 
 **sex** | **str** |  | [optional] 
-**face** | **str** |  | [optional] 
 **sign** | **str** |  | [optional] 
-**level** | **int** |  | [optional] 
-**birthday** | **str** |  | [optional] 
-**vip_type** | **int** |  | [optional] 
 **vip_status** | **int** |  | [optional] 
-**following** | **int** |  | [optional] 
-**follower** | **int** |  | [optional] 
-**archive_count** | **int** |  | [optional] 
-**article_count** | **int** |  | [optional] 
+**vip_type** | **int** |  | [optional] 
 
 ## Example
 

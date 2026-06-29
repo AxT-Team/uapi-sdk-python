@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**text** | **str** | 待转换的文本内容 | 
 **var_from** | **str** | 源格式类型 | 
-**to** | **str** | 目标格式类型 | 
 **options** | **Dict[str, object]** | 可选参数（预留，当前未使用） | [optional] 
+**text** | **str** | 待转换的文本内容 | 
+**to** | **str** | 目标格式类型 | 
 
 ## Example
 

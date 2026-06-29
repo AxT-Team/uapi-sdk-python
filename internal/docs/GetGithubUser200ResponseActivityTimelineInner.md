@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**month** | **str** | 月份，格式为 YYYY-MM。 | [optional] 
 **contribution_count** | **int** | 该月的贡献总数。 | [optional] 
+**month** | **str** | 月份，格式为 YYYY-MM。 | [optional] 
 
 ## Example
 
